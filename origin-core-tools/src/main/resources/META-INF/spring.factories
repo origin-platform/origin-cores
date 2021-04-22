@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.jyusun.origin.core.tools.config.server.SysServerAutoConfiguration

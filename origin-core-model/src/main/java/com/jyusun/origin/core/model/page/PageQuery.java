@@ -1,0 +1,63 @@
+package com.jyusun.origin.core.model.page;
+
+import com.jyusun.origin.core.model.BaseQuery;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+
+/**
+ * 作用描述： - 分页查询对象
+ *
+ * @author jyusun at 2020/2/20 20:55
+ * @since 1.0.0
+ */
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
+public class PageQuery extends BaseQuery {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 当前页数
+     */
+    @ApiModelProperty(value = "当前页数 默认 1", example = "1")
+    public Integer page;
+
+    /**
+     * 每页条数
+     */
+    @ApiModelProperty(value = "每页条数 10", example = "10")
+    public Integer limit;
+
+    /**
+     * <p>
+     * SQL 排序 ASC 数组
+     * </p>
+     */
+    @ApiModelProperty("SQL 排序 ASC")
+    public String[] ascs;
+
+    /**
+     * <p>
+     * SQL 排序 DESC 数组
+     * </p>
+     */
+    @ApiModelProperty("SQL 排序 DESC")
+    public String[] descs;
+
+
+    public PageQuery() {
+        this.init();
+    }
+
+    /**
+     * 参数值初始化
+     */
+    private void init() {
+        this.page = 1;
+        this.limit = 10;
+    }
+
+}
