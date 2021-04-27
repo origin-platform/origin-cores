@@ -27,8 +27,8 @@
     </modules>
 
     <dependencyManagement>
-        <!-- origin-common-dependencies -->
         <dependencies>
+            <!-- origin-core-dependencies -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>origin-core-dependencies</artifactId>

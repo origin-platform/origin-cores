@@ -40,6 +40,16 @@ public class RespResult<E extends Serializable> extends AbstractResult<E> {
     /**
      * 构造函数
      *
+     * @param data           响应数据
+     * @param baseResultCode 响应编码
+     */
+    public RespResult(BaseResultCode baseResultCode, Boolean sign) {
+        this(baseResultCode.code(), baseResultCode.message(), sign);
+    }
+
+    /**
+     * 构造函数
+     *
      * @param data    响应数据
      * @param code    响应编码
      * @param message 响应消息
