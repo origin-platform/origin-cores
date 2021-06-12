@@ -22,8 +22,11 @@
         <module>origin-core-common</module>
         <module>origin-core-model</module>
         <module>origin-core-tools</module>
-        <module>origin-core-excel</module>
         <module>origin-core-db</module>
+
+        <module>origin-base-secure</module>
+        <module>origin-base-excel</module>
+        <module>origin-base-oss</module>
     </modules>
 
     <dependencyManagement>

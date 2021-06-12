@@ -41,7 +41,7 @@ public abstract class BaseController<OriginRepository extends BaseRepository<Dat
      * 列表分页查询
      *
      * @param pageQuery {@link PageQuery} 分页参数查询对象
-     * @param query     {@link DictQuery} 系统参数查询对象
+     * @param query     {@link Data} 系统参数查询对象
      * @return {@link AbstractResult} 响应结果
      */
     @ApiOperation("分页查询：分页条件")

@@ -35,9 +35,9 @@ public class SimpleCache<K, V> implements Serializable {
 	 * @return 值
 	 */
 	public V get(K key) {
+		V value;
 		// 尝试读取缓存
 		readLock.lock();
-		V value;
 		try {
 			value = cache.get(key);
 		}

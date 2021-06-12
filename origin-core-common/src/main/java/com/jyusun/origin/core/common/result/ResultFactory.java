@@ -28,7 +28,7 @@ public final class ResultFactory {
      * @param <E>     {@code E} 泛型标记
      * @return {@link AbstractResult} 响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> data(String code, String message, Boolean sign, E data) {
+    public static <E> AbstractResult<E> data(String code, String message, Boolean sign, E data) {
         return new RespResult<>(code, message, sign, data);
     }
 
@@ -40,9 +40,10 @@ public final class ResultFactory {
      * @param <E>            {@code E} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> data(BaseResultCode baseResultCode, Boolean sign, E data) {
-        return Objects.nonNull(data) ? new RespResult<>(baseResultCode.code(), baseResultCode.message(), sign, data)
-                : data(SystemResultCode.SUCCESS_WARN, false, null);
+    public static <E> AbstractResult<E> data(BaseResultCode baseResultCode, Boolean sign, E data) {
+        String message = sign ? baseResultCode.message() : SystemResultCode.SUCCESS_WARN.message();
+        return new RespResult<>(baseResultCode.code(), message, sign, data);
+
     }
 
     /**
@@ -52,9 +53,8 @@ public final class ResultFactory {
      * @param <E>  {@code E} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> data(E data) {
-        return Objects.nonNull(data) ? data(SystemResultCode.SUCCESS, true, data)
-                : data(SystemResultCode.SUCCESS_WARN, false, null);
+    public static <E> AbstractResult<E> data(E data) {
+        return data(SystemResultCode.SUCCESS, Objects.nonNull(data), data);
     }
 
     /**
@@ -65,7 +65,7 @@ public final class ResultFactory {
      * @param <E>   {@code E} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> dataConvert(Object data, Class<E> clazz) {
+    public static <E> AbstractResult<E> dataConvert(Object data, Class<E> clazz) {
         E convert = AssemblerUtils.convert(data, clazz);
         return data(convert);
     }
@@ -135,50 +135,43 @@ public final class ResultFactory {
      *
      * @param code    {@code String} 消息编码
      * @param message {@code String} 消息描述
-     * @param links   {@link Links} 链接信息
-     * @param title   {@code String} 消息标题
-     * @param detail  {@code String} 消息明细
      * @return {@link ErrorResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> error(BaseResultCode baseResultCode, Links links) {
-        return new ErrorResult<>(baseResultCode.code(), baseResultCode.message(), links);
+    public static <E> AbstractResult<E> error(String code, String message) {
+        return new ErrorResult<>(code, message);
     }
 
     /**
      * 错误信息
      *
-     * @param baseResultCode {@link BaseResultCode} 消息描述
-     * @param links          {@link Links} 链接信息
-     * @param title          {@code String} 消息标题
-     * @param detail         {@code String} 消息明细
-     * @return {@link AbstractResult}响应结果
+     * @param baseResultCode {@link BaseResultCode}  枚举结果
+     * @return {@link AbstractResult} 响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> error(BaseResultCode baseResultCode, Links links,
-                                                                   String title, String detail) {
-        return new ErrorResult<>(baseResultCode, links, title, detail);
+    public static <E> AbstractResult<E> error(BaseResultCode baseResultCode) {
+        return error(baseResultCode.code(), baseResultCode.message());
     }
 
 
     /**
      * 异常信息
      *
-     * @param BaseResult {@link BaseResultCode} 枚举结果
-     * @param title      {@code String} 消息标题
-     * @return {@link AbstractResult}响应结果
+     * @param message {@code String} 消息描述
+     * @return {@link AbstractResult} 响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> error(BaseResultCode baseResultCode) {
-        return new ErrorResult<>(baseResultCode);
+    public static <E> AbstractResult<E> error(String message) {
+        return error(SystemResultCode.INTERNAL_SERVER_ERROR.code(), message);
     }
+
 
     /**
      * 接口数据处理
      * <p>
      * 作用描述：一般情况下如果feign接口统一包装后，获取数据使用
      *
-     * @param {@link AbstractResult}
-     * @return <E> {@code E} 泛型标记数据
+     * @param abstractResult {@link AbstractResult<E>}
+     * @return {@link <E>} 泛型标记数据
      */
-    public static <E extends Serializable> E dataHanle(AbstractResult<E> abstractResult) {
+    public static <E> E dataHandle(AbstractResult<E> abstractResult) {
         if (!abstractResult.getSign()) {
             throw new BusinessException(abstractResult.getCode(), abstractResult.getMessage());
         }

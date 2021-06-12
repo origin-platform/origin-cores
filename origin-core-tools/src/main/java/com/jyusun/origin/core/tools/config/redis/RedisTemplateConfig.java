@@ -25,13 +25,11 @@ public class RedisTemplateConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
         // JSON序列化配置
-        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer =
+                new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-        /*
-         1.x版本  om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-         2.x版本
-         */
+        // 1.x版本om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL)
         om.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL,
                 JsonTypeInfo.As.PROPERTY);
 

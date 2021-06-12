@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 异常工具类
@@ -14,7 +15,7 @@ import java.util.List;
  * @author jyusun
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class ExceptionUtil {
+public final class ThrowableUtil {
 
     /**
      * 获得完整消息，包括异常名，消息格式为：{SimpleClassName}: {ThrowableMessage}
@@ -23,7 +24,7 @@ public final class ExceptionUtil {
      * @return 完整消息
      */
     public static String getMessage(Throwable e) {
-        if (null == e) {
+        if (Objects.isNull(e)) {
             return StringUtil.NULL;
         }
         return String.format("{}: {}", e.getClass().getSimpleName(), e.getMessage());
@@ -36,7 +37,7 @@ public final class ExceptionUtil {
      * @return 消息
      */
     public static String getSimpleMessage(Throwable e) {
-        return (null == e) ? StringUtil.NULL : e.getMessage();
+        return (Objects.isNull(e)) ? StringUtil.NULL : e.getMessage();
     }
 
     /**
@@ -133,7 +134,7 @@ public final class ExceptionUtil {
      */
     @SuppressWarnings("unchecked")
     public static boolean isCausedBy(Throwable throwable, Class<? extends Exception>... causeClasses) {
-        return null != getCausedBy(throwable, causeClasses);
+        return Objects.nonNull(getCausedBy(throwable, causeClasses));
     }
 
     /**

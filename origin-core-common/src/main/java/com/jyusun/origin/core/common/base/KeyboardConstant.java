@@ -17,7 +17,6 @@ public interface KeyboardConstant extends BaseConstants{
 	String PERCENT			    = "%";
 	String HAT				    = "^";
 	String AMPERSAND		    = "&";
-	String AND				    = "and";
 	String ASTERISK			    = "*";
 	String DASH				    = "-";
 	String UNDERSCORE		    = "_";
@@ -51,7 +50,6 @@ public interface KeyboardConstant extends BaseConstants{
 	String RETURN			    = "\r";
 	String TAB				    = "\t";
 
-	String EMPTY			    = "";
 	String SPACE			    = " ";
 
 	String A				    = "a";

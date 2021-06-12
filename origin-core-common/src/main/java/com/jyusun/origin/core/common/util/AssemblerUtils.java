@@ -1,7 +1,6 @@
 package com.jyusun.origin.core.common.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 /**
  * 装配工具
@@ -12,7 +11,7 @@ import lombok.NoArgsConstructor;
  * @author jyusun at 2020/5/25 10:57
  * @since 1.0.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public final class AssemblerUtils {
     /**
      * 数据转换

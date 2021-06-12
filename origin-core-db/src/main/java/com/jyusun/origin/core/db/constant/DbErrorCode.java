@@ -17,12 +17,19 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum DbErrorCode implements BaseResultCode {
 
+    /**
+     * 单页数据响应
+     */
     MORE_THAN_THE_MAXIMUM(ResultConstant.MESSAGE_INTERNAL_SERVER_ERROR, "单页数据超过500，请调整");
 
-    /** 状态码 */
+    /**
+     * 状态码
+     */
     private final String code;
 
-    /** 响应消息 */
+    /**
+     * 响应消息
+     */
     private final String message;
 
     /**

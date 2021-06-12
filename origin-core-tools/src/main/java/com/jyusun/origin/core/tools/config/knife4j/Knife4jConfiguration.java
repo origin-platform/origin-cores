@@ -21,7 +21,7 @@ public class Knife4jConfiguration {
 
     @Bean("defaultApi2")
     public Docket defaultApi2() {
-        Docket docket = new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(new ApiInfoBuilder()
                         //.title("swagger-bootstrap-ui-demo RESTful APIs")
                         .description("# swagger-bootstrap-ui-demo RESTful APIs")
@@ -36,6 +36,5 @@ public class Knife4jConfiguration {
                 .apis(RequestHandlerSelectors.basePackage(SystemConstant.BASE_WEB))
                 .paths(PathSelectors.any())
                 .build();
-        return docket;
     }
 }

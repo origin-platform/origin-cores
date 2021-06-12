@@ -25,6 +25,10 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>origin-core-tools</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>origin-base-secure</artifactId>
+        </dependency>
         <!-- Swagger 注解 -->
         <dependency>
             <groupId>io.swagger</groupId>

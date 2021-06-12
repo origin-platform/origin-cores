@@ -38,6 +38,7 @@ public class SpringUtil implements ApplicationContextAware {
     }
 
     public static void publishEvent(ApplicationEvent event) {
+        log.info("事件发送：{}", event.toString());
         getContext().publishEvent(event);
     }
 

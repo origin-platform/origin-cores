@@ -48,7 +48,7 @@ public final class InetUtil {
     public static String getHostIp() {
         String hostAddress;
         try {
-            InetAddress address = InetUtil.getLocalHostLANAddress();
+            InetAddress address = InetUtil.getLocalHostLanAddress();
             // force a best effort reverse DNS lookup
             hostAddress = address.getHostAddress();
             if (StringUtils.isEmpty(hostAddress)) {
@@ -91,7 +91,7 @@ public final class InetUtil {
      *
      * @throws UnknownHostException If the LAN address of the machine cannot be found.
      */
-    private static InetAddress getLocalHostLANAddress() throws UnknownHostException {
+    private static InetAddress getLocalHostLanAddress() throws UnknownHostException {
         try {
             InetAddress candidateAddress = null;
             // Iterate all NICs (network interface cards)...

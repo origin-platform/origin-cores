@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 
 /**
- * 作用描述： - 抽象响应对象
+ * 作用描述： - 响应对象
  *
  * @author jyusun at 2019/12/21 19:32
  * @since 1.0.0
@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
 @ApiModel("响应对象")
-public class AbstractResult<E extends Serializable> implements Serializable {
+public class AbstractResult<E> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,20 +32,14 @@ public class AbstractResult<E extends Serializable> implements Serializable {
     @ApiModelProperty(value = "操作标记", required = true, example = "false-操作失败|true-操作成功")
     protected Boolean sign;
 
-    @ApiModelProperty("链接对象")
-    protected Links links;
-
-
     /**
      * 数据初始化
      *
      * @param code    {@code String } 响应编码
      * @param message {@code String } 响应消息
      */
-    void init(String code, String message, Boolean sign) {
-        Links links = new Links();
-        links.setSelf("test");
-        this.links = links;
+    void init(String code, String message, boolean sign) {
+
         this.code = code;
         this.message = message;
         this.sign = sign;

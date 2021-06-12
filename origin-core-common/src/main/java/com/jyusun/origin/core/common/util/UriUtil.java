@@ -20,7 +20,7 @@ public class UriUtil extends UriUtils {
 	 * @param charset 字符集
 	 * @return 编码后的url
 	 */
-	public static String encodeURL(String source, Charset charset) {
+	public static String encodeUrl(String source, Charset charset) {
 		return UriUtil.encode(source, charset.name());
 	}
 
@@ -31,7 +31,7 @@ public class UriUtil extends UriUtils {
 	 * @param charset 字符集
 	 * @return 解码url
 	 */
-	public static String decodeURL(String source, Charset charset) {
+	public static String decodeUrl(String source, Charset charset) {
 		return UriUtil.decode(source, charset.name());
 	}
 

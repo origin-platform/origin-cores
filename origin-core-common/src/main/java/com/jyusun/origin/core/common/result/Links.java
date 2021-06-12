@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * 连接地址
  * <p>
- * 作用描述：
+ * 作用描述：请求URL信息
  * </p>
  *
  * @author jyusun

@@ -24,6 +24,11 @@ import java.time.LocalDateTime;
 public abstract class BaseDataSimplify extends BaseDataId {
 
     private static final long serialVersionUID = 1L;
+    /**
+     * 最后更新时间
+     */
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    protected LocalDateTime updateTime;
 
     /**
      * 备注
@@ -32,11 +37,7 @@ public abstract class BaseDataSimplify extends BaseDataId {
     @TableField("remarks")
     protected String remarks;
 
-    /**
-     * 最后更新时间
-     */
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-    protected LocalDateTime updateTime;
+
 
 
 }

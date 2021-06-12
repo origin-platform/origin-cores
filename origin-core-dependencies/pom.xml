@@ -60,22 +60,27 @@
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>origin-core-excel</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>${project.groupId}</groupId>
                 <artifactId>origin-core-db</artifactId>
                 <version>${origin.development.version}</version>
             </dependency>
-
+            <!-- 权限工具 -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>origin-starter-admin</artifactId>
+                <artifactId>origin-base-secure</artifactId>
                 <version>${origin.development.version}</version>
             </dependency>
-
+            <!-- 对象存储工具 -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>origin-base-oss</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
+            <!-- Excel工具 -->
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>origin-base-excel</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

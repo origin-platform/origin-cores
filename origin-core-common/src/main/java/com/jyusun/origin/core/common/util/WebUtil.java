@@ -41,7 +41,7 @@ public class WebUtil extends WebUtils {
     /**
      * 获取http请求 参数
      *
-     * @param request {@link HttpServletRequest}
+     * @param request {@link HttpServletRequest} 请求对象
      * @return {@link Map}
      */
     public static Map<String, String> getParams(HttpServletRequest request) {

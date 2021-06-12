@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public abstract class BaseViewSimplify implements Serializable {
 
     @ApiModelProperty("主键编号")
-    protected Serializable id;
+    protected Serializable sid;
 
     @ApiModelProperty("备注")
     protected String remarks;
