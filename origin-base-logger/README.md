@@ -4,7 +4,7 @@
 ```xml
 <dependency>
     <groupId>${project.parent.groupId}</groupId>
-    <artifactId>operation-base-logger</artifactId>
+    <artifactId>origin-base-logger</artifactId>
 </dependency>
 ```
 ## API 接口日志 
