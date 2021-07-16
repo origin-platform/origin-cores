@@ -2,6 +2,7 @@ package com.jyusun.origin.core.common.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.util.UUID;
 
@@ -14,7 +15,7 @@ import java.util.UUID;
  * @author jyusun at 2020/7/2 14:49
  * @since 1.0.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public final class UuidUtil {
 
     /**

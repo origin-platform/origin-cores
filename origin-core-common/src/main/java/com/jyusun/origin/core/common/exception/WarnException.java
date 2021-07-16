@@ -9,7 +9,7 @@ import com.jyusun.origin.core.common.base.BaseResultCode;
  * @date 2020/1/2 17:08
  * @since 1.0.0
  */
-public class WarnException extends BusinessException {
+public class WarnException extends BaseException {
 
     /**
      * 异常信息构造函数

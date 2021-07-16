@@ -1,5 +1,6 @@
 package com.jyusun.origin.core.common.util;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.web.util.UriUtils;
 
 import java.net.URI;
@@ -11,6 +12,7 @@ import java.nio.charset.Charset;
  *
  * @author L.cm
  */
+@UtilityClass
 public class UriUtil extends UriUtils {
 
 	/**

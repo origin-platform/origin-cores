@@ -8,7 +8,7 @@ import com.jyusun.origin.core.common.base.BaseResultCode;
  * @author jyusun at 2020/1/2 17:08
  * @since 1.0.0
  */
-public class SecureException extends BusinessException {
+public class SecureException extends WarnException {
 
     /**
      * 异常信息构造函数
@@ -48,5 +48,5 @@ public class SecureException extends BusinessException {
     public SecureException(Throwable throwable) {
         super(throwable);
     }
-	
+
 }

@@ -3,9 +3,7 @@ package com.jyusun.origin.core.common.util;
 import eu.bitwalker.useragentutils.Browser;
 import eu.bitwalker.useragentutils.OperatingSystem;
 import eu.bitwalker.useragentutils.UserAgent;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +13,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author jyusun
  */
-@Slf4j
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public final class UserAgentUtil {
 
 
@@ -57,9 +54,7 @@ public final class UserAgentUtil {
         if (ArrayUtil.isEmpty(strArr)) {
             return osVersion;
         }
-        osVersion = strArr[1];
-        log.info("osVersion is:{}", osVersion);
-        return osVersion;
+        return strArr[1];
     }
 
     /**
@@ -93,9 +88,7 @@ public final class UserAgentUtil {
      */
     public static String getOs(String userAgent) {
         OperatingSystem operatingSystem = getOperatingSystem(userAgent);
-        String os = operatingSystem.getGroup().getName();
-        log.info("os is:{}", os);
-        return os;
+        return operatingSystem.getGroup().getName();
     }
 
 
@@ -118,9 +111,7 @@ public final class UserAgentUtil {
      */
     public static String getDevicetype(String userAgent) {
         OperatingSystem operatingSystem = getOperatingSystem(userAgent);
-        String deviceType = operatingSystem.getDeviceType().toString();
-        log.info("deviceType is:{}", deviceType);
-        return deviceType;
+        return operatingSystem.getDeviceType().toString();
     }
 
     /**
@@ -142,9 +133,7 @@ public final class UserAgentUtil {
      */
     public static String getOsName(String userAgent) {
         OperatingSystem operatingSystem = getOperatingSystem(userAgent);
-        String osName = operatingSystem.getName();
-        log.info("osName is:{}", osName);
-        return osName;
+        return operatingSystem.getName();
     }
 
 
@@ -167,9 +156,7 @@ public final class UserAgentUtil {
      */
     public static String getDeviceManufacturer(String userAgent) {
         OperatingSystem operatingSystem = getOperatingSystem(userAgent);
-        String deviceManufacturer = operatingSystem.getManufacturer().toString();
-        log.info("deviceManufacturer is:{}", deviceManufacturer);
-        return deviceManufacturer;
+        return operatingSystem.getManufacturer().toString();
     }
 
     /**
@@ -203,9 +190,7 @@ public final class UserAgentUtil {
      */
     public static String getBrowserName(String userAgent) {
         Browser browser = getBrowser(userAgent);
-        String borderName = browser.getName();
-        log.info("borderName is:{}", borderName);
-        return borderName;
+        return browser.getName();
     }
 
 
@@ -228,9 +213,7 @@ public final class UserAgentUtil {
      */
     public static String getBrowserType(String userAgent) {
         Browser browser = getBrowser(userAgent);
-        String borderType = browser.getBrowserType().getName();
-        log.info("borderType is:{}", borderType);
-        return borderType;
+        return browser.getBrowserType().getName();
     }
 
     /**
@@ -252,9 +235,7 @@ public final class UserAgentUtil {
      */
     public static String getBrowserGroup(String userAgent) {
         Browser browser = getBrowser(userAgent);
-        String browerGroup = browser.getGroup().getName();
-        log.info("browerGroup is:{}", browerGroup);
-        return browerGroup;
+        return browser.getGroup().getName();
     }
 
     /**
@@ -277,9 +258,7 @@ public final class UserAgentUtil {
      */
     public static String getBrowserManufacturer(String userAgent) {
         Browser browser = getBrowser(userAgent);
-        String browserManufacturer = browser.getManufacturer().getName();
-        log.info("browserManufacturer is:{}", browserManufacturer);
-        return browserManufacturer;
+        return browser.getManufacturer().getName();
     }
 
 
@@ -302,9 +281,7 @@ public final class UserAgentUtil {
      */
     public static String getBorderRenderingEngine(String userAgent) {
         Browser browser = getBrowser(userAgent);
-        String renderingEngine = browser.getRenderingEngine().name();
-        log.info("renderingEngine is:{}", renderingEngine);
-        return renderingEngine;
+        return browser.getRenderingEngine().name();
     }
 
 
@@ -331,22 +308,22 @@ public final class UserAgentUtil {
     }
 
 
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
+////        String winUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) " +
+////                "Chrome/68.0.3440.106 Safari/537.36";
 //        String winUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) " +
-//                "Chrome/68.0.3440.106 Safari/537.36";
-        String winUserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) " +
-                "Chrome/90.0.4430.212 Safari/537.36";
-        System.out.println("浏览器组：" + getBrowserGroup(winUserAgent));
-        System.out.println("浏览器名字：" + getBrowserName(winUserAgent));
-        System.out.println("浏览器类型" + getBrowserType(winUserAgent));
-        System.out.println("浏览器生产商：" + getBrowserManufacturer(winUserAgent));
-        System.out.println("浏览器版本：" + getBrowserVersion(winUserAgent));
-        System.out.println("设备生产厂商:" + getDeviceManufacturer(winUserAgent));
-        System.out.println("设备类型:" + getDevicetype(winUserAgent));
-        System.out.println("设备操作系统：" + getOs(winUserAgent));
-        System.out.println("操作系统的名字：" + getOsName(winUserAgent));
-        System.out.println("操作系统的版本号：" + getOsVersion(winUserAgent));
-        System.out.println("操作系统浏览器的渲染引擎:" + getBorderRenderingEngine(winUserAgent));
-    }
+//                "Chrome/90.0.4430.212 Safari/537.36";
+//        System.out.println("浏览器组：" + getBrowserGroup(winUserAgent));
+//        System.out.println("浏览器名字：" + getBrowserName(winUserAgent));
+//        System.out.println("浏览器类型" + getBrowserType(winUserAgent));
+//        System.out.println("浏览器生产商：" + getBrowserManufacturer(winUserAgent));
+//        System.out.println("浏览器版本：" + getBrowserVersion(winUserAgent));
+//        System.out.println("设备生产厂商:" + getDeviceManufacturer(winUserAgent));
+//        System.out.println("设备类型:" + getDevicetype(winUserAgent));
+//        System.out.println("设备操作系统：" + getOs(winUserAgent));
+//        System.out.println("操作系统的名字：" + getOsName(winUserAgent));
+//        System.out.println("操作系统的版本号：" + getOsVersion(winUserAgent));
+//        System.out.println("操作系统浏览器的渲染引擎:" + getBorderRenderingEngine(winUserAgent));
+//    }
 
 }

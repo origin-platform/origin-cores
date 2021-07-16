@@ -12,7 +12,7 @@ import lombok.experimental.UtilityClass;
  * @since 1.0.0
  */
 @UtilityClass
-public final class AssemblerUtils {
+public class AssemblerUtil {
     /**
      * 数据转换
      *

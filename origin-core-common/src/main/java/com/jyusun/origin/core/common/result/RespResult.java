@@ -1,12 +1,13 @@
 package com.jyusun.origin.core.common.result;
 
-import com.jyusun.origin.core.common.base.BaseResultCode;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import lombok.ToString;
 
 /**
  * 作用描述： - 响应数据信息
@@ -14,36 +15,18 @@ import lombok.experimental.Accessors;
  * @author jyusun at 2020/2/20 17:35
  * @since 1.0.0
  */
-@Data
-@Accessors(chain = true)
+@Getter
+@ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@ApiModel("成功响应对象")
 public class RespResult<E> extends AbstractResult<E> {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty("承载数据")
     private E data;
-
-    /**
-     * 构造函数
-     *
-     * @param data           响应数据
-     * @param baseResultCode 响应编码
-     */
-    public RespResult(BaseResultCode baseResultCode, Boolean sign, E data) {
-        this(baseResultCode.code(), baseResultCode.message(), sign, data);
-    }
-
-    /**
-     * 构造函数
-     *
-     * @param sign           响应数据
-     * @param baseResultCode 响应编码
-     */
-    public RespResult(BaseResultCode baseResultCode, Boolean sign) {
-        this(baseResultCode.code(), baseResultCode.message(), sign);
-    }
 
     /**
      * 构造函数
@@ -52,7 +35,7 @@ public class RespResult<E> extends AbstractResult<E> {
      * @param code    响应编码
      * @param message 响应消息
      */
-    public RespResult(String code, String message, Boolean sign) {
+    public RespResult(String code, String message, boolean sign) {
         this.init(code, message, sign, null);
     }
 
@@ -63,7 +46,7 @@ public class RespResult<E> extends AbstractResult<E> {
      * @param code    响应编码
      * @param message 响应消息
      */
-    public RespResult(String code, String message, Boolean sign, E data) {
+    public RespResult(String code, String message, boolean sign, E data) {
         this.init(code, message, sign, data);
     }
 
@@ -76,7 +59,7 @@ public class RespResult<E> extends AbstractResult<E> {
      * @param data    {@code Boolean} 响应数据
      */
     private void init(String code, String message, boolean sign, E data) {
-        super.init(code, message, sign);
+        this.init(code, message, sign);
         this.data = data;
     }
 

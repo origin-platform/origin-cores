@@ -1,14 +1,15 @@
 package com.jyusun.origin.core.common.result;
 
-import com.jyusun.origin.core.common.base.BaseResultCode;
-import com.jyusun.origin.core.common.base.SystemResultCode;
-import com.jyusun.origin.core.common.exception.BusinessException;
-import com.jyusun.origin.core.common.util.AssemblerUtils;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.util.Objects;
+
+import com.jyusun.origin.core.common.base.BaseResultCode;
+import com.jyusun.origin.core.common.enums.SystemResultEnum;
+import com.jyusun.origin.core.common.exception.BusinessException;
+import com.jyusun.origin.core.common.exception.WarnException;
+import com.jyusun.origin.core.common.util.AssemblerUtil;
+import lombok.experimental.UtilityClass;
+
+import java.util.Optional;
 
 /**
  * 作用描述： 响应结果静态工厂
@@ -16,20 +17,22 @@ import java.util.Objects;
  * @author jyusun at 2020/3/9 21:10
  * @since 1.0.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class ResultFactory {
+@UtilityClass
+public class ResultFactory {
 
     /**
      * 数据传输结果响应
      *
-     * @param code    {@code String} 消息编码
+     * @param code    {@code Integer} 消息编码
      * @param message {@code String} 消息描述
      * @param data    {@code Object} 承载数据
      * @param <E>     {@code E} 泛型标记
      * @return {@link AbstractResult} 响应结果
      */
-    public static <E> AbstractResult<E> data(String code, String message, Boolean sign, E data) {
-        return new RespResult<>(code, message, sign, data);
+    public static <E> AbstractResult<E> data(String code, String message, E data) {
+        return Optional.ofNullable(data)
+                .map(obj -> new RespResult<>(code, message, true, obj))
+                .orElseThrow(() -> new WarnException(SystemResultEnum.SUCCESS_DATA_WARN));
     }
 
     /**
@@ -40,9 +43,8 @@ public final class ResultFactory {
      * @param <E>            {@code E} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E> AbstractResult<E> data(BaseResultCode baseResultCode, Boolean sign, E data) {
-        String message = sign ? baseResultCode.message() : SystemResultCode.SUCCESS_WARN.message();
-        return new RespResult<>(baseResultCode.code(), message, sign, data);
+    public static <E> AbstractResult<E> data(BaseResultCode baseResultCode, E data) {
+        return data(baseResultCode.code(), baseResultCode.message(), data);
 
     }
 
@@ -54,7 +56,7 @@ public final class ResultFactory {
      * @return {@link AbstractResult}响应结果
      */
     public static <E> AbstractResult<E> data(E data) {
-        return data(SystemResultCode.SUCCESS, Objects.nonNull(data), data);
+        return data(SystemResultEnum.SUCCESS, data);
     }
 
     /**
@@ -62,82 +64,117 @@ public final class ResultFactory {
      *
      * @param data  {@code Object} 承载数据
      * @param clazz {@link  Class<E>} 转换类型
-     * @param <E>   {@code E} 泛型标记
+     * @param <E>   {@code E }  泛型标记
      * @return {@link AbstractResult}响应结果
      */
     public static <E> AbstractResult<E> dataConvert(Object data, Class<E> clazz) {
-        E convert = AssemblerUtils.convert(data, clazz);
-        return data(convert);
+        return data(AssemblerUtil.convert(data, clazz));
     }
-
 
     /**
      * 数据操作状态
      *
-     * @param code    {@code String} 消息编码
+     * @param code    {@code Integer} 消息编码
      * @param message {@code String} 消息描述
      * @param sign    操作标记（true-成功,false-失败）
-     * @return {@link AbstractResult}响应结果
+     * @return {@link AbstractResult<Boolean>}响应结果
      */
-    public static AbstractResult<Boolean> status(String code, String message, Boolean sign) {
-        return new RespResult<>(code, message, sign);
+    public static AbstractResult<Boolean> status(String code, String message, boolean sign) {
+        if (!sign) {
+            throw new WarnException(SystemResultEnum.SUCCESS_STATUS_WARN);
+        }
+        return new RespResult<>(code, message, true);
     }
 
     /**
      * 数据操作状态
      *
-     * @param baseResultCode {@link BaseResultCode}操作标记（true-成功,false-失败）
+     * @param baseResultCode {@link BaseResultCode} 操作标记（true-成功,false-失败）
      * @param sign           {@code Boolean} 操作标记（true-成功,false-失败）
-     * @return {@link AbstractResult}响应结果
+     * @return {@link AbstractResult<Boolean>}响应结果
      */
-    private static AbstractResult<Boolean> status(BaseResultCode baseResultCode, Boolean sign) {
-        return new RespResult<>(baseResultCode.code(), baseResultCode.message(), sign);
+    private static AbstractResult<Boolean> status(BaseResultCode baseResultCode, boolean sign) {
+        return status(baseResultCode.code(), baseResultCode.message(), sign);
     }
 
     /**
      * 数据操作状态
      *
      * @param sign 操作标记（true-成功,false-失败）
-     * @return {@link AbstractResult}响应结果
+     * @return {@link AbstractResult<Boolean>}响应结果
      */
-    public static AbstractResult<Boolean> status(Boolean sign) {
-        return status(SystemResultCode.SUCCESS, sign);
+    public static AbstractResult<Boolean> status(boolean sign) {
+        return status(SystemResultEnum.SUCCESS, sign);
     }
 
     /**
      * 数据操作状态-创建数据
      *
      * @param sign 操作标记（true-成功,false-失败）
-     * @return {@link RespResult}响应结果
+     * @return {@link AbstractResult<Boolean>} 响应结果
      */
-    public static AbstractResult<Boolean> create(Boolean sign) {
-        return status(SystemResultCode.SUCCESS_CREATE, sign);
+    public static AbstractResult<Boolean> create(boolean sign) {
+        return status(SystemResultEnum.SUCCESS_CREATE, sign);
     }
 
+    /**
+     * 数据操作状态-操作成功
+     *
+     * @return {@link AbstractResult<Boolean>} 响应结果
+     */
+    public static AbstractResult<Boolean> success() {
+        return status(SystemResultEnum.SUCCESS, true);
+    }
 
     /**
      * 错误信息
      *
-     * @param code    {@code String} 消息编码
+     * @param code    {@code Integer} 消息编码
      * @param message {@code String} 消息描述
      * @param links   {@link Links} 链接信息
      * @param title   {@code String} 消息标题
      * @param detail  {@code String} 消息明细
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> error(String code, String message, Links links,
-                                                                   String title, String detail) {
+    public static AbstractResult<Object> error(String code, String message, Links links,
+                                               String title, String detail) {
         return new ErrorResult<>(code, message, links, title, detail);
     }
 
     /**
      * 错误信息
      *
-     * @param code    {@code String} 消息编码
+     * @param baseResultCode {@code BaseResultCode} 枚举消息
+     * @param links          {@link Links} 链接信息
+     * @param title          {@code String} 消息标题
+     * @param detail         {@code String} 消息明细
+     * @return {@link AbstractResult}响应结果
+     */
+    public static AbstractResult<Object> error(BaseResultCode baseResultCode, Links links,
+                                               String title, String detail) {
+        return error(baseResultCode.code(), baseResultCode.message(), links, title, detail);
+    }
+
+    /**
+     * 错误信息
+     *
+     * @param code    {@code Integer} 消息编码
+     * @param message {@code String} 消息描述
+     * @param links   {@link Links} 链接信息
+     * @return {@link AbstractResult}响应结果
+     */
+    public static AbstractResult<Object> error(String code, String message, Links links) {
+        return new ErrorResult<>(code, message, links);
+    }
+
+    /**
+     * 错误信息
+     *
+     * @param code    {@code Integer} 消息编码
      * @param message {@code String} 消息描述
      * @return {@link ErrorResult}响应结果
      */
-    public static <E> AbstractResult<E> error(String code, String message) {
+    public static AbstractResult<Object> error(String code, String message) {
         return new ErrorResult<>(code, message);
     }
 
@@ -145,12 +182,12 @@ public final class ResultFactory {
      * 错误信息
      *
      * @param baseResultCode {@link BaseResultCode}  枚举结果
+     * @param links          {@link Links} 链接信息
      * @return {@link AbstractResult} 响应结果
      */
-    public static <E> AbstractResult<E> error(BaseResultCode baseResultCode) {
-        return error(baseResultCode.code(), baseResultCode.message());
+    public static AbstractResult<Object> error(BaseResultCode baseResultCode, Links links) {
+        return error(baseResultCode.code(), baseResultCode.message(), links);
     }
-
 
     /**
      * 异常信息
@@ -158,15 +195,46 @@ public final class ResultFactory {
      * @param message {@code String} 消息描述
      * @return {@link AbstractResult} 响应结果
      */
-    public static <E> AbstractResult<E> error(String message) {
-        return error(SystemResultCode.INTERNAL_SERVER_ERROR.code(), message);
+    public static AbstractResult<Object> error(String message) {
+        return error(SystemResultEnum.INTERNAL_SERVER_ERROR.code(), message);
     }
 
+    /**
+     * 警告信息
+     *
+     * @param message {@code String} 消息描述
+     * @param links   {@link Links} 请求连接
+     * @return {@link AbstractResult} 响应结果
+     */
+    public static AbstractResult<Object> warn(String code, String message, Links links) {
+        return new WarnResult<>(code, message, links);
+    }
 
     /**
-     * 接口数据处理
-     * <p>
-     * 作用描述：一般情况下如果feign接口统一包装后，获取数据使用
+     * 警告信息
+     *
+     * @param baseResultCode {@link BaseResultCode} 枚举消息
+     * @param message        {@code String} 消息描述
+     * @param links          {@link Links} 请求连接
+     * @return {@link AbstractResult} 响应结果
+     */
+    public static AbstractResult<Object> warn(BaseResultCode baseResultCode, String message, Links links) {
+        return new WarnResult<>(baseResultCode.code(), message, links);
+    }
+
+    /**
+     * 警告信息
+     *
+     * @param baseResultCode {@link BaseResultCode} 枚举消息
+     * @param links          {@link Links} 请求连接
+     * @return {@link AbstractResult} 响应结果
+     */
+    public static AbstractResult<Object> warn(BaseResultCode baseResultCode, Links links) {
+        return new WarnResult<>(baseResultCode, links);
+    }
+
+    /**
+     * 接口数据处理，一般情况下如果feign接口统一包装后，获取数据使用
      *
      * @param abstractResult {@link AbstractResult<E>}
      * @return {@link <E>} 泛型标记数据
@@ -177,5 +245,4 @@ public final class ResultFactory {
         }
         return ((RespResult<E>) abstractResult).getData();
     }
-
 }

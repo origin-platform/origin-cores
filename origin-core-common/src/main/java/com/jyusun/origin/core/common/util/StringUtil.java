@@ -2,6 +2,7 @@ package com.jyusun.origin.core.common.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -10,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author jyusun at 2020/1/5 16:07
  * @since 1.0.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public final class StringUtil extends StringUtils {
 
     public static final String SPACE = " ";

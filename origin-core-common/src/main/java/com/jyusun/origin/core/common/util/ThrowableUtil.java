@@ -2,6 +2,7 @@ package com.jyusun.origin.core.common.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;
@@ -14,7 +15,7 @@ import java.util.Objects;
  *
  * @author jyusun
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public final class ThrowableUtil {
 
     /**

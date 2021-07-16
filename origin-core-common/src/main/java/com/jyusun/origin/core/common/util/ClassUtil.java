@@ -2,6 +2,7 @@ package com.jyusun.origin.core.common.util;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import org.springframework.util.ClassUtils;
 
 import java.lang.reflect.Method;
@@ -14,7 +15,7 @@ import java.util.Arrays;
  * @author jyusun at 2020/1/5 17:08
  * @since 1.0.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public class ClassUtil extends ClassUtils {
 
     /**

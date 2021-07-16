@@ -1,7 +1,6 @@
 package com.jyusun.origin.core.common.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import org.apache.commons.lang3.CharUtils;
 
 /**
@@ -11,8 +10,8 @@ import org.apache.commons.lang3.CharUtils;
  * @author jyusun
  * @since 1.0.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class CharUtil extends CharUtils {
+@UtilityClass
+public class CharUtil extends CharUtils {
 
     public static final char SPACE = ' ';
 

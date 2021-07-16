@@ -10,10 +10,9 @@ import lombok.experimental.Accessors;
 import java.io.Serializable;
 
 /**
- * 连接地址
+ * 链接信息
  * <p>
- * 作用描述：请求URL信息
- * </p>
+ * 作用描述：链接信息
  *
  * @author jyusun
  * @date 2020/12/3 17:48
@@ -30,6 +29,42 @@ public class Links implements Serializable {
 
     @ApiModelProperty("请求地址")
     private String self;
+
+    public Links(String self) {
+        this.self = self;
+    }
+
+    /**
+     * 创建Links构建对象
+     *
+     * @return
+     */
+    public static LinksBuilder builder() {
+        return new LinksBuilder();
+    }
+
+    @NoArgsConstructor
+    public static class LinksBuilder {
+
+        @ApiModelProperty("请求地址")
+        private String self;
+
+        /**
+         * 请求地址赋值
+         *
+         * @param self
+         * @return
+         */
+        public LinksBuilder self(String self) {
+            this.self = self;
+            return this;
+        }
+
+        // 构建链接实体
+        public Links build() {
+            return new Links(self);
+        }
+    }
 
 
 }

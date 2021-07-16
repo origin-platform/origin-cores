@@ -11,5 +11,6 @@ import org.springframework.util.Assert;
  * @date 2020/12/8 13:30
  * @since 1.0.0
  */
+
 public class AssertUtil extends Assert {
 }

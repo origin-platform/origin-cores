@@ -1,17 +1,12 @@
 package com.jyusun.origin.core.common.util;
 
 import com.google.common.collect.Lists;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 作用描述： JavaBean 操作工具
@@ -19,7 +14,7 @@ import java.util.Objects;
  * @author jyusun at 2020/5/18 13:52
  * @since 1.0.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public class BeanUtil extends BeanUtils {
 
     /**
@@ -65,43 +60,5 @@ public class BeanUtil extends BeanUtils {
         return list;
     }
 
-    /**
-     * 读取属性值
-     *
-     * @param object             对象
-     * @param propertyDescriptor 属性信息
-     * @return 属性值
-     */
-    public static Object readPropertyValue(Object object, PropertyDescriptor propertyDescriptor) {
-
-        Method sourceReadMethod = propertyDescriptor.getReadMethod();
-        Object translateValue = null;
-        try {
-            translateValue = sourceReadMethod.invoke(object);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-        return translateValue;
-    }
-
-    /**
-     * 根据对象和属性名称写入属性值
-     *
-     * @param object 对象
-     * @param value  属性值
-     */
-    public static void writePropertyValue(Object object, String propertyName, String value) {
-        PropertyDescriptor targetPropertyDescriptor = BeanUtils.getPropertyDescriptor(object.getClass(), propertyName);
-        Method writeMethod = Objects.requireNonNull(targetPropertyDescriptor).getWriteMethod();
-        try {
-            writeMethod.invoke(object, value);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

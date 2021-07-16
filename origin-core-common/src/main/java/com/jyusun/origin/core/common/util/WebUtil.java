@@ -3,6 +3,7 @@ package com.jyusun.origin.core.common.util;
 import com.google.common.collect.Maps;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestAttributes;
@@ -20,7 +21,7 @@ import java.util.Map;
  * @author jyusun at 2020/4/16 15:18
  * @since 1.0.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@UtilityClass
 public class WebUtil extends WebUtils {
 
     public static final String USER_AGENT_HEADER = "user-agent";

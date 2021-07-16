@@ -1,4 +1,4 @@
-package com.jyusun.origin.core.common.base;
+package com.jyusun.origin.core.common.constant;
 
 /**
  * <p>
