@@ -1,10 +1,9 @@
-package com.jyusun.origin.core.db.utils;
+package com.jyusun.origin.base.db.common.util;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.jyusun.origin.core.common.util.BeanUtil;
 import com.jyusun.origin.core.model.page.PageObject;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
@@ -16,8 +15,8 @@ import java.util.Collections;
  *
  * @author Sun
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class PageUtils {
+@UtilityClass
+public class PageUtil {
 
     /**
      * 获取分页返回值，传入处理后的集合数据

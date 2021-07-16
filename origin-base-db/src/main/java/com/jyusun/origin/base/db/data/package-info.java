@@ -6,4 +6,4 @@
  *
  * @author JyuSun at 2020/6/8 16:24
  */
-package com.jyusun.origin.core.db.data;
+package com.jyusun.origin.base.db.data;

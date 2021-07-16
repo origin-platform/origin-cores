@@ -1,4 +1,4 @@
-package com.jyusun.origin.core.db.base;
+package com.jyusun.origin.base.db;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -69,7 +69,7 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
     /**
      * 数据查询
      *
-     * @param sid     主键编号
+     * @param sid    主键编号
      * @param target 目标转换
      * @return <T>
      */

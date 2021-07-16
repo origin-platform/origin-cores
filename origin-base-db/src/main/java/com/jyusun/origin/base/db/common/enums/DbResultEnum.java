@@ -1,7 +1,7 @@
-package com.jyusun.origin.core.db.constant;
+package com.jyusun.origin.base.db.common.enums;
 
 import com.jyusun.origin.core.common.base.BaseResultCode;
-import com.jyusun.origin.core.common.base.ResultConstant;
+import com.jyusun.origin.core.common.constant.ResultConstant;
 import lombok.AllArgsConstructor;
 
 /**
@@ -15,7 +15,7 @@ import lombok.AllArgsConstructor;
  * @since 1.0.0
  */
 @AllArgsConstructor
-public enum DbErrorCode implements BaseResultCode {
+public enum DbResultEnum implements BaseResultCode {
 
     /**
      * 单页数据响应

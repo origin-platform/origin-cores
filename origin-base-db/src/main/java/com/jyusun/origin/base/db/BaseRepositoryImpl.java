@@ -1,15 +1,15 @@
-package com.jyusun.origin.core.db.base;
+package com.jyusun.origin.base.db;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jyusun.origin.base.db.common.util.ConditionUtil;
+import com.jyusun.origin.base.db.common.util.PageUtil;
 import com.jyusun.origin.core.common.base.BaseResultCode;
 import com.jyusun.origin.core.common.exception.BusinessException;
-import com.jyusun.origin.core.common.util.AssemblerUtils;
-import com.jyusun.origin.core.db.utils.ConditionUtils;
-import com.jyusun.origin.core.db.utils.PageUtils;
+import com.jyusun.origin.core.common.util.AssemblerUtil;
 import com.jyusun.origin.core.model.page.PageObject;
 import com.jyusun.origin.core.model.page.PageQuery;
 
@@ -42,7 +42,7 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      */
     @Override
     public IPage<D> page(PageQuery pageQuery, D data) {
-        return this.page(ConditionUtils.pageInfo(pageQuery), Wrappers.lambdaQuery(data));
+        return this.page(ConditionUtil.pageInfo(pageQuery), Wrappers.lambdaQuery(data));
     }
 
     /**
@@ -54,7 +54,7 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      */
     @Override
     public IPage<D> page(PageQuery pageQuery, Wrapper<D> queryWrapper) {
-        return this.page(ConditionUtils.pageInfo(pageQuery), queryWrapper);
+        return this.page(ConditionUtil.pageInfo(pageQuery), queryWrapper);
     }
 
 
@@ -67,7 +67,7 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      */
     @Override
     public PageObject<D> pageQuery(PageQuery pageQuery, Wrapper<D> queryWrapper) {
-        return PageUtils.dataInfo(this.page(pageQuery, queryWrapper));
+        return PageUtil.dataInfo(this.page(pageQuery, queryWrapper));
     }
 
     /**
@@ -79,7 +79,7 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      */
     @Override
     public <T> PageObject<T> pageQuery(PageQuery pageQuery, Wrapper<D> queryWrapper, Class<T> target) {
-        return PageUtils.dataInfo(this.page(ConditionUtils.pageInfo(pageQuery), queryWrapper), target);
+        return PageUtil.dataInfo(this.page(ConditionUtil.pageInfo(pageQuery), queryWrapper), target);
     }
 
     /**
@@ -91,17 +91,17 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      */
     @Override
     public <T> T getById(Serializable sid, Class<T> target) {
-        return AssemblerUtils.convert(this.getById(sid), target);
+        return AssemblerUtil.convert(this.getById(sid), target);
     }
 
     @Override
     public boolean save(Object obj, Class<D> data) {
-        return this.save(AssemblerUtils.convert(obj, data));
+        return this.save(AssemblerUtil.convert(obj, data));
     }
 
     @Override
     public boolean updateById(Object obj, Class<D> data) {
-        return this.updateById(AssemblerUtils.convert(obj, data));
+        return this.updateById(AssemblerUtil.convert(obj, data));
     }
 
 

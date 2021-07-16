@@ -1,4 +1,4 @@
-package com.jyusun.origin.core.db.data;
+package com.jyusun.origin.base.db.data;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 /**
  * 数据对象
  * <p>
- * 作用描述： 基础数据对象，不直接继承 {@link BaseDataSimplify} 减少继承深度
+ * 作用描述： 基础数据对象
  * </p>
  *
  * @author JyuSun at 2019/4/2 16:21
@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public abstract class BaseData extends BaseDataId {
+public abstract class BaseData extends BaseId {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,6 @@ public abstract class BaseData extends BaseDataId {
      */
     @TableField(value = "creator", fill = FieldFill.INSERT)
     protected Long creator;
-
 
     /**
      * 最后更新时间
@@ -66,5 +65,6 @@ public abstract class BaseData extends BaseDataId {
     @Version
     @TableField("revision")
     protected Integer revision;
+
 
 }

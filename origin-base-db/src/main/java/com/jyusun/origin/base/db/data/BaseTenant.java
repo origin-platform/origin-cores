@@ -1,4 +1,4 @@
-package com.jyusun.origin.core.db.data;
+package com.jyusun.origin.base.db.data;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public abstract class BaseDataTenant extends BaseData {
+public abstract class BaseTenant extends BaseData {
 
     private static final long serialVersionUID = 1L;
 

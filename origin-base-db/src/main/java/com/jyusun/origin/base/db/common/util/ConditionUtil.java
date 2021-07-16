@@ -1,14 +1,13 @@
-package com.jyusun.origin.core.db.utils;
+package com.jyusun.origin.base.db.common.util;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jyusun.origin.base.db.common.enums.DbResultEnum;
 import com.jyusun.origin.core.common.exception.BusinessException;
 import com.jyusun.origin.core.common.util.ObjectUtil;
-import com.jyusun.origin.core.db.constant.DbErrorCode;
 import com.jyusun.origin.core.model.page.PageQuery;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 
 /**
  * 作用描述：
@@ -17,8 +16,8 @@ import lombok.NoArgsConstructor;
  * @author jyusun at 2020/5/21 17:05
  * @since 1.0.0
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class ConditionUtils {
+@UtilityClass
+public  class ConditionUtil {
 
     private static final Integer MAX_LIMIT = 500;
 
@@ -34,9 +33,8 @@ public final class ConditionUtils {
      * @return Page<T>
      */
     public static <T> Page<T> pageInfo(PageQuery query) {
-
         if (query.getLimit() > MAX_LIMIT) {
-            throw new BusinessException(DbErrorCode.MORE_THAN_THE_MAXIMUM);
+            throw new BusinessException(DbResultEnum.MORE_THAN_THE_MAXIMUM);
         }
         Page<T> page = new Page<>(query.getPage(), query.getLimit());
         String[] arrayAsc = query.getAscs();

@@ -1,4 +1,4 @@
-package com.jyusun.origin.core.db.base;
+package com.jyusun.origin.base.db;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.activerecord.Model;

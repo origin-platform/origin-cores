@@ -1,10 +1,10 @@
-package com.jyusun.origin.core.db.config;
+package com.jyusun.origin.base.db.config;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
-import com.jyusun.origin.core.common.base.SystemConstant;
+import com.jyusun.origin.core.common.constant.SystemConstant;
 import com.jyusun.origin.secure.UserInfo;
 import com.jyusun.origin.secure.common.util.SecureUtil;
 import lombok.extern.slf4j.Slf4j;

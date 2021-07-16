@@ -1,4 +1,4 @@
-package com.jyusun.origin.core.db.base;
+package com.jyusun.origin.base.db;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.activerecord.Model;

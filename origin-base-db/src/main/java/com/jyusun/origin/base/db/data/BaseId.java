@@ -1,9 +1,10 @@
-package com.jyusun.origin.core.db.data;
+package com.jyusun.origin.base.db.data;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,7 +25,7 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public abstract class BaseDataId extends Model<BaseDataId> {
+public abstract class BaseId extends Model<BaseId> {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,6 +41,13 @@ public abstract class BaseDataId extends Model<BaseDataId> {
      */
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     protected LocalDateTime createTime;
+
+    /**
+     * 最后更新时间
+     */
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    protected LocalDateTime updateTime;
+
 
 
 }
