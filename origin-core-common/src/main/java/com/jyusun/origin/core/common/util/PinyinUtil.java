@@ -12,8 +12,9 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
  * 作用描述：
  * <p> - 汉字转拼音工具处理类
  * <p> - TODO 多音字暂时未处理
+ *
  * @author JyuSun at 2019/1/3 11:26
- * @version 1.0.0
+ * @since 1.0.0
  */
 @Slf4j
 public class PinyinUtil {
@@ -24,7 +25,6 @@ public class PinyinUtil {
      *
      * @param chineseLanguage 要转成拼音的中文
      * @return String 转换后的拼音
-     * @author JyuSun at 2019/1/4 14:03
      */
     private String toHanyuPinyin(String chineseLanguage) {
         char[] clChars = chineseLanguage.trim().toCharArray();
@@ -127,7 +127,6 @@ public class PinyinUtil {
      *
      * @param chineseLanguage 需要转换的汉字
      * @return String - 转换后的字符
-     * @author JyuSun at 2019/1/3 13:39
      */
     public static String getFirstLetter(String chineseLanguage) {
         char[] clChars = chineseLanguage.trim().toCharArray();
@@ -157,10 +156,5 @@ public class PinyinUtil {
         return hanyupinyin;
     }
 
-    public static void main(String[] args) {
-        PinyinUtil hanyuPinyinHelper = new PinyinUtil();
-        System.out.println(hanyuPinyinHelper.toHanyuPinyin("银"));
-        System.out.println(PinyinUtil.getFirstLetter("银asd发噶"));
-    }
 }
 
