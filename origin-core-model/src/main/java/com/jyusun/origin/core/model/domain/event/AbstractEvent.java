@@ -17,14 +17,12 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @NoArgsConstructor
-public class AbstractEvent<T> implements Serializable {
+public class AbstractEvent<T extends Serializable> implements Serializable {
 
-	private Serializable id;
+    private Serializable sid;
 
-	private Long timestamp;
+    private Long timestamp;
 
-	private String source;
-
-	private T data;
+    private T source;
 
 }
