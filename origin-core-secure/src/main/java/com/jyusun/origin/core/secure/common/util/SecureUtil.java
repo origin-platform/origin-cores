@@ -16,17 +16,20 @@ public class SecureUtil {
 
     /**
      * 获取用户信息
-     * TODO 需要改为实际的值
      *
      * @param request {@link HttpServletRequest}
      * @return {@link UserInfo}
      */
     public UserInfo getUser(HttpServletRequest request) {
+        String tenantId = "100001";
+        long userId = 1000000000000000001L;
+        String account = "admin";
+        String nickName = "管理员阿呆";
         return new UserInfo()
-                .setTenantId("100001")
-                .setUserId(1000000000000000001L)
-                .setAccount("admin")
-                .setNickName("管理员阿呆");
+                .setTenantId(tenantId)
+                .setUserId(userId)
+                .setAccount(account)
+                .setNickName(nickName);
     }
 
     /**
@@ -36,6 +39,16 @@ public class SecureUtil {
      */
     public UserInfo getUser() {
         return getUser(WebUtil.getRequest());
+    }
+
+
+    /**
+     * 获取用户信息ID信息
+     *
+     * @return {@link UserInfo}
+     */
+    public Long getUserId() {
+        return getUser().getUserId();
     }
 
 }

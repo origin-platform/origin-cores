@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.plugins.OptimisticLockerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import com.jyusun.origin.core.common.constant.SystemConstant;
-import com.jyusun.origin.core.secure.UserInfo;
 import com.jyusun.origin.core.secure.common.util.SecureUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
@@ -69,9 +68,8 @@ public class MybatisPlusConfiguration {
          */
         @Override
         public void insertFill(MetaObject metaObject) {
-            UserInfo userInfo = SecureUtil.getUser();
-            this.fillStrategy(metaObject, "creator", userInfo.getUserId());
-            this.fillStrategy(metaObject, "updateMan", userInfo.getUserId());
+            this.fillStrategy(metaObject, "creator", SecureUtil.getUserId());
+            this.fillStrategy(metaObject, "updateMan", SecureUtil.getUserId());
 
             this.fillStrategy(metaObject, "createTime", LocalDateTime.now());
             this.fillStrategy(metaObject, "updateTime", LocalDateTime.now());
@@ -84,8 +82,7 @@ public class MybatisPlusConfiguration {
          */
         @Override
         public void updateFill(MetaObject metaObject) {
-            UserInfo userInfo = SecureUtil.getUser();
-            this.fillStrategy(metaObject, "updateMan", userInfo.getUserId());
+            this.fillStrategy(metaObject, "updateMan", SecureUtil.getUserId());
             this.fillStrategy(metaObject, "updateTime", LocalDateTime.now());
         }
     }
