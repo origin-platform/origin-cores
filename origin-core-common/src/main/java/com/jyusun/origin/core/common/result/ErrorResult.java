@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * 作用描述： - 错误信息响应
  *
@@ -22,7 +24,7 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ApiModel("异常响应对象")
-public class ErrorResult<E> extends AbstractResult<E> {
+public class ErrorResult<E extends Serializable> extends AbstractResult<E> {
 
     private static final long serialVersionUID = 1L;
 

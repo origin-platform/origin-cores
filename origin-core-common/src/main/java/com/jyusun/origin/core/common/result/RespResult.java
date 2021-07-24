@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * 作用描述： - 响应数据信息
  *
@@ -20,7 +22,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ApiModel("成功响应对象")
-public class RespResult<E> extends AbstractResult<E> {
+public class RespResult<E extends Serializable> extends AbstractResult<E> {
 
     private static final long serialVersionUID = 1L;
 

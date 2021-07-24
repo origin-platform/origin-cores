@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * 响应对象
  * <p>
@@ -22,7 +24,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ApiModel("成功响应对象")
-public class WarnResult<E> extends AbstractResult<E> {
+public class WarnResult<E extends Serializable> extends AbstractResult<E> {
 
     private static final long serialVersionUID = 1L;
 

@@ -1,7 +1,6 @@
 package com.jyusun.origin.core.common.result;
 
 
-
 import com.jyusun.origin.core.common.base.BaseResultCode;
 import com.jyusun.origin.core.common.enums.SystemResultEnum;
 import com.jyusun.origin.core.common.exception.BusinessException;
@@ -9,6 +8,7 @@ import com.jyusun.origin.core.common.exception.WarnException;
 import com.jyusun.origin.core.common.util.AssemblerUtil;
 import lombok.experimental.UtilityClass;
 
+import java.io.Serializable;
 import java.util.Optional;
 
 /**
@@ -29,7 +29,7 @@ public class ResultFactory {
      * @param <E>     {@code E} 泛型标记
      * @return {@link AbstractResult} 响应结果
      */
-    public static <E> AbstractResult<E> data(String code, String message, E data) {
+    public static <E extends Serializable> AbstractResult<E> data(String code, String message, E data) {
         return Optional.ofNullable(data)
                 .map(obj -> new RespResult<>(code, message, true, obj))
                 .orElseThrow(() -> new WarnException(SystemResultEnum.SUCCESS_DATA_WARN));
@@ -43,7 +43,7 @@ public class ResultFactory {
      * @param <E>            {@code E} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E> AbstractResult<E> data(BaseResultCode baseResultCode, E data) {
+    public static <E extends Serializable> AbstractResult<E> data(BaseResultCode baseResultCode, E data) {
         return data(baseResultCode.code(), baseResultCode.message(), data);
 
     }
@@ -55,7 +55,7 @@ public class ResultFactory {
      * @param <E>  {@code E} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E> AbstractResult<E> data(E data) {
+    public static <E extends Serializable> AbstractResult<E> data(E data) {
         return data(SystemResultEnum.SUCCESS, data);
     }
 
@@ -67,7 +67,7 @@ public class ResultFactory {
      * @param <E>   {@code E }  泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E> AbstractResult<E> dataConvert(Object data, Class<E> clazz) {
+    public static <E extends Serializable> AbstractResult<E> dataConvert(Object data, Class<E> clazz) {
         return data(AssemblerUtil.convert(data, clazz));
     }
 
@@ -136,8 +136,8 @@ public class ResultFactory {
      * @param detail  {@code String} 消息明细
      * @return {@link AbstractResult}响应结果
      */
-    public static AbstractResult<Object> error(String code, String message, Links links,
-                                               String title, String detail) {
+    public static AbstractResult<Serializable> error(String code, String message, Links links,
+                                                     String title, String detail) {
         return new ErrorResult<>(code, message, links, title, detail);
     }
 
@@ -150,8 +150,8 @@ public class ResultFactory {
      * @param detail         {@code String} 消息明细
      * @return {@link AbstractResult}响应结果
      */
-    public static AbstractResult<Object> error(BaseResultCode baseResultCode, Links links,
-                                               String title, String detail) {
+    public static AbstractResult<Serializable> error(BaseResultCode baseResultCode, Links links,
+                                                     String title, String detail) {
         return error(baseResultCode.code(), baseResultCode.message(), links, title, detail);
     }
 
@@ -163,7 +163,7 @@ public class ResultFactory {
      * @param links   {@link Links} 链接信息
      * @return {@link AbstractResult}响应结果
      */
-    public static AbstractResult<Object> error(String code, String message, Links links) {
+    public static AbstractResult<Serializable> error(String code, String message, Links links) {
         return new ErrorResult<>(code, message, links);
     }
 
@@ -174,7 +174,7 @@ public class ResultFactory {
      * @param message {@code String} 消息描述
      * @return {@link ErrorResult}响应结果
      */
-    public static AbstractResult<Object> error(String code, String message) {
+    public static AbstractResult<Serializable> error(String code, String message) {
         return new ErrorResult<>(code, message);
     }
 
@@ -185,7 +185,7 @@ public class ResultFactory {
      * @param links          {@link Links} 链接信息
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Object> error(BaseResultCode baseResultCode, Links links) {
+    public static AbstractResult<Serializable> error(BaseResultCode baseResultCode, Links links) {
         return error(baseResultCode.code(), baseResultCode.message(), links);
     }
 
@@ -195,7 +195,7 @@ public class ResultFactory {
      * @param message {@code String} 消息描述
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Object> error(String message) {
+    public static AbstractResult<Serializable> error(String message) {
         return error(SystemResultEnum.INTERNAL_SERVER_ERROR.code(), message);
     }
 
@@ -206,7 +206,7 @@ public class ResultFactory {
      * @param links   {@link Links} 请求连接
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Object> warn(String code, String message, Links links) {
+    public static AbstractResult<Serializable> warn(String code, String message, Links links) {
         return new WarnResult<>(code, message, links);
     }
 
@@ -218,7 +218,7 @@ public class ResultFactory {
      * @param links          {@link Links} 请求连接
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Object> warn(BaseResultCode baseResultCode, String message, Links links) {
+    public static AbstractResult<Serializable> warn(BaseResultCode baseResultCode, String message, Links links) {
         return new WarnResult<>(baseResultCode.code(), message, links);
     }
 
@@ -229,7 +229,7 @@ public class ResultFactory {
      * @param links          {@link Links} 请求连接
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Object> warn(BaseResultCode baseResultCode, Links links) {
+    public static AbstractResult<Serializable> warn(BaseResultCode baseResultCode, Links links) {
         return new WarnResult<>(baseResultCode, links);
     }
 
@@ -239,7 +239,7 @@ public class ResultFactory {
      * @param abstractResult {@link AbstractResult<E>}
      * @return {@link <E>} 泛型标记数据
      */
-    public static <E> E dataHandle(AbstractResult<E> abstractResult) {
+    public static <E extends Serializable> E dataHandle(AbstractResult<E> abstractResult) {
         if (!abstractResult.getSign()) {
             throw new BusinessException(abstractResult.getCode(), abstractResult.getMessage());
         }

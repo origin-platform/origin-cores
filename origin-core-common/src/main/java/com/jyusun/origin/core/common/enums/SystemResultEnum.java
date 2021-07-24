@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
  * @author jyusun at 2019-07-01
  * @since 1.0.0
  */
-
 @AllArgsConstructor
 public enum SystemResultEnum implements BaseResultCode {
     /**
