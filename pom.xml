@@ -14,17 +14,18 @@
     <version>1.0.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <packaging>pom</packaging>
-    <description>起源-公共基础</description>
+    <description>公共基础</description>
 
     <modules>
         <module>origin-core-dependencies</module>
         <module>origin-starter-core</module>
         <module>origin-core-common</module>
         <module>origin-core-model</module>
-        <module>origin-core-tools</module>
-        <module>origin-core-db</module>
+        <module>origin-core-secure</module>
 
-        <module>origin-base-secure</module>
+        <module>origin-base-db</module>
+        <module>origin-base-logger</module>
+        <module>origin-base-swagger</module>
         <module>origin-base-excel</module>
         <module>origin-base-oss</module>
     </modules>
@@ -41,8 +42,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <properties>
-
-    </properties>
 
 </project>
