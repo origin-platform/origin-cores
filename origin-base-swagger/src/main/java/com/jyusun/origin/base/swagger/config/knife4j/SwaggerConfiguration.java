@@ -21,7 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @Configuration
 @EnableSwagger2WebMvc
 @EnableConfigurationProperties(SwaggerProperties.class)
-@ConditionalOnProperty(prefix = "origin.swagger", name = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "origin-system.swagger", name = "enabled", matchIfMissing = true)
 public class SwaggerConfiguration {
 
     private final SwaggerProperties swaggerProperties;

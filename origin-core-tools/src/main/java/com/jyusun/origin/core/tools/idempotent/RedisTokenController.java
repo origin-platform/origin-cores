@@ -29,7 +29,7 @@ public class RedisTokenController {
 
     @GetMapping
     public AbstractResult<String> getToken() {
-        String token = "token" + UUID.randomUUID().toString();
+        String token = "token" + UUID.randomUUID();
         redisHandle.set(token, token, TOKEN_TIME_OUT);
         return ResultFactory.data(token);
     }

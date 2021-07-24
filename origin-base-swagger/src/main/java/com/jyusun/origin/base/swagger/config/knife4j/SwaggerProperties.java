@@ -15,7 +15,7 @@ import springfox.documentation.service.Contact;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "origin.swagger")
+@ConfigurationProperties(prefix = "origin-system.swagger")
 public class SwaggerProperties {
     /**
      * isEnabled：true or false

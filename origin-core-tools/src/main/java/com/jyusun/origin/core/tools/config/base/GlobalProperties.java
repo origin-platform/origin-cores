@@ -1,4 +1,4 @@
-package com.jyusun.origin.common.config;
+package com.jyusun.origin.core.tools.config.base;
 
 import lombok.Getter;
 import lombok.Setter;

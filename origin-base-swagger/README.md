@@ -17,7 +17,7 @@
 - 配置YML（不配置默认启用，扫描com.jyusun.origin下所有Web接口）
 
 ```yaml
-origin:
+origin-system:
   swagger:
     # 是否启用：true-启用，false-禁用 （默认为true,生产环境下建议禁用）
     enabled: true

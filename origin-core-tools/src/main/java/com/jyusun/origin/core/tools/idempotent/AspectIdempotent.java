@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.tools.idempotent;
 
-import com.jyusun.origin.core.common.base.ResultConstant;
+import com.jyusun.origin.core.common.constant.ResultConstant;
 import com.jyusun.origin.core.common.exception.BusinessException;
 import com.jyusun.origin.core.common.util.WebUtil;
 import com.jyusun.origin.core.tools.handle.RedisHandle;

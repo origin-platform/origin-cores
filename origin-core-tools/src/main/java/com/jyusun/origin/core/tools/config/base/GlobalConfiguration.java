@@ -1,4 +1,4 @@
-package com.jyusun.origin.common.config;
+package com.jyusun.origin.core.tools.config.base;
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

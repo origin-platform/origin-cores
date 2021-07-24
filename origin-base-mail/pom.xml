@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.jyusun.origin</groupId>
         <artifactId>origin-cores</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>origin-starter-core</artifactId>
+    <artifactId>origin-base-mail</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
-    <packaging>pom</packaging>
-    <description>公共基础-starter</description>
+    <packaging>jar</packaging>
+    <description>公共基础-邮件处理</description>
+
 
     <dependencies>
-        <!-- 公共基础-基础封装 -->
+        <!-- 公共基础-常用工具 -->
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>origin-core-common</artifactId>
         </dependency>
-
         <!-- 公共基础-数据模型 -->
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>origin-core-model</artifactId>
         </dependency>
-
-        <!-- 公共基础-权限工具 -->
+        <!-- 邮件发送 -->
         <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>origin-core-secure</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
-
     </dependencies>
 
 </project>

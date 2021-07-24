@@ -27,6 +27,7 @@
         <module>origin-base-logger</module>
         <module>origin-base-swagger</module>
         <module>origin-base-excel</module>
+        <module>origin-base-mail</module>
         <module>origin-base-oss</module>
     </modules>
 
