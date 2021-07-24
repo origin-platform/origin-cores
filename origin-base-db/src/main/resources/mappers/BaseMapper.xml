@@ -4,7 +4,7 @@
 <mapper namespace="com.jyusun.origin.base.db.BaseRepoMapper">
 
     <!-- 通用映射关系 仅ID -->
-    <resultMap id="ResultIdMap" type="com.jyusun.origin.base.db.data.BaseId">
+    <resultMap id="ResultIdMap" type="com.jyusun.origin.base.db.data.BaseObject">
         <id column="sid" property="sid" javaType="long" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP"/>
         <result column="updated_time" property="updateTime" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP"/>
@@ -26,16 +26,14 @@
 
     <!-- 数据库通用列-->
     <sql id="BaseIdList">
-        id
-        ,
+        sid,
         create_time,
         updated_time,
     </sql>
 
     <!-- 数据库通用列-->
     <sql id="BaseColumnList">
-        id
-        ,
+        sid,
         remarks,
         creator,
         create_time,
@@ -47,8 +45,9 @@
 
     <!-- 数据库通用列-->
     <sql id="BaseTenantList">
+
         tenant_id,
-        id,
+        sid,
         remarks,
         creator,
         create_time,
@@ -60,9 +59,7 @@
 
     <!-- mysql分页通用结尾 -->
     <sql id="pageEnd">
-        limit
-        #{pageQuery.offsetPara,jdbcType=INTEGER} ,
-        #{pageQuery.limitPara,jdbcType=INTEGER}
+        limit #{pageQuery.offsetPara,jdbcType=INTEGER} , #{pageQuery.limitPara,jdbcType=INTEGER}
     </sql>
     <!-- Like left -->
     <sql id="like_left">
