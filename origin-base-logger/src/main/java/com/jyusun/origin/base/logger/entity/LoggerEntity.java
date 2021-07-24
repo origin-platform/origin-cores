@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
+
 /**
  * 实体对象
  * <p>
@@ -37,7 +39,7 @@ public class LoggerEntity extends BaseDTO {
      * 响应结果
      */
     @ApiModelProperty("响应结果")
-    private AbstractResult<Object> result;
+    private AbstractResult<Serializable> result;
 
     /**
      * 用户代理信息

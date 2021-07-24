@@ -5,6 +5,8 @@ import com.jyusun.origin.base.logger.annotation.WebLogger;
 import com.jyusun.origin.base.logger.common.util.LoggerUtil;
 import com.jyusun.origin.base.logger.common.util.PointUtil;
 import com.jyusun.origin.base.logger.entity.LoggerEntity;
+import com.jyusun.origin.core.common.result.AbstractResult;
+import com.jyusun.origin.core.common.result.ResultFactory;
 import com.jyusun.origin.core.common.util.WebUtil;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +15,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+
+import java.io.Serializable;
 
 
 /**
@@ -28,13 +32,13 @@ public class WebLoggerAspect {
     /**
      * 切点前后环绕通知：输出请求信息 和 响应信息
      *
-     * @param point
+     * @param point     {@link ProceedingJoinPoint} 切点信息
      * @param webLogger {@link WebLogger } 切点注解
-     * @return
+     * @return {@code Object} 请求处理结果
      */
     @Around("@annotation(webLogger)")
     @SneakyThrows
-    public Object doAround(ProceedingJoinPoint point, WebLogger webLogger) {
+    public AbstractResult<Serializable> doAround(ProceedingJoinPoint point, WebLogger webLogger) {
         // 获取类名
         String className = point.getTarget().getClass().getName();
         // 获取方法
@@ -42,7 +46,7 @@ public class WebLoggerAspect {
         // 开始时间
         long beginTime = System.currentTimeMillis();
         //执行方法
-        Object result = point.proceed();
+        AbstractResult<Serializable> result = (AbstractResult<Serializable>) point.proceed();
         //执行时长(毫秒)
         long timeConsuming = System.currentTimeMillis() - beginTime;
 
@@ -53,7 +57,7 @@ public class WebLoggerAspect {
                 .setTimeConsuming(timeConsuming);
         log.info(LoggerUtil.logMessageRequest(WebUtil.getRequest(), logger,
                 PointUtil.getRequestParamsByProceedingJoinPoint(point), className, method,
-                webLogger.isOutResult() ? result : null));
+                webLogger.isOutResult() ? result : ResultFactory.success()));
         return result;
     }
 

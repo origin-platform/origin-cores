@@ -6,14 +6,17 @@ import com.jyusun.origin.base.logger.entity.LoggerEntity;
 import com.jyusun.origin.base.logger.entity.value.RequestInfo;
 import com.jyusun.origin.base.logger.entity.value.UserAgentInfo;
 import com.jyusun.origin.core.common.base.BaseResultCode;
+import com.jyusun.origin.core.common.result.AbstractResult;
 import com.jyusun.origin.core.common.result.RespResult;
 import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.UriUtil;
 import com.jyusun.origin.core.common.util.UserAgentUtil;
 import com.jyusun.origin.core.common.util.WebUtil;
+import com.jyusun.origin.core.secure.common.util.SecureUtil;
 import lombok.experimental.UtilityClass;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Optional;
 import java.util.StringJoiner;
@@ -35,12 +38,12 @@ public class LoggerUtil {
      */
     private static final String STR_FORMAT_ERROR = new StringJoiner(StringUtil.LF)
             .add(StringUtil.LF)
-            .add("############################## [ClamcException - Begin] ##############################")
+            .add("############################## [Exception - Begin] ##############################")
             .add(" CODE     : %s")
             .add(" MESSAGE  : %s")
             .add(" TITLE    : %s")
             .add(" DETAIL   : %s")
-            .add("############################## [ClamcException - End  ] ##############################")
+            .add("############################## [Exception - End  ] ##############################")
             .toString();
 
     /**
@@ -48,10 +51,10 @@ public class LoggerUtil {
      */
     private static final String STR_FORMAT_WARN = new StringJoiner(StringUtil.LF)
             .add(StringUtil.LF)
-            .add("****************************** [ClamcWarnException - Begin] ******************************")
+            .add("****************************** [WarnException - Begin] ******************************")
             .add(" CODE   : %s")
             .add(" MESSAGE: %s")
-            .add("****************************** [ClamcWarnException - End  ] ******************************")
+            .add("****************************** [WarnException - End  ] ******************************")
             .toString();
 
     /**
@@ -106,7 +109,7 @@ public class LoggerUtil {
 
     public static String logMessageRequest(HttpServletRequest request, LoggerEntity logger,
                                            Map<String, Object> argsParams, String className,
-                                           String method, Object result) {
+                                           String method, AbstractResult<Serializable> result) {
 
         RequestInfo requestInfo = Optional.ofNullable(request)
                 .map(req -> getRequestInfo(req, argsParams, className, method)).orElse(new RequestInfo());
@@ -114,13 +117,11 @@ public class LoggerUtil {
         UserAgentInfo userAgent = Optional.ofNullable(request)
                 .map(LoggerUtil::getUserAgent).orElse(new UserAgentInfo());
 
-        // TODO 需要后续填充为当前登录用户
-        logger.setOperator("system")
+        logger.setOperator(String.valueOf(SecureUtil.getUser().getUserId()))
                 .setRequestInfo(requestInfo)
                 // 代理信息 应该用户登录日志记录一次即可
                 .setUserAgent(userAgent)
-                .setResult((RespResult<Object>) result);
-
+                .setResult((RespResult<Serializable>) result);
         return String.format(STR_FORMAT_REQUEST, logger.getTitle(),
                 logger.getOperator(),
                 logger.getBeginTime(),
@@ -138,8 +139,7 @@ public class LoggerUtil {
         UserAgentInfo userAgent = Optional.ofNullable(request)
                 .map(LoggerUtil::getUserAgent).orElse(new UserAgentInfo());
 
-        // TODO 需要后续填充为当前登录用户
-        logger.setOperator("system")
+        logger.setOperator(String.valueOf(SecureUtil.getUser().getUserId()))
                 .setRequestInfo(requestInfo)
                 // 代理信息 应该用户登录日志记录一次即可
                 .setUserAgent(userAgent);
