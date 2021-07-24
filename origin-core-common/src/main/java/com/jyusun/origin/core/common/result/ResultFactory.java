@@ -79,7 +79,7 @@ public class ResultFactory {
      * @param sign    操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>}响应结果
      */
-    public static AbstractResult<Boolean> status(String code, String message, boolean sign) {
+    public static <E extends Serializable> AbstractResult<E> status(String code, String message, boolean sign) {
         if (!sign) {
             throw new WarnException(SystemResultEnum.SUCCESS_STATUS_WARN);
         }
@@ -93,7 +93,7 @@ public class ResultFactory {
      * @param sign           {@code Boolean} 操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>}响应结果
      */
-    private static AbstractResult<Boolean> status(BaseResultCode baseResultCode, boolean sign) {
+    private static <E extends Serializable> AbstractResult<E> status(BaseResultCode baseResultCode, boolean sign) {
         return status(baseResultCode.code(), baseResultCode.message(), sign);
     }
 
@@ -103,7 +103,7 @@ public class ResultFactory {
      * @param sign 操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>}响应结果
      */
-    public static AbstractResult<Boolean> status(boolean sign) {
+    public static <E extends Serializable> AbstractResult<E> status(boolean sign) {
         return status(SystemResultEnum.SUCCESS, sign);
     }
 
@@ -113,7 +113,7 @@ public class ResultFactory {
      * @param sign 操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>} 响应结果
      */
-    public static AbstractResult<Boolean> create(boolean sign) {
+    public static <E extends Serializable> AbstractResult<E> create(boolean sign) {
         return status(SystemResultEnum.SUCCESS_CREATE, sign);
     }
 
@@ -122,7 +122,7 @@ public class ResultFactory {
      *
      * @return {@link AbstractResult<Boolean>} 响应结果
      */
-    public static AbstractResult<Boolean> success() {
+    public static <E extends Serializable> AbstractResult<E> success() {
         return status(SystemResultEnum.SUCCESS, true);
     }
 
