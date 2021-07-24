@@ -28,6 +28,7 @@
         <module>origin-base-swagger</module>
         <module>origin-base-excel</module>
         <module>origin-base-mail</module>
+        <module>origin-base-wecom</module>
         <module>origin-base-oss</module>
     </modules>
 
