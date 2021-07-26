@@ -1,13 +1,11 @@
 package com.jyusun.origin.core.common.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
 
 import java.util.UUID;
 
 /**
- * 工具
+ * UUID工具
  * <p>
  * 作用描述：UUID操作
  * </p>
@@ -24,7 +22,7 @@ public final class UuidUtil {
      * @return {@code String }
      */
     public static String generateUuidStr32() {
-        return UUID.randomUUID().toString().replaceAll(StringUtil.DASHED, StringUtil.EMPTY);
+        return generateUuidStr36().replace(StringUtil.DASHED, StringUtil.EMPTY);
     }
 
     /**
@@ -41,11 +39,10 @@ public final class UuidUtil {
      * <p>  - 返回8位计算后的UUID,可能有概率会重复，需要配合其他的数据使用</p>
      *
      * @return a
-     * @author JyuSun at 2019/1/3 17:27
      */
     public static String generateShortUuid() {
         StringBuilder shortBuffer = new StringBuilder();
-        String uuid = UUID.randomUUID().toString().replace(StringUtil.DASHED, StringUtil.EMPTY);
+        String uuid = generateUuidStr32();
         for (int i = 0; i < 8; i++) {
             String str = uuid.substring(i * 4, i * 4 + 4);
             int x = Integer.parseInt(str, 16);

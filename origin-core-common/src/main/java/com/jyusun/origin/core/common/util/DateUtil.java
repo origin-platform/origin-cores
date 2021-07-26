@@ -91,6 +91,15 @@ public class DateUtil {
     }
 
     /**
+     * 获取当前日期
+     *
+     * @return {@code String} 格式为yyyyMMdd字符串日期
+     */
+    public static String thisDateToStrYmd() {
+        return toStr(LocalDate.now(), FORMAT_YYYYMMDD);
+    }
+
+    /**
      * 当前时间 LocalTime To String
      *
      * @param format {@code String } 转换格式
@@ -145,5 +154,14 @@ public class DateUtil {
     public static String strDateConvertFormat(String date, String thisFormat, String toFormat) {
         return StringUtils.isBlank(date) ? StringUtil.EMPTY :
                 toLocalDate(date, thisFormat).format(DateTimeFormatter.ofPattern(toFormat));
+    }
+
+    /**
+     * 当前时间戳
+     *
+     * @return {@code Long} 时间戳
+     */
+    public long timeStamp() {
+        return System.currentTimeMillis();
     }
 }
