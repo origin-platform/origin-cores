@@ -95,7 +95,7 @@ public final class StringUtil extends StringUtils {
         int temp = 0;
         for (int i = 0; i < para.length(); i++) {
             if (Character.isUpperCase(para.charAt(i))) {
-                sb.insert(i + temp, "_");
+                sb.insert(i + temp, UNDERLINE);
                 temp += 1;
             }
         }
