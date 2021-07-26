@@ -8,7 +8,7 @@ import com.jyusun.origin.core.common.base.BaseResultCode;
  * @author jyusun at 2020/1/2 17:08
  * @since 1.0.0
  */
-public class BusinessException extends WarnException {
+public class BusinessException extends BaseException {
 
     /**
      * 业务异常信息构造函数

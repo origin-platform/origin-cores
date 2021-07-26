@@ -4,7 +4,6 @@ package com.jyusun.origin.core.common.result;
 import com.jyusun.origin.core.common.base.BaseResultCode;
 import com.jyusun.origin.core.common.enums.SystemResultEnum;
 import com.jyusun.origin.core.common.exception.BusinessException;
-import com.jyusun.origin.core.common.exception.WarnException;
 import com.jyusun.origin.core.common.util.AssemblerUtil;
 import lombok.experimental.UtilityClass;
 
@@ -32,7 +31,7 @@ public class ResultFactory {
     public static <E extends Serializable> AbstractResult<E> data(String code, String message, E data) {
         return Optional.ofNullable(data)
                 .map(obj -> new RespResult<>(code, message, true, obj))
-                .orElseThrow(() -> new WarnException(SystemResultEnum.SUCCESS_DATA_WARN));
+                .orElseThrow(() -> new BusinessException(SystemResultEnum.SUCCESS_DATA_WARN));
     }
 
     /**
@@ -81,7 +80,7 @@ public class ResultFactory {
      */
     public static <E extends Serializable> AbstractResult<E> status(String code, String message, boolean sign) {
         if (!sign) {
-            throw new WarnException(SystemResultEnum.SUCCESS_STATUS_WARN);
+            throw new BusinessException(SystemResultEnum.SUCCESS_STATUS_WARN);
         }
         return new RespResult<>(code, message, true);
     }

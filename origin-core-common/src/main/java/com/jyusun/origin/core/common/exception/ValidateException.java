@@ -7,7 +7,7 @@ import com.jyusun.origin.core.common.base.BaseResultCode;
  *
  * @author jyusun
  */
-public class ValidateException extends WarnException {
+public class ValidateException extends BusinessException {
 
     /**
      * 异常信息构造函数
