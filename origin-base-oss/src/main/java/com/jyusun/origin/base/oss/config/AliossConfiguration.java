@@ -5,6 +5,11 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.common.auth.CredentialsProvider;
 import com.aliyun.oss.common.auth.DefaultCredentialProvider;
 import com.jyusun.origin.base.oss.OssTemplate;
+import com.jyusun.origin.base.oss.config.props.OssProperties;
+import com.jyusun.origin.base.oss.factory.OssFactory;
+import com.jyusun.origin.base.oss.rule.DefaultOssRule;
+import com.jyusun.origin.base.oss.rule.OssRule;
+import com.jyusun.origin.base.oss.strategy.AliossHandle;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -23,11 +28,17 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration(proxyBeanMethods = false)
 @AllArgsConstructor
-@EnableConfigurationProperties(OssProperties.class)
+@EnableConfigurationProperties({OssProperties.class, DefaultOssRule.class})
 @ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "ali")
 public class AliossConfiguration {
 
     private final OssProperties ossProperties;
+
+    @Bean
+    @ConditionalOnMissingBean(OssRule.class)
+    public OssRule ossRule() {
+        return new DefaultOssRule();
+    }
 
     /**
      * Oss 客户端信息
@@ -56,11 +67,21 @@ public class AliossConfiguration {
         return new OSSClient(ossProperties.getEndpoint(), credentialsProvider, conf);
     }
 
+    /**
+     * 阿里云处理
+     *
+     * @param ossClient {@link OSSClient} 阿里云对象存储客户端
+     * @param ossRule
+     * @return
+     */
     @Bean
-    @ConditionalOnMissingBean(AliossTemplate.class)
+    @ConditionalOnMissingBean(OssTemplate.class)
     @ConditionalOnBean({OSSClient.class, OssRule.class})
     public OssTemplate aliossTemplate(OSSClient ossClient, OssRule ossRule) {
-        return new AliossTemplate(ossClient, ossProperties, ossRule);
+        OssFactory ossFactory = new OssFactory();
+        ossFactory.setOssClient(ossClient);
+        ossFactory.setOssRule(ossRule);
+        return new AliossHandle(ossFactory);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.jyusun.origin.base.oss.config;
+package com.jyusun.origin.base.oss.config.props;
 
 import com.jyusun.origin.base.oss.common.enums.TypeEnum;
 import lombok.Getter;
@@ -18,21 +18,21 @@ public class OssProperties {
     /**
      * 是否启用
      */
-    private Boolean enabled;
+    private Boolean enabled = true;
     /**
      * 对象存储类型
      */
     private TypeEnum type;
     /**
-     * 令牌桶
+     * 存储空间
      */
     private String bucket;
     /**
-     * 令牌桶名称
+     * 默认存储空间名称
      */
-    private String bucketName;
+    private String bucketName = "origin-platform";
     /**
-     * 端点
+     * 端点（访问域名）
      */
     private String endpoint;
     /**

@@ -1,6 +1,7 @@
 package com.jyusun.origin.base.oss.config;
 
 
+import com.jyusun.origin.base.oss.config.props.OssProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
