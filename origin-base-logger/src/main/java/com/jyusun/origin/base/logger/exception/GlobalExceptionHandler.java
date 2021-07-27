@@ -5,8 +5,8 @@ import com.jyusun.origin.base.logger.common.util.LoggerUtil;
 import com.jyusun.origin.core.common.enums.SystemResultEnum;
 import com.jyusun.origin.core.common.exception.BusinessException;
 import com.jyusun.origin.core.common.exception.SecureException;
+import com.jyusun.origin.core.common.exception.ServiceException;
 import com.jyusun.origin.core.common.exception.UtilException;
-import com.jyusun.origin.core.common.exception.WarnException;
 import com.jyusun.origin.core.common.result.AbstractResult;
 import com.jyusun.origin.core.common.result.Links;
 import com.jyusun.origin.core.common.result.ResultFactory;
@@ -175,14 +175,14 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 警示性异常信息
+     * 服务异常信息
      *
-     * @param e {@link WarnException}
+     * @param e {@link ServiceException}
      * @return {@link AbstractResult}
      */
-    @ExceptionHandler(WarnException.class)
+    @ExceptionHandler(ServiceException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public AbstractResult<Serializable> handleError(WarnException e) {
+    public AbstractResult<Serializable> handleError(ServiceException e) {
         log.warn(LoggerUtil.logMessageWarn(e.getCode(), e.getMessage()));
         return ResultFactory.warn(e.getCode(), e.getMessage(), links());
     }

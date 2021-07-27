@@ -15,16 +15,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Getter
 @ConfigurationProperties(prefix = "origin-system")
 public class GlobalProperties {
-
-    /** project name * */
-    private String name;
-
-    /** project version */
-    private String version;
-
-    /** Base Profile */
-    private String profile;
-
     /**
      * 获取头像上传路径
      */
@@ -45,4 +35,14 @@ public class GlobalProperties {
     public String getUploadPath() {
         return this.profile + "/upload";
     }
+    /** project name * */
+    private String name;
+
+    /** project version */
+    private String version;
+
+    /** Base Profile */
+    private String profile;
+
+
 }
