@@ -1,5 +1,6 @@
 package com.jyusun.origin.base.oss.strategy;
 
+import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.Bucket;
 import com.aliyun.oss.model.PutObjectResult;
@@ -32,7 +33,7 @@ public class AliossHandle extends OssAccessor implements OssTemplate {
      *
      * @return {@link OSSClient}
      */
-    private OSSClient getOssClient() {
+    private OSS getOssClient() {
         return this.getOssFactory().getOssClient();
     }
 

@@ -1,5 +1,6 @@
 package com.jyusun.origin.base.oss.factory;
 
+import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.rule.OssRule;
@@ -31,7 +32,7 @@ public class OssFactory {
     /**
      * 阿里云对象存储
      */
-    private OSSClient ossClient;
+    private OSS ossClient;
 
     /**
      * 七牛云鉴权

@@ -1,9 +1,9 @@
 package com.jyusun.origin.base.oss.config;
 
-import com.aliyun.oss.ClientConfiguration;
+import com.aliyun.oss.ClientBuilderConfiguration;
+import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.common.auth.CredentialsProvider;
-import com.aliyun.oss.common.auth.DefaultCredentialProvider;
+import com.aliyun.oss.OSSClientBuilder;
 import com.jyusun.origin.base.oss.OssTemplate;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.factory.OssFactory;
@@ -43,13 +43,13 @@ public class AliossConfiguration {
     /**
      * Oss 客户端信息
      *
-     * @return {@link OSSClient}
+     * @return {@link OSS}
      */
     @Bean
-    @ConditionalOnMissingBean(OSSClient.class)
-    public OSSClient ossClient() {
+    @ConditionalOnMissingBean(OSS.class)
+    public OSS ossClient() {
         // 创建ClientConfiguration。ClientConfiguration是OSSClient的配置类，可配置代理、连接超时、最大连接数等参数。
-        ClientConfiguration conf = new ClientConfiguration();
+        ClientBuilderConfiguration conf = new ClientBuilderConfiguration();
         // 设置OSSClient允许打开的最大HTTP连接数，默认为1024个。
         conf.setMaxConnections(1024);
         // 设置Socket层传输数据的超时时间，默认为50000毫秒。
@@ -62,22 +62,25 @@ public class AliossConfiguration {
         conf.setIdleConnectionTime(60000);
         // 设置失败请求重试次数，默认为3次。
         conf.setMaxErrorRetry(5);
-        CredentialsProvider credentialsProvider = new DefaultCredentialProvider(ossProperties.getAccessKeyId(),
-                ossProperties.getAccessKeySecret());
-        return new OSSClient(ossProperties.getEndpoint(), credentialsProvider, conf);
+        // 设置是否支持CNAME。CNAME用于将自定义域名绑定到目标Bucket。
+        // conf.setSupportCname(true);
+        // 创建OSSClient实例
+        return new OSSClientBuilder().build(ossProperties.getEndpoint(),
+                ossProperties.getAccessKeyId(),
+                ossProperties.getAccessKeySecret(), conf);
     }
 
     /**
      * 阿里云处理
      *
      * @param ossClient {@link OSSClient} 阿里云对象存储客户端
-     * @param ossRule
-     * @return
+     * @param ossRule   {@link OssRule }
+     * @return {@link OssTemplate} Oss操作模板
      */
     @Bean
     @ConditionalOnMissingBean(OssTemplate.class)
-    @ConditionalOnBean({OSSClient.class, OssRule.class})
-    public OssTemplate aliossTemplate(OSSClient ossClient, OssRule ossRule) {
+    @ConditionalOnBean({OSS.class, OssRule.class})
+    public OssTemplate aliossTemplate(OSS ossClient, OssRule ossRule) {
         OssFactory ossFactory = new OssFactory();
         ossFactory.setOssClient(ossClient);
         ossFactory.setOssRule(ossRule);
