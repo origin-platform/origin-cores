@@ -26,9 +26,10 @@ import org.springframework.context.annotation.Configuration;
  * @author jyusun
  * @since 1.0.0
  */
+@Configuration
 @AllArgsConstructor
 @EnableConfigurationProperties({OssProperties.class, OssRule.class})
-@ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "ali")
+@ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "ALI")
 public class AliossConfiguration {
 
     private final OssProperties ossProperties;

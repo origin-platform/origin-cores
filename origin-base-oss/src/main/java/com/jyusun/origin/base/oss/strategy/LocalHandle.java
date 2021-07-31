@@ -96,6 +96,7 @@ public class LocalHandle extends OssAccessor implements OssTemplate {
      * @param cover        {@code Boolean} true-覆盖，false-不覆盖
      * @return {@link UploadInfo} 上传信息
      */
+    @Override
     @SneakyThrows
     public UploadInfo put(String bucketName, InputStream inputStream, String originalName, boolean cover) {
         this.makeBucket(bucketName);

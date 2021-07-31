@@ -23,7 +23,7 @@ import org.springframework.context.annotation.Bean;
  */
 @AllArgsConstructor
 @EnableConfigurationProperties(OssProperties.class)
-@ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "qiniu")
+@ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "QINIU")
 public class QiniuConfiguration {
 
     private final OssProperties ossProperties;

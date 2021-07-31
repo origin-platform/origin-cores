@@ -1,7 +1,6 @@
 package com.jyusun.origin.base.oss.common.enums;
 
 
-import com.jyusun.origin.core.common.base.BaseEnum;
 import lombok.AllArgsConstructor;
 
 /**
@@ -10,35 +9,23 @@ import lombok.AllArgsConstructor;
  * @author jyusun
  */
 @AllArgsConstructor
-public enum TypeEnum implements BaseEnum {
+public enum TypeEnum {
 
     /**
      * 对象存储类型:本地
      */
-    LOCAL("local", "本地存储"),
+    LOCAL,
     /**
      * 对象存储类型:阿里云
      */
-    ALI("ali", "阿里云"),
+    ALI,
     /**
      * 对象存储类型:七牛云
      */
-    QINIU("qiniu", "七牛云"),
+    QINIU,
     /**
      * 对象存储类型:FastDFS
      */
-    FASTDFS("fastdfs", "FastDFS");
+    FASTDFS;
 
-    private final String code;
-    private final String label;
-
-    @Override
-    public String code() {
-        return this.code;
-    }
-
-    @Override
-    public String label() {
-        return this.label;
-    }
 }

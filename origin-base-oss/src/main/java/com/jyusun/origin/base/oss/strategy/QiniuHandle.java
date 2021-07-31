@@ -4,11 +4,13 @@ import com.jyusun.origin.base.oss.OssTemplate;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.factory.OssAccessor;
 import com.jyusun.origin.base.oss.factory.OssFactory;
+import com.jyusun.origin.base.oss.model.UploadInfo;
 import com.jyusun.origin.base.oss.rule.OssRule;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -75,6 +77,18 @@ public class QiniuHandle extends OssAccessor implements OssTemplate {
     @Override
     public void makeBucket(String bucketName) {
 
+    }
+
+    /**
+     * @param bucketName   存储空间名称
+     * @param stream       {@link InputStream} 输入流
+     * @param originalName {@code String} 文件名称
+     * @param cover        {@code Boolean} true-覆盖，false-不覆盖
+     * @return {@link UploadInfo} 上传信息
+     */
+    @Override
+    public UploadInfo put(String bucketName, InputStream stream, String originalName, boolean cover) {
+        return null;
     }
 
     /**

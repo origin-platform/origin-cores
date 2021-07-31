@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 
 @AllArgsConstructor
 @EnableConfigurationProperties({OssProperties.class, OssRule.class})
-@ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "local")
+@ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "LOCAL")
 public class LocalConfiguration {
 
     private final OssProperties ossProperties;
