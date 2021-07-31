@@ -26,14 +26,18 @@ import org.springframework.context.annotation.Configuration;
  * @author jyusun
  * @since 1.0.0
  */
-@Configuration(proxyBeanMethods = false)
 @AllArgsConstructor
-@EnableConfigurationProperties({OssProperties.class, DefaultOssRule.class})
+@EnableConfigurationProperties({OssProperties.class, OssRule.class})
 @ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "ali")
 public class AliossConfiguration {
 
     private final OssProperties ossProperties;
 
+    /**
+     * 存储规则注册
+     *
+     * @return {@link OssRule}
+     */
     @Bean
     @ConditionalOnMissingBean(OssRule.class)
     public OssRule ossRule() {

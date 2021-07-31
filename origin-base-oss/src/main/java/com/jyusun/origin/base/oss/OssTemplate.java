@@ -53,30 +53,30 @@ public interface OssTemplate {
     /**
      * 删除文件
      *
-     * @param fileName
+     * @param fileName {@code String} 文件名称
      */
     void removeFile(String fileName);
 
     /**
      * 删除文件
      *
-     * @param bucketName
-     * @param fileName
+     * @param bucketName {@code String} 存储空间名称
+     * @param fileName   {@code String} 文件名称
      */
     void removeFile(String bucketName, String fileName);
 
     /**
      * 删除文件
      *
-     * @param fileNames
+     * @param fileNames {@link List<String>} 文件名称集合
      */
     void removeFiles(List<String> fileNames);
 
     /**
      * 删除文件
      *
-     * @param bucketName
-     * @param fileNames
+     * @param bucketName {@code String} 存储空间名称
+     * @param fileNames  {@link List<String>} 文件名称集合
      */
     void removeFiles(String bucketName, List<String> fileNames);
 }

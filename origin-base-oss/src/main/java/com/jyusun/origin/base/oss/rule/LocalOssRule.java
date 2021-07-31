@@ -6,11 +6,11 @@ import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.UuidUtil;
 
 /**
- * 默认Oss规则
+ * 本地Oss规则
  *
  * @author sun
  */
-public class DefaultOssRule implements OssRule {
+public class LocalOssRule implements OssRule {
 
 
     @Override

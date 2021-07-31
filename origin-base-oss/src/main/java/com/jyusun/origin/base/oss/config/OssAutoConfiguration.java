@@ -1,10 +1,9 @@
 package com.jyusun.origin.base.oss.config;
 
 
-import com.jyusun.origin.base.oss.config.props.OssProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * Oss 自动装配
@@ -12,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @author jyusun
  */
 @Configuration
-@EnableConfigurationProperties(OssProperties.class)
+@Import({AliossConfiguration.class, QiniuConfiguration.class})
 @ConditionalOnProperty(prefix = "origin-system.oss", name = "enabled", matchIfMissing = true)
 public class OssAutoConfiguration {
 }

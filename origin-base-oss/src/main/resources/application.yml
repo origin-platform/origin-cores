@@ -1,7 +1,7 @@
 origin:
   oss:
     enabled: true
-    type: ALI
+    type: ali
     bucket: origin-platform.oss-cn-beijing.aliyuncs.com
     bucket-name: origin-platform
     end-point: oss-cn-beijing.aliyuncs.com

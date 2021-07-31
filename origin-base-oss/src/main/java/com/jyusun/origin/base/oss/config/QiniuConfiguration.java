@@ -2,6 +2,7 @@ package com.jyusun.origin.base.oss.config;
 
 import com.jyusun.origin.base.oss.OssTemplate;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
+import com.jyusun.origin.base.oss.factory.OssFactory;
 import com.jyusun.origin.base.oss.rule.OssRule;
 import com.jyusun.origin.base.oss.strategy.QiniuHandle;
 import com.qiniu.common.Zone;
@@ -14,14 +15,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Oss配置类
  *
  * @author jyusun
  */
-@Configuration(proxyBeanMethods = false)
 @AllArgsConstructor
 @EnableConfigurationProperties(OssProperties.class)
 @ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "qiniu")
@@ -56,7 +55,13 @@ public class QiniuConfiguration {
     @ConditionalOnBean({Auth.class, UploadManager.class, BucketManager.class, OssRule.class})
     public OssTemplate qiniuTemplate(Auth auth, UploadManager uploadManager, BucketManager bucketManager,
                                      OssRule ossRule) {
-        return new QiniuHandle(auth, uploadManager, bucketManager, ossRule);
+        OssFactory ossFactory = new OssFactory();
+        ossFactory.setOssProperties(ossProperties);
+        ossFactory.setAuth(auth);
+        ossFactory.setUploadManager(uploadManager);
+        ossFactory.setBucketManager(bucketManager);
+        ossFactory.setOssRule(ossRule);
+        return new QiniuHandle(ossFactory);
     }
 
 
