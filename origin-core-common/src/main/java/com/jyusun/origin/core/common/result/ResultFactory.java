@@ -5,6 +5,9 @@ import com.jyusun.origin.core.common.base.BaseResultCode;
 import com.jyusun.origin.core.common.enums.SystemResultEnum;
 import com.jyusun.origin.core.common.exception.BusinessException;
 import com.jyusun.origin.core.common.util.AssemblerUtil;
+import com.jyusun.origin.core.common.util.StringUtil;
+import com.jyusun.origin.core.common.util.UriUtil;
+import com.jyusun.origin.core.common.util.WebUtil;
 import lombok.experimental.UtilityClass;
 
 import java.io.Serializable;
@@ -181,11 +184,10 @@ public class ResultFactory {
      * 错误信息
      *
      * @param baseResultCode {@link BaseResultCode}  枚举结果
-     * @param links          {@link Links} 链接信息
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Serializable> error(BaseResultCode baseResultCode, Links links) {
-        return error(baseResultCode.code(), baseResultCode.message(), links);
+    public static AbstractResult<Serializable> error(BaseResultCode baseResultCode) {
+        return error(baseResultCode.code(), baseResultCode.message(), links());
     }
 
     /**
@@ -214,22 +216,30 @@ public class ResultFactory {
      *
      * @param baseResultCode {@link BaseResultCode} 枚举消息
      * @param message        {@code String} 消息描述
-     * @param links          {@link Links} 请求连接
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Serializable> warn(BaseResultCode baseResultCode, String message, Links links) {
-        return new WarnResult<>(baseResultCode.code(), message, links);
+    public static AbstractResult<Serializable> warn(BaseResultCode baseResultCode, String message) {
+        return warn(baseResultCode.code(), message, links());
     }
 
     /**
      * 警告信息
      *
      * @param baseResultCode {@link BaseResultCode} 枚举消息
-     * @param links          {@link Links} 请求连接
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Serializable> warn(BaseResultCode baseResultCode, Links links) {
-        return new WarnResult<>(baseResultCode, links);
+    public static AbstractResult<Serializable> warn(BaseResultCode baseResultCode) {
+        return warn(baseResultCode.code(), baseResultCode.message(), links());
+    }
+
+    /**
+     * 警告信息
+     *
+     * @param message {@code String} 消息描述
+     * @return {@link AbstractResult} 响应结果
+     */
+    public static AbstractResult<Serializable> warn(String code, String message) {
+        return warn(code, message, links());
     }
 
     /**
@@ -243,5 +253,17 @@ public class ResultFactory {
             throw new BusinessException(abstractResult.getCode(), abstractResult.getMessage());
         }
         return ((RespResult<E>) abstractResult).getData();
+    }
+
+    /**
+     * HttpServletRequest 中 获取请求链接
+     *
+     * @return {@link Links} 链接信息
+     */
+    private static Links links() {
+        String self = Optional.ofNullable(WebUtil.getRequest())
+                .map(request -> UriUtil.getPath(request.getRequestURI()))
+                .orElse(StringUtil.EMPTY);
+        return Links.builder().self(self).build();
     }
 }

@@ -43,7 +43,7 @@ public class ErrorResult<E extends Serializable> extends AbstractResult<E> {
     }
 
     public ErrorResult(String code, String message, Links links) {
-        this.init(code, message, links, null, null);
+        this(code, message, links, null, null);
     }
 
     public ErrorResult(String code, String message) {

@@ -34,15 +34,6 @@ public class WarnResult<E extends Serializable> extends AbstractResult<E> {
     /**
      * 构造函数
      *
-     * @param baseResultCode 响应编码
-     */
-    public WarnResult(BaseResultCode baseResultCode, Links links) {
-        this(baseResultCode.code(), baseResultCode.message(), links);
-    }
-
-    /**
-     * 构造函数
-     *
      * @param code    响应编码
      * @param message 响应消息
      */
