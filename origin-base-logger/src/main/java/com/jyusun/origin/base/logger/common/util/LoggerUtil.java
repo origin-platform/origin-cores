@@ -84,32 +84,32 @@ public class LoggerUtil {
             .add("#=#=#=#=#=#=#=#=#=#=#=#=#=#=#= [RequestException - End  ] =#=#=#=#=#=#=#=#=#=#=#=#=#=#=#")
             .toString();
 
-    public static String logMessageError(String code, String message, String title, String detail) {
+    public static String errorMessage(String code, String message, String title, String detail) {
         return String.format(STR_FORMAT_ERROR, code, message, title, detail);
     }
 
-    public static String logMessageError(
+    public static String errorMessage(
             BaseResultCode baseResultCode,
             String title, String detail) {
-        return logMessageError(baseResultCode.code(), baseResultCode.message(), title, detail);
+        return errorMessage(baseResultCode.code(), baseResultCode.message(), title, detail);
     }
 
-    public static String logMessageWarn(String code, String message) {
+    public static String warnMessage(String code, String message) {
         return String.format(STR_FORMAT_WARN, code, message);
     }
 
-    public static String logMessageWarn(BaseResultCode baseResultCode) {
-        return logMessageWarn(baseResultCode.code(), baseResultCode.message());
+    public static String warnMessage(BaseResultCode baseResultCode) {
+        return warnMessage(baseResultCode.code(), baseResultCode.message());
     }
 
-    public static String logMessageWarn(BaseResultCode baseResultCode, String message) {
-        return logMessageWarn(baseResultCode.code(), baseResultCode.message() + "，" + message);
+    public static String warnMessage(BaseResultCode baseResultCode, String message) {
+        return warnMessage(baseResultCode.code(), baseResultCode.message() + "，" + message);
 
     }
 
-    public static String logMessageRequest(HttpServletRequest request, LoggerEntity logger,
-                                           Map<String, Object> argsParams, String className,
-                                           String method, AbstractResult<Serializable> result) {
+    public static String requestMessage(HttpServletRequest request, LoggerEntity logger,
+                                        Map<String, Object> argsParams, String className,
+                                        String method, AbstractResult<Serializable> result) {
 
         RequestInfo requestInfo = Optional.ofNullable(request)
                 .map(req -> getRequestInfo(req, argsParams, className, method)).orElse(new RequestInfo());
@@ -130,9 +130,9 @@ public class LoggerUtil {
     }
 
 
-    public static String logMessageRequestError(HttpServletRequest request, LoggerEntity logger,
-                                                Map<String, Object> params, String className,
-                                                String method) {
+    public static String requestErrorMessage(HttpServletRequest request, LoggerEntity logger,
+                                             Map<String, Object> params, String className,
+                                             String method) {
 
         RequestInfo requestInfo = Optional.ofNullable(request)
                 .map(req -> getRequestInfo(req, params, className, method)).orElse(new RequestInfo());
@@ -175,21 +175,20 @@ public class LoggerUtil {
      */
     public static UserAgentInfo getUserAgent(HttpServletRequest request) {
         String userAgent = UserAgentUtil.getUserAgent(request);
-        UserAgentInfo info = new UserAgentInfo();
-        info.setBrowserManufacturer(UserAgentUtil.getBrowserManufacturer(userAgent));
-        info.setBrowserGroup(UserAgentUtil.getBrowserGroup(userAgent));
-        info.setBrowserName(UserAgentUtil.getBrowserName(userAgent));
-        info.setBrowserType(UserAgentUtil.getBrowserType(userAgent));
-        info.setBrowserVersion(UserAgentUtil.getBrowserVersion(userAgent));
+        return new UserAgentInfo()
+                .setBrowserManufacturer(UserAgentUtil.getBrowserManufacturer(userAgent))
+                .setBrowserGroup(UserAgentUtil.getBrowserGroup(userAgent))
+                .setBrowserName(UserAgentUtil.getBrowserName(userAgent))
+                .setBrowserType(UserAgentUtil.getBrowserType(userAgent))
+                .setBrowserVersion(UserAgentUtil.getBrowserVersion(userAgent))
 
-        info.setDeviceManufacturer(UserAgentUtil.getDeviceManufacturer(userAgent));
-        info.setDeviceType(UserAgentUtil.getDevicetype(userAgent));
-        info.setOs(UserAgentUtil.getOs(userAgent));
+                .setDeviceManufacturer(UserAgentUtil.getDeviceManufacturer(userAgent))
+                .setDeviceType(UserAgentUtil.getDevicetype(userAgent))
+                .setOs(UserAgentUtil.getOs(userAgent))
 
-        info.setOsName(UserAgentUtil.getOsName(userAgent));
-        info.setOsVersion(UserAgentUtil.getOsVersion(userAgent));
-        info.setBrowserRenderingEngine(UserAgentUtil.getBorderRenderingEngine(userAgent));
-        return info;
+                .setOsName(UserAgentUtil.getOsName(userAgent))
+                .setOsVersion(UserAgentUtil.getOsVersion(userAgent))
+                .setBrowserRenderingEngine(UserAgentUtil.getBorderRenderingEngine(userAgent));
 
     }
 }

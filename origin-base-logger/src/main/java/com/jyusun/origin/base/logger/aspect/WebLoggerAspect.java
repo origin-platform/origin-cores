@@ -55,7 +55,7 @@ public class WebLoggerAspect {
         logger.setTitle(webLogger.value())
                 .setBeginTime(beginTime)
                 .setTimeConsuming(timeConsuming);
-        log.info(LoggerUtil.logMessageRequest(WebUtil.getRequest(), logger,
+        log.info(LoggerUtil.requestMessage(WebUtil.getRequest(), logger,
                 PointUtil.getRequestParamsByProceedingJoinPoint(point), className, method,
                 webLogger.isOutResult() ? result : ResultFactory.success()));
         return result;
@@ -78,7 +78,7 @@ public class WebLoggerAspect {
         LoggerEntity logger = new LoggerEntity();
         logger.setTitle(webLogger.value())
                 .setBeginTime(System.currentTimeMillis());
-        log.info(LoggerUtil.logMessageRequestError(WebUtil.getRequest(), logger,
+        log.info(LoggerUtil.requestErrorMessage(WebUtil.getRequest(), logger,
                 PointUtil.getRequestParamsByJoinPoint(joinPoint), className, method));
     }
 
