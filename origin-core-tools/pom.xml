@@ -13,6 +13,15 @@
     <name>${project.artifactId}</name>
     <description>公共基础-通用工具</description>
 
+    <!-- 开发者信息 -->
+    <developers>
+        <developer>
+            <id>jyusun</id>
+            <name>ayu</name>
+            <email>jyusun@foxmail.com</email>
+        </developer>
+    </developers>
+
     <dependencies>
         <!-- 通用基础-基础处理 -->
         <dependency>

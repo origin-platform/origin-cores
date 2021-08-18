@@ -169,7 +169,7 @@ public class LoggerUtil {
     }
 
     /**
-     * 添加用户代理信息
+     * 用户代理信息
      *
      * @param request {@link HttpServletRequest}
      */

@@ -15,6 +15,15 @@
     <name>${project.artifactId}</name>
     <description>基础工具-Swagger-API</description>
 
+    <!-- 开发者信息 -->
+    <developers>
+        <developer>
+            <id>jyusun</id>
+            <name>ayu</name>
+            <email>jyusun@foxmail.com</email>
+        </developer>
+    </developers>
+
     <dependencies>
         <dependency>
             <groupId>${project.parent.groupId}</groupId>

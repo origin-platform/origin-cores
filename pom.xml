@@ -16,6 +16,15 @@
     <packaging>pom</packaging>
     <description>公共基础</description>
 
+    <!-- 开发者信息 -->
+    <developers>
+        <developer>
+            <id>jyusun</id>
+            <name>ayu</name>
+            <email>jyusun@foxmail.com</email>
+        </developer>
+    </developers>
+
     <modules>
         <module>origin-core-dependencies</module>
         <module>origin-starter-core</module>

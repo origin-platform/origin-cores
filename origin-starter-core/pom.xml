@@ -9,10 +9,18 @@
     </parent>
 
     <artifactId>origin-starter-core</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <packaging>pom</packaging>
     <description>公共基础-starter</description>
+
+    <!-- 开发者信息 -->
+    <developers>
+        <developer>
+            <id>jyusun</id>
+            <name>ayu</name>
+            <email>jyusun@foxmail.com</email>
+        </developer>
+    </developers>
 
     <dependencies>
         <!-- 公共基础-基础封装 -->

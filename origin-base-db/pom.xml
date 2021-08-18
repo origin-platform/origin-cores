@@ -14,6 +14,15 @@
     <packaging>jar</packaging>
     <description>公共基础-数据库操作</description>
 
+    <!-- 开发者信息 -->
+    <developers>
+        <developer>
+            <id>jyusun</id>
+            <name>ayu</name>
+            <email>jyusun@foxmail.com</email>
+        </developer>
+    </developers>
+
     <dependencies>
         <!-- 公共依赖-核心 -->
         <dependency>
