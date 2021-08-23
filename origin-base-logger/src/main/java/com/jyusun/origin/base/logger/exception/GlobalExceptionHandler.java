@@ -106,7 +106,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 404未找到请求 (RPC 调用可能会触发 )
+     * 404未找到请求
      *
      * @param e {@link NoHandlerFoundException }
      * @return {@link AbstractResult}
