@@ -32,4 +32,9 @@ public class SystemConstant implements BaseConstants {
      * 扫描FeignClient包路径
      */
     public static final String BASE_FEIGN = "com.jyusun.origin.**.client.feign";
+
+    /**
+     * 基础名称
+     */
+    public static final String NAME = "origin-platform";
 }

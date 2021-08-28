@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 文件上传信息
  *
- * @author sun
+ * @author sun at 2021-8-23 22:02:13
  */
 @Data
 public class UploadInfo {

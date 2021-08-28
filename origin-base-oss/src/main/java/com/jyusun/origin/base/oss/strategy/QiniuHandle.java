@@ -132,4 +132,27 @@ public class QiniuHandle extends OssAccessor implements OssTemplate {
     public void removeFiles(String bucketName, List<String> fileNames) {
 
     }
+
+    /**
+     * 下载响应
+     *
+     * @param bucketName       存储空间名称
+     * @param responseFileName 响应文件名称
+     * @param remoteFilePath   远程文件路径
+     */
+    @Override
+    public void downloadWeb(String bucketName, String responseFileName, String remoteFilePath) {
+
+    }
+
+    /**
+     * 下载响应
+     *
+     * @param responseFileName 响应文件名称
+     * @param remoteFilePath   远程文件路径
+     */
+    @Override
+    public void downloadWeb(String responseFileName, String remoteFilePath) {
+
+    }
 }

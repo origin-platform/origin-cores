@@ -31,19 +31,21 @@ public class LocalConfiguration {
         return new LocalOssRule();
     }
 
-    /**
-     * 本地处理
-     *
-     * @param ossRule {@link OssRule }
-     * @return {@link OssTemplate} Oss操作模板
-     */
     @Bean
-    @ConditionalOnMissingBean(OssTemplate.class)
     @ConditionalOnBean(OssRule.class)
-    public OssTemplate aliossTemplate(OssRule ossRule) {
+    public OssFactory ossFactory(OssRule ossRule) {
         OssFactory ossFactory = new OssFactory();
         ossFactory.setOssProperties(ossProperties);
         ossFactory.setOssRule(ossRule);
+        return ossFactory;
+    }
+
+    /**
+     * 本地处理
+     */
+    @Bean
+    @ConditionalOnMissingBean(OssTemplate.class)
+    public OssTemplate localTemplate(OssFactory ossFactory) {
         return new LocalHandle(ossFactory);
     }
 }
