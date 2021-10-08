@@ -21,7 +21,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = false)
 @ApiModel("响应对象")
-public abstract class AbstractResult<E extends Serializable> implements Serializable {
+public class AbstractResult<E extends Serializable> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

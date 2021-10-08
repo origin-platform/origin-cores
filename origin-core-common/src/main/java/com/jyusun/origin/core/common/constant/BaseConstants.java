@@ -1,9 +1,8 @@
 package com.jyusun.origin.core.common.constant;
 
 /**
- * <p>
  * 作用描述：全局常量
- * </p>
+ * <p>
  *
  * @author jyusun
  * @date 2020/11/24 14:55

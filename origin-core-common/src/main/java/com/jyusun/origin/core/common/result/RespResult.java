@@ -28,7 +28,7 @@ public class RespResult<E extends Serializable> extends AbstractResult<E> {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty("承载数据")
-    private E data;
+    private E body;
 
     /**
      * 构造函数
@@ -44,12 +44,12 @@ public class RespResult<E extends Serializable> extends AbstractResult<E> {
     /**
      * 构造函数
      *
-     * @param data    响应数据
+     * @param body    响应数据
      * @param code    响应编码
      * @param message 响应消息
      */
-    public RespResult(String code, String message, boolean sign, E data) {
-        this.init(code, message, sign, data);
+    public RespResult(String code, String message, boolean sign, E body) {
+        this.init(code, message, sign, body);
     }
 
     /**
@@ -58,11 +58,11 @@ public class RespResult<E extends Serializable> extends AbstractResult<E> {
      * @param code    {@code String } 响应编码
      * @param message {@code String } 响应消息
      * @param sign    {@code Boolean} 操作标记
-     * @param data    {@code Boolean} 响应数据
+     * @param body    {@code Boolean} 响应数据
      */
-    private void init(String code, String message, boolean sign, E data) {
+    private void init(String code, String message, boolean sign, E body) {
         this.init(code, message, sign);
-        this.data = data;
+        this.body = body;
     }
 
 

@@ -5,7 +5,7 @@ import com.jyusun.origin.core.common.base.BaseResultCode;
 /**
  * 验证异常
  *
- * @author jyusun
+ * @author jyusun at 2021-10-8 09:48:55
  */
 public class ValidateException extends BusinessException {
 

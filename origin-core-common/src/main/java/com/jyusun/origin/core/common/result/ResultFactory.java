@@ -27,12 +27,12 @@ public class ResultFactory {
      *
      * @param code    {@code Integer} 消息编码
      * @param message {@code String} 消息描述
-     * @param data    {@code Object} 承载数据
+     * @param body    {@code Object} 承载数据
      * @param <E>     {@code E} 泛型标记
      * @return {@link AbstractResult} 响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> data(String code, String message, E data) {
-        return Optional.ofNullable(data)
+    public static <E extends Serializable> AbstractResult<E> data(String code, String message, E body) {
+        return Optional.ofNullable(body)
                 .map(obj -> new RespResult<>(code, message, true, obj))
                 .orElseThrow(() -> new BusinessException(SystemResultEnum.SUCCESS_DATA_WARN));
     }
@@ -41,24 +41,24 @@ public class ResultFactory {
      * 数据传输结果响应
      *
      * @param baseResultCode {@link BaseResultCode} 基础响应结果
-     * @param data           {@code Object} 承载数据
+     * @param body           {@code Object} 承载数据
      * @param <E>            {@code E} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> data(BaseResultCode baseResultCode, E data) {
-        return data(baseResultCode.code(), baseResultCode.message(), data);
+    public static <E extends Serializable> AbstractResult<E> data(BaseResultCode baseResultCode, E body) {
+        return data(baseResultCode.code(), baseResultCode.message(), body);
 
     }
 
     /**
      * 数据传输结果响应
      *
-     * @param data {@code Object} 承载数据
+     * @param body {@code Object} 承载数据
      * @param <E>  {@code E} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> data(E data) {
-        return data(SystemResultEnum.SUCCESS, data);
+    public static <E extends Serializable> AbstractResult<E> data(E body) {
+        return data(SystemResultEnum.SUCCESS, body);
     }
 
     /**
@@ -252,7 +252,7 @@ public class ResultFactory {
         if (!abstractResult.getSign()) {
             throw new BusinessException(abstractResult.getCode(), abstractResult.getMessage());
         }
-        return ((RespResult<E>) abstractResult).getData();
+        return abstractResult.getBody();
     }
 
     /**
