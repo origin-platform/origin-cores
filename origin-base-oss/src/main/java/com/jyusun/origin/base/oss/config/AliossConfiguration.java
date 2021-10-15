@@ -6,10 +6,12 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSClientBuilder;
 import com.jyusun.origin.base.oss.OssTemplate;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
-import com.jyusun.origin.base.oss.factory.OssFactory;
-import com.jyusun.origin.base.oss.rule.DefaultOssRule;
-import com.jyusun.origin.base.oss.rule.OssRule;
-import com.jyusun.origin.base.oss.strategy.AliossHandle;
+import com.jyusun.origin.base.oss.factory.handle.AliossHandle;
+import com.jyusun.origin.base.oss.factory.handle.OssHandleFactory;
+import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
+import com.jyusun.origin.base.oss.factory.props.AliPropsFactory;
+import com.jyusun.origin.base.oss.factory.rule.DefaultOssRule;
+import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -76,20 +78,27 @@ public class AliossConfiguration {
     }
 
     /**
-     * 阿里云处理
-     *
      * @param ossClient {@link OSSClient} 阿里云对象存储客户端
      * @param ossRule   {@link OssRule }
+     * @return
+     */
+    @Bean
+    @ConditionalOnBean({OSS.class, OssRule.class})
+    public AbstractPropsFactory ossFactory(OSS ossClient, OssRule ossRule) {
+        return new AliPropsFactory().setOssClient(ossClient).setOssProperties(ossProperties).setOssRule(ossRule);
+    }
+
+
+    /**
+     * 阿里云处理
+     *
      * @return {@link OssTemplate} Oss操作模板
      */
     @Bean
-    @ConditionalOnMissingBean(OssTemplate.class)
-    @ConditionalOnBean({OSS.class, OssRule.class})
-    public OssTemplate aliossTemplate(OSS ossClient, OssRule ossRule) {
-        OssFactory ossFactory = new OssFactory();
-        ossFactory.setOssClient(ossClient);
-        ossFactory.setOssRule(ossRule);
-        return new AliossHandle(ossFactory);
+    @ConditionalOnMissingBean(AliPropsFactory.class)
+    public OssTemplate aliossTemplate(AliPropsFactory propsFactory) {
+        OssHandleFactory ossHandleFactory = new AliossHandle(propsFactory);
+        return new OssTemplate(ossHandleFactory);
     }
 
 }

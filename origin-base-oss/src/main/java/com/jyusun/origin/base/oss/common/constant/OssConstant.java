@@ -9,4 +9,6 @@ import lombok.experimental.UtilityClass;
  */
 @UtilityClass
 public class OssConstant {
+
+    public static final String UPLOAD_PATH = "upload";
 }

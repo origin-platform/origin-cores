@@ -252,7 +252,7 @@ public class ResultFactory {
         if (!abstractResult.getSign()) {
             throw new BusinessException(abstractResult.getCode(), abstractResult.getMessage());
         }
-        return abstractResult.getBody();
+        return ((RespResult<E>) abstractResult).getBody();
     }
 
     /**

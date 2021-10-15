@@ -1,11 +1,10 @@
 package com.jyusun.origin.base.oss.factory;
 
 
-import com.aliyun.oss.OSSClient;
-import com.jyusun.origin.base.oss.rule.OssRule;
+import com.jyusun.origin.base.oss.factory.handle.OssHandleFactory;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
@@ -13,16 +12,14 @@ import org.springframework.beans.factory.InitializingBean;
  * <p>
  * 作用描述：
  *
- * @author jyusun
- * @date 2021/7/12 13:28
+ * @author jyusun at 2021/7/12 13:28
  * @since 1.0.0
  */
+@AllArgsConstructor
 public class OssAccessor implements InitializingBean {
 
     @Getter(AccessLevel.PROTECTED)
-    @Setter(AccessLevel.PROTECTED)
-    private OssFactory ossFactory;
-
+    private final OssHandleFactory ossHandleFactory;
 
     @Override
     public void afterPropertiesSet() {
