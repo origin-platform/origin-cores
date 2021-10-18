@@ -72,7 +72,7 @@
 //
 //    @Bean
 //    @ConditionalOnMissingBean(OssTemplate.class)
-//    public OssTemplate qiniuTemplate(AbstractPropsFactory ossFactory) {
+//    public OssTemplate ossTemplate(AbstractPropsFactory ossFactory) {
 //        return new OssTemplate(ossFactory);
 //    }
 //

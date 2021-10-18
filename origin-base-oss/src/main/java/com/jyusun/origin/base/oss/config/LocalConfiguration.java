@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean;
  */
 @AllArgsConstructor
 @EnableConfigurationProperties({OssProperties.class, OssRule.class})
-@ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "LOCAL")
+@ConditionalOnProperty(prefix = "origin-system.oss", name = "enabled", matchIfMissing = false)
 public class LocalConfiguration {
 
     private final OssProperties ossProperties;
@@ -53,7 +53,7 @@ public class LocalConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(OssTemplate.class)
-    public OssTemplate localTemplate(AbstractPropsFactory propsFactory) {
+    public OssTemplate ossTemplate(AbstractPropsFactory propsFactory) {
         OssHandleFactory ossHandleFactory = new LocalHandle(propsFactory);
         return new OssTemplate(ossHandleFactory);
     }

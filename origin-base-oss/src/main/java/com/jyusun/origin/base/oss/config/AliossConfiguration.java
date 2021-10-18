@@ -26,11 +26,11 @@ import org.springframework.context.annotation.Configuration;
  * <p>
  * 作用描述：阿里云配置
  *
- * @author jyusun
+ * @author jyusun at 2021-10-18 15:23:28
  * @since 1.0.0
  */
 @Slf4j
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
 @EnableConfigurationProperties({OssProperties.class})
 @ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "ALI")
@@ -86,7 +86,6 @@ public class AliossConfiguration {
     @Bean
     @ConditionalOnBean({OSS.class, OssRule.class})
     public AbstractPropsFactory propsFactory(OSS ossClient, OssRule ossRule) {
-        log.info("================ Ali OSS Props ================");
         return new AliPropsFactory().setOssClient(ossClient).setOssProperties(ossProperties).setOssRule(ossRule);
     }
 
@@ -98,7 +97,7 @@ public class AliossConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(AbstractPropsFactory.class)
-    public OssTemplate aliossTemplate(AbstractPropsFactory propsFactory) {
+    public OssTemplate ossTemplate(AbstractPropsFactory propsFactory) {
         log.info("================ Ali OSS Template ================");
         OssHandleFactory ossHandleFactory = new AliossHandle(propsFactory);
         return new OssTemplate(ossHandleFactory);
