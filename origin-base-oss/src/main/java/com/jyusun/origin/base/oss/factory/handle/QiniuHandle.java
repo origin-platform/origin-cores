@@ -1,4 +1,4 @@
-//package com.jyusun.origin.base.oss.factory.handle;
+package com.jyusun.origin.base.oss.factory.handle;//package com.jyusun.origin.base.oss.factory.handle;
 //
 //import com.jyusun.origin.base.oss.config.props.OssProperties;
 //import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;

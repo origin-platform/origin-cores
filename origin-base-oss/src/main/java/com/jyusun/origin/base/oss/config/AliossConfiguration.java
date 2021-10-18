@@ -19,7 +19,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * Alioss配置类
@@ -30,7 +29,6 @@ import org.springframework.context.annotation.Configuration;
  * @since 1.0.0
  */
 @Slf4j
-@Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
 @EnableConfigurationProperties({OssProperties.class})
 @ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "ALI")
@@ -44,6 +42,7 @@ public class AliossConfiguration {
      * @return {@link OssRule}
      */
     @Bean
+    @ConditionalOnMissingBean(OssRule.class)
     public OssRule ossRule() {
         return new DefaultOssRule();
     }
@@ -96,7 +95,6 @@ public class AliossConfiguration {
      * @return {@link OssTemplate} Oss操作模板
      */
     @Bean
-    @ConditionalOnMissingBean(AbstractPropsFactory.class)
     public OssTemplate ossTemplate(AbstractPropsFactory propsFactory) {
         log.info("================ Ali OSS Template ================");
         OssHandleFactory ossHandleFactory = new AliossHandle(propsFactory);

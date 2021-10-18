@@ -1,4 +1,4 @@
-//package com.jyusun.origin.base.oss.config;
+package com.jyusun.origin.base.oss.config;//package com.jyusun.origin.base.oss.config;
 //
 //import com.jyusun.origin.base.oss.OssTemplate;
 //import com.jyusun.origin.base.oss.config.props.OssProperties;
@@ -72,7 +72,7 @@
 //
 //    @Bean
 //    @ConditionalOnMissingBean(OssTemplate.class)
-//    public OssTemplate ossTemplate(AbstractPropsFactory ossFactory) {
+//    public OssTemplate qiniuTemplate(AbstractPropsFactory ossFactory) {
 //        return new OssTemplate(ossFactory);
 //    }
 //

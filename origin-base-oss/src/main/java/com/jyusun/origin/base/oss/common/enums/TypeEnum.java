@@ -1,14 +1,11 @@
 package com.jyusun.origin.base.oss.common.enums;
 
 
-import lombok.AllArgsConstructor;
-
 /**
  * OSS存储类型
  *
  * @author jyusun
  */
-@AllArgsConstructor
 public enum TypeEnum {
 
     /**

@@ -1,1 +1,0 @@
-package com.jyusun.origin.base.oss;
