@@ -1,20 +1,12 @@
 package com.jyusun.origin.base.oss.factory.handle;
 
-import com.aliyun.oss.model.Bucket;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
-import com.jyusun.origin.base.oss.factory.props.AliPropsFactory;
 import com.jyusun.origin.base.oss.factory.props.LocalPropsFactory;
-import com.jyusun.origin.base.oss.model.UploadInfo;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
-import com.jyusun.origin.core.common.util.StringUtil;
-import lombok.SneakyThrows;
-import org.apache.commons.io.IOUtils;
+import com.jyusun.origin.base.oss.model.UploadInfo;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * 对象存储处理
@@ -28,8 +20,8 @@ public class LocalHandle implements OssHandleFactory {
 
     private final LocalPropsFactory propsFactory;
 
-    public LocalHandle(LocalPropsFactory propsFactory) {
-        this.propsFactory = propsFactory;
+    public LocalHandle(AbstractPropsFactory propsFactory) {
+        this.propsFactory = (LocalPropsFactory) propsFactory;
     }
 
 

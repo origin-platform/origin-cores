@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.jyusun.origin.base.oss.config.OssAutoConfiguration
+com.jyusun.origin.base.oss.config.AliossConfiguration\
+com.jyusun.origin.base.oss.config.LocalConfiguration

@@ -44,7 +44,7 @@ public class LocalConfiguration {
      */
     @Bean
     @ConditionalOnBean(OssRule.class)
-    public AbstractPropsFactory ossFactory(OssRule ossRule) {
+    public AbstractPropsFactory propsFactory(OssRule ossRule) {
         return new LocalPropsFactory().setOssProperties(ossProperties).setOssRule(ossRule);
     }
 
@@ -53,7 +53,7 @@ public class LocalConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(OssTemplate.class)
-    public OssTemplate localTemplate(LocalPropsFactory propsFactory) {
+    public OssTemplate localTemplate(AbstractPropsFactory propsFactory) {
         OssHandleFactory ossHandleFactory = new LocalHandle(propsFactory);
         return new OssTemplate(ossHandleFactory);
     }

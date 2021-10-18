@@ -5,6 +5,7 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.Bucket;
 import com.aliyun.oss.model.PutObjectResult;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
+import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
 import com.jyusun.origin.base.oss.factory.props.AliPropsFactory;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
@@ -25,8 +26,8 @@ public class AliossHandle implements OssHandleFactory {
 
     private final AliPropsFactory propsFactory;
 
-    public AliossHandle(AliPropsFactory propsFactory) {
-        this.propsFactory = propsFactory;
+    public AliossHandle(AbstractPropsFactory propsFactory) {
+        this.propsFactory = (AliPropsFactory) propsFactory;
     }
 
 

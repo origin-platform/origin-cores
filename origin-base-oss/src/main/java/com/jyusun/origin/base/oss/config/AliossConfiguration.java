@@ -12,7 +12,8 @@ import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
 import com.jyusun.origin.base.oss.factory.props.AliPropsFactory;
 import com.jyusun.origin.base.oss.factory.rule.DefaultOssRule;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -28,9 +29,10 @@ import org.springframework.context.annotation.Configuration;
  * @author jyusun
  * @since 1.0.0
  */
+@Slf4j
 @Configuration
-@AllArgsConstructor
-@EnableConfigurationProperties({OssProperties.class, OssRule.class})
+@RequiredArgsConstructor
+@EnableConfigurationProperties({OssProperties.class})
 @ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "ALI")
 public class AliossConfiguration {
 
@@ -42,7 +44,6 @@ public class AliossConfiguration {
      * @return {@link OssRule}
      */
     @Bean
-    @ConditionalOnMissingBean(OssRule.class)
     public OssRule ossRule() {
         return new DefaultOssRule();
     }
@@ -84,7 +85,8 @@ public class AliossConfiguration {
      */
     @Bean
     @ConditionalOnBean({OSS.class, OssRule.class})
-    public AbstractPropsFactory ossFactory(OSS ossClient, OssRule ossRule) {
+    public AbstractPropsFactory propsFactory(OSS ossClient, OssRule ossRule) {
+        log.info("================ Ali OSS Props ================");
         return new AliPropsFactory().setOssClient(ossClient).setOssProperties(ossProperties).setOssRule(ossRule);
     }
 
@@ -95,8 +97,9 @@ public class AliossConfiguration {
      * @return {@link OssTemplate} Oss操作模板
      */
     @Bean
-    @ConditionalOnMissingBean(AliPropsFactory.class)
-    public OssTemplate aliossTemplate(AliPropsFactory propsFactory) {
+    @ConditionalOnMissingBean(AbstractPropsFactory.class)
+    public OssTemplate aliossTemplate(AbstractPropsFactory propsFactory) {
+        log.info("================ Ali OSS Template ================");
         OssHandleFactory ossHandleFactory = new AliossHandle(propsFactory);
         return new OssTemplate(ossHandleFactory);
     }
