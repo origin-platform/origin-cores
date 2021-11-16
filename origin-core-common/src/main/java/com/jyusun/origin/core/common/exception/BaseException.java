@@ -1,7 +1,5 @@
 package com.jyusun.origin.core.common.exception;
 
-import com.jyusun.origin.core.common.base.BaseResultCode;
-import com.jyusun.origin.core.common.util.ThrowableUtil;
 import lombok.Getter;
 
 /**
@@ -14,7 +12,7 @@ import lombok.Getter;
 public abstract class BaseException extends RuntimeException {
 
     @Getter
-    protected String code;
+    private final String code;
 
     /**
      * 异常信息构造函数
@@ -27,24 +25,6 @@ public abstract class BaseException extends RuntimeException {
         this.code = code;
     }
 
-    /**
-     * 异常信息构造函数
-     *
-     * @param baseResultCode {@link BaseResultCode} 消息枚举
-     */
-    public BaseException(BaseResultCode baseResultCode) {
-        this(baseResultCode.code(), baseResultCode.message());
-    }
-
-    /**
-     * 异常信息构造函数
-     *
-     * @param baseResultCode {@link BaseResultCode} 消息枚举
-     * @param cause          {@link Throwable} 异常信息
-     */
-    public BaseException(BaseResultCode baseResultCode, Throwable cause) {
-        this(baseResultCode.code(), baseResultCode.message(), cause);
-    }
 
     /**
      * 异常信息构造函数
@@ -58,13 +38,5 @@ public abstract class BaseException extends RuntimeException {
         this.code = code;
     }
 
-    /**
-     * 异常信息构造函数
-     *
-     * @param cause {@link Throwable} 异常信息
-     */
-    public BaseException(Throwable cause) {
-        super(ThrowableUtil.getMessage(cause), cause);
-    }
 
 }

@@ -21,17 +21,17 @@ import java.util.Objects;
 @UtilityClass
 public class DateUtil {
 
-    public static final String FORMAT_YYYY_MM_DD_HH_MM_SS_FFF = "yyyy-MM-dd HH:mm:ss fff";
-    public static final String FORMAT_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    public static final String PATTERN_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    public static final String PATTERN_YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
+    public static final String PATTERN_YYYY_MM_DD = "yyyy-MM-dd";
+    public static final String PATTERN_HH_MM_SS = "HH:mm:ss";
 
-    public static final String FORMAT_YYYY_MM_DD = "yyyy-MM-dd";
+    public static final String PATTERN_YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
+    public static final String PATTERN_YYYYMMDDHHMM = "yyyyMMddHHmm";
+    public static final String PATTERN_YYYYMMDD = "yyyyMMdd";
+    public static final String PATTERN_YYYYMM = "yyyyMM";
+    public static final String PATTERN_HHMMSS = "HHmmss";
 
-    public static final String FORMAT_YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
-    public static final String FORMAT_YYYYMMDD = "yyyyMMdd";
-    public static final String FORMAT_YYYYMM = "yyyyMM";
-
-    public static final String FORMAT_MMDDYYYY = "MMddyyyy";
-    public static final String FORMAT_MMDD = "MMdd";
     public static final String FORMAT_YYYY = "yyyy";
     public static final String FORMAT_MM = "MM";
     public static final String FORMAT_DD = "dd";
@@ -96,7 +96,7 @@ public class DateUtil {
      * @return {@code String} 格式为yyyyMMdd字符串日期
      */
     public static String thisDateToStrYmd() {
-        return toStr(LocalDate.now(), FORMAT_YYYYMMDD);
+        return toStr(LocalDate.now(), PATTERN_YYYYMMDD);
     }
 
     /**

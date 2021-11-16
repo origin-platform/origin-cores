@@ -1,7 +1,5 @@
 package com.jyusun.origin.core.common.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
 
 import java.lang.reflect.InvocationTargetException;
@@ -107,7 +105,6 @@ public final class ThrowableUtil {
      *
      * @param i 层数
      * @return 指定层的堆栈信息
-     * @since 4.1.4
      */
     public static StackTraceElement getStackElement(int i) {
         return getStackElements()[i];
@@ -117,7 +114,6 @@ public final class ThrowableUtil {
      * 获取入口堆栈信息
      *
      * @return 入口堆栈信息
-     * @since 4.1.4
      */
     public static StackTraceElement getRootStackElement() {
         final StackTraceElement[] stackElements = getStackElements();
@@ -131,7 +127,6 @@ public final class ThrowableUtil {
      * @param throwable    异常
      * @param causeClasses 定义的引起异常的类
      * @return 是否由指定异常类引起
-     * @since 4.1.13
      */
     @SuppressWarnings("unchecked")
     public static boolean isCausedBy(Throwable throwable, Class<? extends Exception>... causeClasses) {
@@ -144,7 +139,6 @@ public final class ThrowableUtil {
      * @param throwable    异常
      * @param causeClasses 定义的引起异常的类
      * @return 是否由指定异常类引起
-     * @since 4.1.13
      */
     @SuppressWarnings("unchecked")
     public static Throwable getCausedBy(Throwable throwable, Class<? extends Exception>... causeClasses) {
@@ -166,7 +160,6 @@ public final class ThrowableUtil {
      * @param throwable      异常
      * @param exceptionClass 定义的引起异常的类
      * @return true 来自或者包含
-     * @since 4.3.2
      */
     public static boolean isFromOrSuppressedThrowable(Throwable throwable, Class<? extends Throwable> exceptionClass) {
         return convertFromOrSuppressedThrowable(throwable, exceptionClass, true) != null;
@@ -179,7 +172,6 @@ public final class ThrowableUtil {
      * @param exceptionClass 定义的引起异常的类
      * @param checkCause     判断cause
      * @return true 来自或者包含
-     * @since 4.4.1
      */
     public static boolean isFromOrSuppressedThrowable(Throwable throwable, Class<? extends Throwable> exceptionClass,
                                                       boolean checkCause) {
@@ -193,7 +185,6 @@ public final class ThrowableUtil {
      * @param throwable      异常
      * @param exceptionClass 定义的引起异常的类
      * @return 结果为null 不是来自或者包含
-     * @since 4.3.2
      */
     public static <T extends Throwable> T convertFromOrSuppressedThrowable(Throwable throwable,
                                                                            Class<T> exceptionClass) {
@@ -208,7 +199,6 @@ public final class ThrowableUtil {
      * @param exceptionClass 定义的引起异常的类
      * @param checkCause     判断cause
      * @return 结果为null 不是来自或者包含
-     * @since 4.4.1
      */
     @SuppressWarnings("unchecked")
     public static <T extends Throwable> T convertFromOrSuppressedThrowable(Throwable throwable,
@@ -247,7 +237,6 @@ public final class ThrowableUtil {
      *
      * @param throwable 异常对象，可以为null
      * @return 异常链中所有异常集合
-     * @since 4.6.2
      */
     public static List<Throwable> getThrowableList(Throwable throwable) {
         List<Throwable> list = new ArrayList<>();
@@ -280,7 +269,6 @@ public final class ThrowableUtil {
      *
      * @param th 异常
      * @return 消息
-     * @since 1.0.0
      */
     public static String getRootCauseMessage(final Throwable th) {
         return getMessage(getRootCause(th));

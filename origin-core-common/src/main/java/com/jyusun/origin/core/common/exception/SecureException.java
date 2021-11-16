@@ -1,6 +1,7 @@
 package com.jyusun.origin.core.common.exception;
 
 import com.jyusun.origin.core.common.base.BaseResultCode;
+import com.jyusun.origin.core.common.enums.SystemResultEnum;
 
 /**
  * 作用描述： - 自定义异常：认证异常
@@ -26,7 +27,7 @@ public class SecureException extends BusinessException {
      * @param baseResultCode {@link BaseResultCode} 消息枚举
      */
     public SecureException(BaseResultCode baseResultCode) {
-        super(baseResultCode);
+        super(baseResultCode.code(), baseResultCode.message());
     }
 
     /**
@@ -43,10 +44,21 @@ public class SecureException extends BusinessException {
     /**
      * 异常信息构造函数
      *
+     * @param baseResultCode {@link BaseResultCode}
+     * @param throwable      {@link Throwable} 异常信息
+     */
+    public SecureException(BaseResultCode baseResultCode, Throwable throwable) {
+        this(baseResultCode.code(), baseResultCode.message(), throwable);
+    }
+
+    /**
+     * 异常信息构造函数
+     *
      * @param throwable {@link Throwable} 异常信息
      */
     public SecureException(Throwable throwable) {
-        super(throwable);
+        this(SystemResultEnum.INTERNAL_SERVER_ERROR, throwable);
     }
+
 
 }

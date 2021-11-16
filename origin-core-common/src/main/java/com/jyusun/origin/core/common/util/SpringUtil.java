@@ -1,8 +1,11 @@
-package com.jyusun.origin.core.common.util;
+package com.jyusun.origin.basic.common.util;
 
+import com.jyusun.origin.core.common.util.ObjectUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationEvent;
@@ -18,9 +21,17 @@ import org.springframework.stereotype.Component;
 @Lazy(false)
 @Component
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class SpringUtil implements ApplicationContextAware {
+public class SpringUtil implements ApplicationContextAware, DisposableBean {
 
     private static ApplicationContext applicationContext;
+
+    public static ApplicationContext getContext() {
+        if (ObjectUtil.isEmpty(applicationContext)) {
+            throw new IllegalStateException("applicationContext属性为null,请检查是否注入了SpringUtil");
+        }
+        return applicationContext;
+    }
+
 
     public static <T> T getBean(String beanName) {
         return (T) getContext().getBean(beanName);
@@ -28,13 +39,6 @@ public class SpringUtil implements ApplicationContextAware {
 
     public static <T> T getBean(Class<T> clazz) {
         return getContext().getBean(clazz);
-    }
-
-    public static ApplicationContext getContext() {
-        if (ObjectUtil.isEmpty(applicationContext)) {
-            throw new IllegalStateException("applicationContext属性为null,请检查是否注入了SpringUtil");
-        }
-        return applicationContext;
     }
 
     public static void publishEvent(ApplicationEvent event) {
@@ -48,6 +52,22 @@ public class SpringUtil implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
         SpringUtil.applicationContext = applicationContext;
+    }
+
+    /**
+     * 清除SpringContextHolder中的ApplicationContext为Null.
+     */
+    public static void clearHolder() {
+        applicationContext = null;
+    }
+
+    /**
+     * 实现DisposableBean接口, 在Context关闭时清理静态变量.
+     */
+    @Override
+    @SneakyThrows
+    public void destroy() {
+        SpringUtil.clearHolder();
     }
 
 
