@@ -36,17 +36,16 @@ public abstract class BaseObject extends Model<BaseObject> {
     protected Long sid;
 
     /**
+     * 创建人ID
+     */
+    @TableField(value = "creator", fill = FieldFill.INSERT)
+    protected Long creator;
+
+    /**
      * 创建时间
      */
     @TableField(value = "create_time", fill = FieldFill.INSERT)
     protected LocalDateTime createTime;
-
-    /**
-     * 最后更新时间
-     */
-    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-    protected LocalDateTime updateTime;
-
 
 
 }

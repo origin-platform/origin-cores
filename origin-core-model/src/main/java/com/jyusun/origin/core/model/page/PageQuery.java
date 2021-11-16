@@ -1,6 +1,7 @@
 package com.jyusun.origin.core.model.page;
 
 import com.jyusun.origin.core.model.BaseQuery;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,6 +16,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
+@ApiModel("查询对象：分页查询")
 public class PageQuery extends BaseQuery {
 
     private static final long serialVersionUID = 1L;
@@ -23,13 +25,13 @@ public class PageQuery extends BaseQuery {
      * 当前页数
      */
     @ApiModelProperty(value = "当前页数 默认 1", example = "1")
-    public Integer page;
+    private Integer page;
 
     /**
      * 每页条数
      */
     @ApiModelProperty(value = "每页条数 10", example = "10")
-    public Integer limit;
+    private Integer limit;
 
     /**
      * <p>
@@ -37,7 +39,7 @@ public class PageQuery extends BaseQuery {
      * </p>
      */
     @ApiModelProperty("SQL 排序 ASC")
-    public String[] ascs;
+    private String[] ascs;
 
     /**
      * <p>
@@ -45,7 +47,7 @@ public class PageQuery extends BaseQuery {
      * </p>
      */
     @ApiModelProperty("SQL 排序 DESC")
-    public String[] descs;
+    private String[] descs;
 
 
     public PageQuery() {

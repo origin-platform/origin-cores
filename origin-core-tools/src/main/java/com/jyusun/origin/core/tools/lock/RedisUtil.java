@@ -37,7 +37,7 @@ public class RedisUtil {
      * @param key {@code String} 键
      * @return {@code Boolean} true-删除成功，false-删除失败
      */
-    public Boolean delete(String key) {
+    public boolean delete(String key) {
         return redisTemplate.delete(key);
     }
 

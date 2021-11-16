@@ -8,6 +8,9 @@ import com.jyusun.origin.core.common.exception.BusinessException;
 import com.jyusun.origin.core.common.util.ObjectUtil;
 import com.jyusun.origin.core.model.page.PageQuery;
 import lombok.experimental.UtilityClass;
+import org.apache.commons.collections4.CollectionUtils;
+
+import java.util.List;
 
 /**
  * 作用描述：

@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class RedisHandle {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, String> redisTemplate;
 
     public void set(String key, String value, long timeOut) {
         redisTemplate.opsForValue().set(key, value, timeOut);
     }
 
-    public Boolean delete(String key) {
+    public boolean delete(String key) {
         return redisTemplate.delete(key);
     }
 }

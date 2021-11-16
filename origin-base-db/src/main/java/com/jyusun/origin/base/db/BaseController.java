@@ -35,7 +35,7 @@ import java.io.Serializable;
 public abstract class BaseController<R extends BaseRepository<D>, D extends Model<?>> {
 
     @Autowired
-    protected R originRepository;
+    protected  R originRepository;
 
     /**
      * 列表分页查询

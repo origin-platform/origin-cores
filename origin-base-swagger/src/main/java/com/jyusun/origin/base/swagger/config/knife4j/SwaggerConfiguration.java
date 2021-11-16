@@ -1,6 +1,7 @@
 package com.jyusun.origin.base.swagger.config.knife4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -11,6 +12,7 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
@@ -18,10 +20,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
  *
  * @author jyusun
  */
+@EnableKnife4j
 @Configuration
-@EnableSwagger2WebMvc
+@EnableSwagger2
 @EnableConfigurationProperties(SwaggerProperties.class)
 @ConditionalOnProperty(prefix = "origin-system.swagger", name = "enabled", matchIfMissing = true)
+@RequiredArgsConstructor
 public class SwaggerConfiguration {
 
     private final SwaggerProperties swaggerProperties;
@@ -29,14 +33,10 @@ public class SwaggerConfiguration {
     @Value("${spring.application.name:unknown}")
     private String appName;
 
-    @Autowired
-    public SwaggerConfiguration(SwaggerProperties swaggerProperties) {
-        this.swaggerProperties = swaggerProperties;
-    }
 
     @Bean("defaultApi")
     public Docket defaultApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
+        return new Docket(DocumentationType.OAS_30)
                 .apiInfo(new ApiInfoBuilder()
                         .title(swaggerProperties.getTitle())
                         .description(swaggerProperties.getDescription())

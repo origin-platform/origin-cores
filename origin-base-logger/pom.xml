@@ -36,7 +36,7 @@
             <artifactId>origin-core-model</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.jyusun.origin</groupId>
+            <groupId>${project.parent.groupId}</groupId>
             <artifactId>origin-core-secure</artifactId>
         </dependency>
         <!-- Spring AOP -->

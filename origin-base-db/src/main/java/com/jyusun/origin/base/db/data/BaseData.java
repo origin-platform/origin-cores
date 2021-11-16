@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
+
 /**
  * 数据对象
  * <p>
@@ -33,16 +35,16 @@ public abstract class BaseData extends BaseObject {
     protected String remarks;
 
     /**
-     * 创建人ID
-     */
-    @TableField(value = "creator", fill = FieldFill.INSERT)
-    protected Long creator;
-
-    /**
      * 最后更新人ID
      */
     @TableField(value = "update_man", fill = FieldFill.INSERT_UPDATE)
     protected Long updateMan;
+
+    /**
+     * 最后更新时间
+     */
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    protected LocalDateTime updateTime;
 
     /**
      * 逻辑删除标识（逻辑删除即更新操作） 0-false-未删除,1-true-已删除

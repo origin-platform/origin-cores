@@ -1,5 +1,6 @@
 package com.jyusun.origin.core.model.page;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @NoArgsConstructor
+@ApiModel
 public final class PageObject<T> implements Serializable {
 
 	/** 响应数据行结果 */
