@@ -57,7 +57,7 @@ public class SecureException extends BusinessException {
      * @param throwable {@link Throwable} 异常信息
      */
     public SecureException(Throwable throwable) {
-        this(SystemResultEnum.INTERNAL_SERVER_ERROR, throwable);
+        this(SystemResultEnum.UN_AUTHORIZED, throwable);
     }
 
 

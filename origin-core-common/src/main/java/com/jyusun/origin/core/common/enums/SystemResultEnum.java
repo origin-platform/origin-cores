@@ -82,7 +82,12 @@ public enum SystemResultEnum implements BaseResultCode {
     /**
      * 消息不能读取
      */
-    BAD_REQUEST_MSG_NOT_READABLE(ResultConstant.MESSAGE_BAD_REQUEST, "消息不能读取");
+    BAD_REQUEST_MSG_NOT_READABLE(ResultConstant.MESSAGE_BAD_REQUEST, "消息不能读取"),
+
+    /**
+     * 业务错误
+     */
+    MESSAGE_BUSINESS_ERROR(ResultConstant.MESSAGE_BUSINESS_ERROR, "输入信息错误，请注意调整");
 
     /**
      * 状态码

@@ -55,5 +55,10 @@ public class ResultConstant implements BaseConstants {
      */
     public static final String MESSAGE_INTERNAL_SERVER_ERROR = "S00500";
 
+    /**
+     * B99999 - 业务异常
+     */
+    public static final String MESSAGE_BUSINESS_ERROR = "B99999";
+
 
 }

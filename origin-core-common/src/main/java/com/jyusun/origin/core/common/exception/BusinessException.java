@@ -57,7 +57,7 @@ public class BusinessException extends BaseException {
      * @param throwable {@link Throwable} 异常信息
      */
     public BusinessException(Throwable throwable) {
-        this(SystemResultEnum.INTERNAL_SERVER_ERROR, throwable);
+        this(SystemResultEnum.MESSAGE_BUSINESS_ERROR, throwable);
     }
 
 
