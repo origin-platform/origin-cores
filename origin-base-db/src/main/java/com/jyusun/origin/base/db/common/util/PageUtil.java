@@ -1,11 +1,13 @@
 package com.jyusun.origin.base.db.common.util;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.jyusun.origin.core.common.util.BeanUtil;
 import com.jyusun.origin.core.model.page.PageObject;
 import lombok.experimental.UtilityClass;
 import org.springframework.util.CollectionUtils;
 
+import java.io.Serializable;
 import java.util.Collections;
 
 /**
@@ -25,7 +27,7 @@ public class PageUtil {
      * @param <T>  分页限定类型
      * @return <T, R> PageDTO<R>
      */
-    public static <T> PageObject<T> dataInfo(IPage<T> page) {
+    public static <T extends Serializable> PageObject<T> dataInfo(IPage<T> page) {
         PageObject<T> pageObject = new PageObject<>();
         pageObject.setRows(CollectionUtils.isEmpty(page.getRecords()) ?
                 Collections.emptyList() : page.getRecords());
@@ -43,7 +45,8 @@ public class PageUtil {
      * @param <T>  分页限定类型
      * @return <T, R> PageDTO<R>
      */
-    public static <T, R> PageObject<R> dataInfo(IPage<T> page, Class<R> clazz) {
+    public static <T extends Serializable, R extends Serializable> PageObject<R> dataInfo(IPage<T> page,
+                                                                                          Class<R> clazz) {
         PageObject<R> pageObject = new PageObject<>();
         pageObject.setRows(CollectionUtils.isEmpty(page.getRecords()) ?
                 Collections.emptyList() : BeanUtil.copyList(page.getRecords(), clazz));

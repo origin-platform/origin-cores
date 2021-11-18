@@ -64,7 +64,7 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
      * @param target       目标转换
      * @return <T>
      */
-    <T> PageObject<T> pageQuery(PageQuery pageQuery, @Param("ew") Wrapper<D> queryWrapper, Class<T> target);
+    <T extends Serializable> PageObject<T> pageQuery(PageQuery pageQuery, @Param("ew") Wrapper<D> queryWrapper, Class<T> target);
 
     /**
      * 数据查询

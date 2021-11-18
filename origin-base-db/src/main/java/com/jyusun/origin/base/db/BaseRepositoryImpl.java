@@ -78,7 +78,7 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      * @return {@link PageObject} 目标类型
      */
     @Override
-    public <T> PageObject<T> pageQuery(PageQuery pageQuery, Wrapper<D> queryWrapper, Class<T> target) {
+    public <T extends Serializable> PageObject<T> pageQuery(PageQuery pageQuery, Wrapper<D> queryWrapper, Class<T> target) {
         return PageUtil.dataInfo(this.page(ConditionUtil.pageInfo(pageQuery), queryWrapper), target);
     }
 

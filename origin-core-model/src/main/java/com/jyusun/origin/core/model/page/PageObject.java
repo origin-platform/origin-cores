@@ -21,7 +21,7 @@ import java.util.List;
 @Accessors(chain = true)
 @NoArgsConstructor
 @ApiModel
-public final class PageObject<T> implements Serializable {
+public final class PageObject<T extends Serializable> implements Serializable {
 
 	/** 响应数据行结果 */
 	@ApiModelProperty("响应数据")

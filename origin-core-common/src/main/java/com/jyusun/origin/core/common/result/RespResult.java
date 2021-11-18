@@ -22,7 +22,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ApiModel("成功响应对象")
-public class RespResult<E extends Serializable> extends AbstractResult<E> {
+public class RespResult<E> extends AbstractResult<E> {
 
     private static final long serialVersionUID = 1L;
 

@@ -11,6 +11,7 @@ import com.jyusun.origin.core.common.util.WebUtil;
 import lombok.experimental.UtilityClass;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -59,6 +60,40 @@ public class ResultFactory {
      */
     public static <E extends Serializable> AbstractResult<E> data(E body) {
         return data(SystemResultEnum.SUCCESS, body);
+    }
+
+    /**
+     * 数据传输结果响应
+     *
+     * @param <E> {@code E} 泛型标记
+     * @return {@link AbstractResult}响应结果
+     */
+    public static <E extends Serializable> AbstractResult<List<E>> datas(String code, String message, List<E> datas) {
+        return Optional.ofNullable(datas)
+                .map(obj -> new RespResult<>(code, message, true, obj))
+                .orElseThrow(() -> new BusinessException(SystemResultEnum.SUCCESS_DATA_WARN));
+    }
+
+    /**
+     * 数据传输结果响应
+     *
+     * @param datas {@code Object} 承载数据
+     * @param <E>   {@code E} 泛型标记
+     * @return {@link AbstractResult}响应结果
+     */
+    public static <E extends Serializable> AbstractResult<List<E>> datas(BaseResultCode baseResultCode, List<E> datas) {
+        return datas(baseResultCode.code(), baseResultCode.message(), datas);
+    }
+
+    /**
+     * 数据传输结果响应
+     *
+     * @param datas {@code Object} 承载数据
+     * @param <E>   {@code E} 泛型标记
+     * @return {@link AbstractResult}响应结果
+     */
+    public static <E extends Serializable> AbstractResult<List<E>> datas(List<E> datas) {
+        return datas(SystemResultEnum.SUCCESS, datas);
     }
 
     /**
