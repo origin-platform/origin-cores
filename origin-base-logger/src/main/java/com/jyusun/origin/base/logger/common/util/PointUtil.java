@@ -57,7 +57,7 @@ public class PointUtil {
      * @return {@link Map<String, Object>}
      */
     private Map<String, Object> buildParam(String[] paramNames, Object[] paramValues) {
-        Map<String, Object> requestParams = new HashMap<>();
+        Map<String, Object> requestParams = new HashMap<>(16);
         for (int i = 0; i < paramNames.length; i++) {
             Object value = paramValues[i];
 

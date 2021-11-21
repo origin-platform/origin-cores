@@ -70,7 +70,7 @@ public class AliossConfiguration {
         // 设置失败请求重试次数，默认为3次。
         conf.setMaxErrorRetry(5);
         // 设置是否支持CNAME。CNAME用于将自定义域名绑定到目标Bucket。
-        // conf.setSupportCname(true);
+//         conf.setSupportCname(true);
         // 创建OSSClient实例
         return new OSSClientBuilder().build(ossProperties.getEndpoint(),
                 ossProperties.getAccessKeyId(),
