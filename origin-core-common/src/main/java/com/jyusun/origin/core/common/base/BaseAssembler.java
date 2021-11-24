@@ -1,9 +1,12 @@
 package com.jyusun.origin.core.common.base;
 
 /**
+ * 转换接口
  *
  * @param <DTO>
  * @param <OBJ>
+ * @author jyusun at 2021-11-21 18:57:35
+ * @since 1.0.0
  */
 public interface BaseAssembler<DTO, OBJ> {
 
