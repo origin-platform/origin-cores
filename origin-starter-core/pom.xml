@@ -10,7 +10,7 @@
 
     <artifactId>origin-starter-core</artifactId>
     <name>${project.artifactId}</name>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
     <description>公共基础-starter</description>
 
     <!-- 开发者信息 -->
