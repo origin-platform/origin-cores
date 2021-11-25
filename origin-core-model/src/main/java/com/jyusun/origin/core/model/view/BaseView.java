@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
+
 /**
  * 作用描述： - 基础视图对象
  *
@@ -14,13 +16,18 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public abstract class BaseView extends BaseViewSimplify {
+public abstract class BaseView extends BaseViewObject {
 
-    @ApiModelProperty("创建人")
-    protected Long creator;
-
-    @ApiModelProperty("创建人：标签")
-    protected String creatorLabel;
+    /**
+     * 备注
+     */
+    @ApiModelProperty("备注")
+    protected String remarks;
+    /**
+     * 最后更新时间
+     */
+    @ApiModelProperty("更新时间")
+    protected LocalDateTime updateTime;
 
     @ApiModelProperty("最后更新人")
     protected Long updateMan;
@@ -30,5 +37,12 @@ public abstract class BaseView extends BaseViewSimplify {
 
     @ApiModelProperty("乐观锁")
     protected Integer revision;
+
+
+
+
+
+
+
 
 }

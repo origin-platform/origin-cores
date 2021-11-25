@@ -1,14 +1,17 @@
 package com.jyusun.origin.base.db.common.util;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.jyusun.origin.core.common.util.BeanUtil;
 import com.jyusun.origin.core.model.page.PageObject;
 import lombok.experimental.UtilityClass;
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.util.CollectionUtils;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -55,6 +58,27 @@ public class PageUtil {
         pageObject.setTotal(page.getTotal());
         pageObject.setPages(page.getPages());
 
+        return pageObject;
+    }
+
+    /**
+     * 获取分页返回值，传入处理后的集合数据
+     *
+     * @param page 分页信息
+     * @param <T>  分页限定类型
+     * @return <T, R> PageDTO<R>
+     */
+    public static <D extends Serializable, T extends Converter<D, T> & Serializable> PageObject<T>
+    dataConvert(IPage<D> page, Class<T> clazz) {
+        PageObject<T> pageObject = new PageObject<>();
+        List<T> dataConvers = Optional.ofNullable(page.getRecords()).orElse(Collections.emptyList())
+                .stream().map(datas -> BeanUtil.newInstance(clazz).convert(datas)).collect(Collectors.toList());
+
+        pageObject.setRows(dataConvers);
+        pageObject.setLimit(page.getSize());
+        pageObject.setPage(page.getCurrent());
+        pageObject.setTotal(page.getTotal());
+        pageObject.setPages(page.getPages());
         return pageObject;
     }
 }

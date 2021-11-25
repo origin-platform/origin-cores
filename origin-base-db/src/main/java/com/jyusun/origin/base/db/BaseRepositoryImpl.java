@@ -12,6 +12,7 @@ import com.jyusun.origin.core.common.exception.BusinessException;
 import com.jyusun.origin.core.common.util.AssemblerUtil;
 import com.jyusun.origin.core.model.page.PageObject;
 import com.jyusun.origin.core.model.page.PageQuery;
+import org.springframework.core.convert.converter.Converter;
 
 import java.io.Serializable;
 
@@ -82,6 +83,18 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
         return PageUtil.dataInfo(this.page(ConditionUtil.pageInfo(pageQuery), queryWrapper), target);
     }
 
+    /**
+     * 按分页条件查询
+     *
+     * @param queryWrapper 条件构造器
+     * @param pageQuery    条件构造器
+     * @return {@link PageObject} 目标类型
+     */
+    @Override
+    public <T extends Converter<D, T> & Serializable> PageObject<T> pageConvert(PageQuery pageQuery,
+                                                                          Wrapper<D> queryWrapper, Class<T> target) {
+        return PageUtil.dataConvert(this.page(ConditionUtil.pageInfo(pageQuery), queryWrapper), target);
+    }
     /**
      * 数据查询
      *

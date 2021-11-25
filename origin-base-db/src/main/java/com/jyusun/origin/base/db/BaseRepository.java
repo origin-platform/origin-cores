@@ -8,6 +8,7 @@ import com.jyusun.origin.core.common.base.BaseResultCode;
 import com.jyusun.origin.core.model.page.PageObject;
 import com.jyusun.origin.core.model.page.PageQuery;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.core.convert.converter.Converter;
 
 import java.io.Serializable;
 
@@ -65,6 +66,17 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
      * @return <T>
      */
     <T extends Serializable> PageObject<T> pageQuery(PageQuery pageQuery, @Param("ew") Wrapper<D> queryWrapper, Class<T> target);
+
+    /**
+     * 分页查询
+     *
+     * @param pageQuery    分页查询条件
+     * @param queryWrapper 条件构造器
+     * @param target       目标转换
+     * @return <T>
+     */
+    <T extends Converter<D, T> & Serializable> PageObject<T> pageConvert(PageQuery pageQuery, @Param("ew") Wrapper<D> queryWrapper,
+                                                                       Class<T> target);
 
     /**
      * 数据查询

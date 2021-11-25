@@ -17,18 +17,27 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public abstract class BaseViewSimplify implements Serializable {
+public abstract class BaseViewObject implements Serializable {
 
+    /**
+     * 主键ID
+     */
     @ApiModelProperty("主键编号")
     protected Serializable sid;
 
-    @ApiModelProperty("备注")
-    protected String remarks;
+    /**
+     * 创建人ID
+     */
+    @ApiModelProperty("创建人ID")
+    protected Long creator;
 
+
+    @ApiModelProperty("创建人：标签")
+    protected String creatorLabel;
+    /**
+     * 创建时间
+     */
     @ApiModelProperty("创建时间")
     protected LocalDateTime createTime;
-
-    @ApiModelProperty("更新时间")
-    protected LocalDateTime updateTime;
 
 }
