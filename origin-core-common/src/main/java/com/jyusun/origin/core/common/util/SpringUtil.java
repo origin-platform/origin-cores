@@ -1,6 +1,5 @@
-package com.jyusun.origin.basic.common.util;
+package com.jyusun.origin.core.common.util;
 
-import com.jyusun.origin.core.common.util.ObjectUtil;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.SneakyThrows;
