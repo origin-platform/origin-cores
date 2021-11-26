@@ -5,11 +5,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jyusun.origin.base.db.common.enums.DbResultEnum;
 import com.jyusun.origin.base.db.common.util.ConditionUtil;
 import com.jyusun.origin.base.db.common.util.PageUtil;
 import com.jyusun.origin.core.common.base.BaseResultCode;
 import com.jyusun.origin.core.common.exception.BusinessException;
+import com.jyusun.origin.core.common.exception.ValidateException;
 import com.jyusun.origin.core.common.util.AssemblerUtil;
+import com.jyusun.origin.core.common.util.ObjectUtil;
 import com.jyusun.origin.core.model.page.PageObject;
 import com.jyusun.origin.core.model.page.PageQuery;
 import org.springframework.core.convert.converter.Converter;
@@ -79,7 +82,8 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      * @return {@link PageObject} 目标类型
      */
     @Override
-    public <T extends Serializable> PageObject<T> pageQuery(PageQuery pageQuery, Wrapper<D> queryWrapper, Class<T> target) {
+    public <T extends Serializable> PageObject<T> pageQuery(PageQuery pageQuery, Wrapper<D> queryWrapper,
+                                                            Class<T> target) {
         return PageUtil.dataInfo(this.page(ConditionUtil.pageInfo(pageQuery), queryWrapper), target);
     }
 
@@ -92,9 +96,11 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      */
     @Override
     public <T extends Converter<D, T> & Serializable> PageObject<T> pageConvert(PageQuery pageQuery,
-                                                                          Wrapper<D> queryWrapper, Class<T> target) {
+                                                                                Wrapper<D> queryWrapper,
+                                                                                Class<T> target) {
         return PageUtil.dataConvert(this.page(ConditionUtil.pageInfo(pageQuery), queryWrapper), target);
     }
+
     /**
      * 数据查询
      *
@@ -104,7 +110,11 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      */
     @Override
     public <T> T getById(Serializable sid, Class<T> target) {
-        return AssemblerUtil.convert(this.getById(sid), target);
+        D obj = this.getById(sid);
+        if (ObjectUtil.isEmpty(obj)) {
+            throw new ValidateException(DbResultEnum.DATA_NOT_EXIST);
+        }
+        return AssemblerUtil.convert(obj, target);
     }
 
     @Override

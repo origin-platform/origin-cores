@@ -20,7 +20,11 @@ public enum DbResultEnum implements BaseResultCode {
     /**
      * 单页数据响应
      */
-    MORE_THAN_THE_MAXIMUM(ResultConstant.MESSAGE_INTERNAL_SERVER_ERROR, "单页数据超过500，请调整");
+    MORE_THAN_THE_MAXIMUM(ResultConstant.MESSAGE_INTERNAL_SERVER_ERROR, "单页数据超过500，请调整"),
+    /**
+     * 当前操作数据不存在（可能被删除了）
+     */
+    DATA_NOT_EXIST(ResultConstant.MESSAGE_BAD_REQUEST, "当前操作数据不存在，请刷新页面");
 
     /**
      * 状态码
