@@ -27,13 +27,13 @@ public enum SystemResultEnum implements BaseResultCode {
      */
     SUCCESS_DATA_WARN(ResultConstant.MESSAGE_OK, "暂无承载数据"),
     /**
-     * 操作成功：200 警告 删除和修改找不到对应数据会触发
-     */
-    SUCCESS_STATUS_WARN(ResultConstant.MESSAGE_OK, "操作成功，没有对应的记录"),
-    /**
      * 创建成功：S00201
      */
     SUCCESS_CREATE(ResultConstant.MESSAGE_CREATE, "创建成功"),
+    /**
+     * 操作成功：S00204 警告 删除和修改找不到对应数据会触发
+     */
+    SUCCESS_NO_CONTENT(ResultConstant.MESSAGE_NO_CONTENT, "操作成功，没有对应的记录"),
     /**
      * 请求错误：S00400
      */

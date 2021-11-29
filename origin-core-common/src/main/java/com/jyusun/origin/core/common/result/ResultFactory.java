@@ -118,7 +118,7 @@ public class ResultFactory {
      */
     public static <E extends Serializable> AbstractResult<E> status(String code, String message, boolean sign) {
         if (!sign) {
-            throw new BusinessException(SystemResultEnum.SUCCESS_STATUS_WARN);
+            throw new BusinessException(SystemResultEnum.SUCCESS_NO_CONTENT);
         }
         return new RespResult<>(code, message, true);
     }

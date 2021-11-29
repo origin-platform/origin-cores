@@ -27,6 +27,10 @@ public class ResultConstant implements BaseConstants {
      */
     public static final String MESSAGE_CREATE = "S00201";
     /**
+     * S00204-操作无内容
+     */
+    public static final String MESSAGE_NO_CONTENT = "S00204";
+    /**
      * S00400-请求错误
      */
     public static final String MESSAGE_BAD_REQUEST = "S00400";
