@@ -29,10 +29,10 @@ public class ResultFactory {
      * @param code    {@code Integer} 消息编码
      * @param message {@code String} 消息描述
      * @param body    {@code Object} 承载数据
-     * @param <E>     {@code E} 泛型标记
+     * @param <T>     {@code T} 泛型标记
      * @return {@link AbstractResult} 响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> data(String code, String message, E body) {
+    public static <T extends Serializable> AbstractResult<T> data(String code, String message, T body) {
         return Optional.ofNullable(body)
                 .map(obj -> new RespResult<>(code, message, true, obj))
                 .orElseThrow(() -> new BusinessException(SystemResultEnum.SUCCESS_DATA_WARN));
@@ -43,10 +43,10 @@ public class ResultFactory {
      *
      * @param baseResultCode {@link BaseResultCode} 基础响应结果
      * @param body           {@code Object} 承载数据
-     * @param <E>            {@code E} 泛型标记
+     * @param <T>            {@code T} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> data(BaseResultCode baseResultCode, E body) {
+    public static <T extends Serializable> AbstractResult<T> data(BaseResultCode baseResultCode, T body) {
         return data(baseResultCode.code(), baseResultCode.message(), body);
 
     }
@@ -55,20 +55,20 @@ public class ResultFactory {
      * 数据传输结果响应
      *
      * @param body {@code Object} 承载数据
-     * @param <E>  {@code E} 泛型标记
+     * @param <T>  {@code T} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> data(E body) {
+    public static <T extends Serializable> AbstractResult<T> data(T body) {
         return data(SystemResultEnum.SUCCESS, body);
     }
 
     /**
      * 数据传输结果响应
      *
-     * @param <E> {@code E} 泛型标记
+     * @param <T> {@code T} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<List<E>> datas(String code, String message, List<E> datas) {
+    public static <T extends Serializable> AbstractResult<List<T>> datas(String code, String message, List<T> datas) {
         return Optional.ofNullable(datas)
                 .map(obj -> new RespResult<>(code, message, true, obj))
                 .orElseThrow(() -> new BusinessException(SystemResultEnum.SUCCESS_DATA_WARN));
@@ -78,10 +78,10 @@ public class ResultFactory {
      * 数据传输结果响应
      *
      * @param datas {@code Object} 承载数据
-     * @param <E>   {@code E} 泛型标记
+     * @param <T>   {@code T} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<List<E>> datas(BaseResultCode baseResultCode, List<E> datas) {
+    public static <T extends Serializable> AbstractResult<List<T>> datas(BaseResultCode baseResultCode, List<T> datas) {
         return datas(baseResultCode.code(), baseResultCode.message(), datas);
     }
 
@@ -89,10 +89,10 @@ public class ResultFactory {
      * 数据传输结果响应
      *
      * @param datas {@code Object} 承载数据
-     * @param <E>   {@code E} 泛型标记
+     * @param <T>   {@code T} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<List<E>> datas(List<E> datas) {
+    public static <T extends Serializable> AbstractResult<List<T>> datas(List<T> datas) {
         return datas(SystemResultEnum.SUCCESS, datas);
     }
 
@@ -116,7 +116,7 @@ public class ResultFactory {
      * @param sign    操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> status(String code, String message, boolean sign) {
+    public static <T extends Serializable> AbstractResult<T> status(String code, String message, boolean sign) {
         if (!sign) {
             throw new BusinessException(SystemResultEnum.SUCCESS_NO_CONTENT);
         }
@@ -130,7 +130,7 @@ public class ResultFactory {
      * @param sign           {@code Boolean} 操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>}响应结果
      */
-    private static <E extends Serializable> AbstractResult<E> status(BaseResultCode baseResultCode, boolean sign) {
+    private static <T extends Serializable> AbstractResult<T> status(BaseResultCode baseResultCode, boolean sign) {
         return status(baseResultCode.code(), baseResultCode.message(), sign);
     }
 
@@ -140,7 +140,7 @@ public class ResultFactory {
      * @param sign 操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> status(boolean sign) {
+    public static <T extends Serializable> AbstractResult<T> status(boolean sign) {
         return status(SystemResultEnum.SUCCESS, sign);
     }
 
@@ -150,7 +150,7 @@ public class ResultFactory {
      * @param sign 操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>} 响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> create(boolean sign) {
+    public static <T extends Serializable> AbstractResult<T> create(boolean sign) {
         return status(SystemResultEnum.SUCCESS_CREATE, sign);
     }
 
@@ -159,7 +159,7 @@ public class ResultFactory {
      *
      * @return {@link AbstractResult<Boolean>} 响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> success() {
+    public static <T extends Serializable> AbstractResult<T> success() {
         return status(SystemResultEnum.SUCCESS, true);
     }
 
@@ -280,14 +280,14 @@ public class ResultFactory {
     /**
      * 接口数据处理，一般情况下如果feign接口统一包装后，获取数据使用
      *
-     * @param abstractResult {@link AbstractResult<E>}
-     * @return {@link <E>} 泛型标记数据
+     * @param abstractResult {@link AbstractResult<T>}
+     * @return {@link <T>} 泛型标记数据
      */
-    public static <E extends Serializable> E dataHandle(AbstractResult<E> abstractResult) {
+    public static <T extends Serializable> T dataHandle(AbstractResult<T> abstractResult) {
         if (!abstractResult.getSign()) {
             throw new BusinessException(abstractResult.getCode(), abstractResult.getMessage());
         }
-        return ((RespResult<E>) abstractResult).getBody();
+        return ((RespResult<T>) abstractResult).getBody();
     }
 
     /**

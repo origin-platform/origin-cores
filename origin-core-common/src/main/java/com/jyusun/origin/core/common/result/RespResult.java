@@ -9,8 +9,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.io.Serializable;
-
 /**
  * 作用描述： - 响应数据信息
  *
@@ -22,13 +20,13 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @ApiModel("成功响应对象")
-public class RespResult<E> extends AbstractResult<E> {
+public class RespResult<T> extends AbstractResult<T> {
 
     private static final long serialVersionUID = 1L;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty("承载数据")
-    private E body;
+    private T body;
 
     /**
      * 构造函数
@@ -48,7 +46,7 @@ public class RespResult<E> extends AbstractResult<E> {
      * @param code    响应编码
      * @param message 响应消息
      */
-    public RespResult(String code, String message, boolean sign, E body) {
+    public RespResult(String code, String message, boolean sign, T body) {
         this.init(code, message, sign, body);
     }
 
@@ -60,7 +58,7 @@ public class RespResult<E> extends AbstractResult<E> {
      * @param sign    {@code Boolean} 操作标记
      * @param body    {@code Boolean} 响应数据
      */
-    private void init(String code, String message, boolean sign, E body) {
+    private void init(String code, String message, boolean sign, T body) {
         this.init(code, message, sign);
         this.body = body;
     }
