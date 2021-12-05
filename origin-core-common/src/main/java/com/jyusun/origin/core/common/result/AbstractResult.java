@@ -31,7 +31,7 @@ public abstract class AbstractResult<T> implements Serializable {
     @ApiModelProperty(value = "响应消息", required = true)
     private String message;
 
-    @ApiModelProperty(value = "操作标记", required = true, example = "false-操作失败|true-操作成功")
+    @ApiModelProperty(value = "操作标记", required = true, example = "0-操作失败|1-操作成功")
     private Boolean sign;
 
     /**
