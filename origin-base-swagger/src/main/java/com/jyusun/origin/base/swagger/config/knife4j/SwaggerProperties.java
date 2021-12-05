@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 
 /**
@@ -54,22 +56,18 @@ public class SwaggerProperties {
      */
     private String basePackage = SystemConstant.BASE_WEB;
 
-    /**
-     * 构建联络方式
-     *
-     * @return {@link Contact}
-     */
-    Contact buildContact() {
-        return contactBuilder().name(contact.getName()).url(contact.getUrl()).email(contact.getEmail()).build();
-    }
 
-    /**
-     * ContactBuilder
-     *
-     * @return
-     */
-    private SwaggerProperties.ContactBuilder contactBuilder() {
-        return new SwaggerProperties.ContactBuilder();
+    public ApiInfo buildApiInfo() {
+        return new ApiInfoBuilder()
+                .title(this.getTitle())
+                .description(this.getDescription())
+                .termsOfServiceUrl(this.getTermsOfServiceUrl())
+                .contact(ContactInfo.creator()
+                        .name(contact.getName())
+                        .url(contact.getUrl())
+                        .email(contact.getEmail()).build())
+                .version(this.getVersion())
+                .build();
     }
 
     @Setter
@@ -91,36 +89,38 @@ public class SwaggerProperties {
         @ApiModelProperty("联络邮箱")
         private String email;
 
-    }
-
-    private static class ContactBuilder {
-
-        @ApiModelProperty("联系人")
-        private String name;
-        @ApiModelProperty("URL")
-        private String url;
-        @ApiModelProperty("联络邮箱")
-        private String email;
-
-        private SwaggerProperties.ContactBuilder name(String name) {
-            this.name = name;
-            return this;
+        public static ContactBuilder creator() {
+            return new ContactBuilder();
         }
 
-        private SwaggerProperties.ContactBuilder url(String url) {
-            this.url = url;
-            return this;
-        }
+        public static class ContactBuilder {
 
-        private SwaggerProperties.ContactBuilder email(String email) {
-            this.email = email;
-            return this;
-        }
+            @ApiModelProperty("联系人")
+            private String name;
+            @ApiModelProperty("URL")
+            private String url;
+            @ApiModelProperty("联络邮箱")
+            private String email;
 
-        private Contact build() {
-            return new Contact(name, url, email);
-        }
+            private ContactBuilder name(String name) {
+                this.name = name;
+                return this;
+            }
 
+            private ContactBuilder url(String url) {
+                this.url = url;
+                return this;
+            }
+
+            private ContactBuilder email(String email) {
+                this.email = email;
+                return this;
+            }
+
+            private Contact build() {
+                return new Contact(name, url, email);
+            }
+        }
     }
 
 
