@@ -2,7 +2,6 @@ package com.jyusun.origin.base.db;
 
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.jyusun.origin.base.db.common.util.PageUtil;
 import com.jyusun.origin.core.common.result.AbstractResult;
 import com.jyusun.origin.core.common.result.ResultFactory;
 import com.jyusun.origin.core.model.page.PageObject;
@@ -32,23 +31,23 @@ import java.io.Serializable;
  * @date 2020/10/15 17:24
  * @since 1.0.0
  */
-public abstract class BaseController<R extends BaseRepository<D>, D extends Model<?>> {
+public abstract class BaseController<R extends BaseRepository<T>, T extends Model<?>> {
 
     @Autowired
-    protected  R originRepository;
+    protected R originRepository;
 
     /**
      * 列表分页查询
      *
      * @param pageQuery {@link PageQuery} 分页参数查询对象
-     * @param query     {@link D} 系统参数查询对象
+     * @param data      {@link T} 系统参数查询对象
      * @return {@link AbstractResult} 响应结果
      */
     @ApiOperation("分页查询：分页条件")
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
-    public AbstractResult<PageObject<D>> pageQuery(PageQuery pageQuery, D query) {
-        return ResultFactory.data(PageUtil.dataInfo(this.originRepository.page(pageQuery, query)));
+    public AbstractResult<PageObject<T>> pageQuery(PageQuery pageQuery, T data) {
+        return ResultFactory.data(this.originRepository.pageQuery(pageQuery, data));
     }
 
 
@@ -61,7 +60,7 @@ public abstract class BaseController<R extends BaseRepository<D>, D extends Mode
     @ApiOperation("数据查询：主键编号")
     @GetMapping("{sid}")
     @ResponseStatus(code = HttpStatus.OK)
-    public AbstractResult<D> findById(@PathVariable Serializable sid) {
+    public AbstractResult<T> findById(@PathVariable Serializable sid) {
         return ResultFactory.data(this.originRepository.getById(sid));
     }
 
@@ -87,7 +86,7 @@ public abstract class BaseController<R extends BaseRepository<D>, D extends Mode
     @ApiOperation("数据新增")
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public AbstractResult<Boolean> save(@Validated @RequestBody @ModelAttribute D data) {
+    public AbstractResult<Boolean> save(@Validated @RequestBody @ModelAttribute T data) {
         return ResultFactory.create(this.originRepository.save(data));
     }
 
@@ -102,7 +101,7 @@ public abstract class BaseController<R extends BaseRepository<D>, D extends Mode
      */
     @ApiOperation("数据更新：主键编号")
     @PutMapping
-    public AbstractResult<Boolean> updateById(@Validated @RequestBody D data) {
+    public AbstractResult<Boolean> updateById(@Validated @RequestBody T data) {
         return ResultFactory.status(this.originRepository.updateById(data));
     }
 }

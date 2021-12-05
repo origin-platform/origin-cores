@@ -41,7 +41,7 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
     }
 
     public static void publishEvent(ApplicationEvent event) {
-        log.info("事件发送：{}", event.toString());
+        log.info("事件发送：{}", event.getTimestamp());
         getContext().publishEvent(event);
     }
 
@@ -56,7 +56,7 @@ public class SpringUtil implements ApplicationContextAware, DisposableBean {
     /**
      * 清除SpringContextHolder中的ApplicationContext为Null.
      */
-    public static void clearHolder() {
+    private static void clearHolder() {
         applicationContext = null;
     }
 

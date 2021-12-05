@@ -1,6 +1,7 @@
 package com.jyusun.origin.base.db;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -26,11 +27,11 @@ import java.io.Serializable;
  * @author JyuSun at 2019/3/29 11:15
  * @version 1.0.0
  */
-public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends Model<?>>
-        extends ServiceImpl<M, D> implements BaseRepository<D> {
+public abstract class BaseRepositoryImpl<M extends BaseMapper<T>, T extends Model<?>>
+        extends ServiceImpl<M, T> implements BaseRepository<T> {
 
     @Override
-    public Boolean unique(Wrapper<D> wrapper, BaseResultCode baseResultCode) {
+    public Boolean unique(Wrapper<T> wrapper, BaseResultCode baseResultCode) {
         if (this.count(wrapper) > 0) {
             throw new BusinessException(baseResultCode);
         }
@@ -45,8 +46,20 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      * @return <T>
      */
     @Override
-    public IPage<D> page(PageQuery pageQuery, D data) {
+    public IPage<T> page(PageQuery pageQuery, T data) {
         return this.page(ConditionUtil.pageInfo(pageQuery), Wrappers.lambdaQuery(data));
+    }
+
+    /**
+     * 按分页条件查询
+     *
+     * @param data      数据对象
+     * @param pageQuery 条件构造器
+     * @return {@link PageObject} 目标类型
+     */
+    @Override
+    public PageObject<T> pageQuery(PageQuery pageQuery, T data) {
+        return PageUtil.dataInfo(this.page(pageQuery, data));
     }
 
     /**
@@ -57,7 +70,7 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      * @return IPage<D>
      */
     @Override
-    public IPage<D> page(PageQuery pageQuery, Wrapper<D> queryWrapper) {
+    public IPage<T> page(PageQuery pageQuery, Wrapper<T> queryWrapper) {
         return this.page(ConditionUtil.pageInfo(pageQuery), queryWrapper);
     }
 
@@ -70,7 +83,7 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      * @return {@link PageObject} 目标类型
      */
     @Override
-    public PageObject<D> pageQuery(PageQuery pageQuery, Wrapper<D> queryWrapper) {
+    public PageObject<T> pageQuery(PageQuery pageQuery, Wrapper<T> queryWrapper) {
         return PageUtil.dataInfo(this.page(pageQuery, queryWrapper));
     }
 
@@ -82,22 +95,23 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      * @return {@link PageObject} 目标类型
      */
     @Override
-    public <T extends Serializable> PageObject<T> pageQuery(PageQuery pageQuery, Wrapper<D> queryWrapper,
-                                                            Class<T> target) {
+    public <V extends Serializable> PageObject<V> pageQuery(PageQuery pageQuery, Wrapper<T> queryWrapper,
+                                                            Class<V> target) {
         return PageUtil.dataInfo(this.page(ConditionUtil.pageInfo(pageQuery), queryWrapper), target);
     }
 
     /**
      * 按分页条件查询
      *
-     * @param queryWrapper 条件构造器
      * @param pageQuery    条件构造器
+     * @param queryWrapper 条件构造器
+     * @param target
      * @return {@link PageObject} 目标类型
      */
     @Override
-    public <T extends Converter<D, T> & Serializable> PageObject<T> pageConvert(PageQuery pageQuery,
-                                                                                Wrapper<D> queryWrapper,
-                                                                                Class<T> target) {
+    public <V extends Converter<T, V> & Serializable> PageObject<V> pageConvert(PageQuery pageQuery,
+                                                                                Wrapper<T> queryWrapper,
+                                                                                Class<V> target) {
         return PageUtil.dataConvert(this.page(ConditionUtil.pageInfo(pageQuery), queryWrapper), target);
     }
 
@@ -109,8 +123,8 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
      * @return <T>
      */
     @Override
-    public <T> T getById(Serializable sid, Class<T> target) {
-        D obj = this.getById(sid);
+    public <V> V getById(Serializable sid, Class<V> target) {
+        T obj = this.getById(sid);
         if (ObjectUtil.isEmpty(obj)) {
             throw new ValidateException(DbResultEnum.DATA_NOT_EXIST);
         }
@@ -118,12 +132,12 @@ public abstract class BaseRepositoryImpl<M extends BaseRepoMapper<D>, D extends 
     }
 
     @Override
-    public boolean save(Object obj, Class<D> data) {
+    public boolean save(Object obj, Class<T> data) {
         return this.save(AssemblerUtil.convert(obj, data));
     }
 
     @Override
-    public boolean updateById(Object obj, Class<D> data) {
+    public boolean updateById(Object obj, Class<T> data) {
         return this.updateById(AssemblerUtil.convert(obj, data));
     }
 

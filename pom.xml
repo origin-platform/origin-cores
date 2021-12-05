@@ -34,7 +34,6 @@
 
         <module>origin-base-db</module>
         <module>origin-base-feign</module>
-        <module>origin-base-logger</module>
         <module>origin-base-swagger</module>
         <module>origin-base-excel</module>
         <module>origin-base-mail</module>

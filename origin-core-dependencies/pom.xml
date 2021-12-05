@@ -62,12 +62,6 @@
                 <artifactId>origin-base-db</artifactId>
                 <version>${origin.development.version}</version>
             </dependency>
-            <!-- 日志打印 -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-logger</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
             <!-- 在线文档 -->
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>

@@ -10,5 +10,5 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
  * @author jyusun at 2020/2/17 12:18
  * @since 1.0.0
  */
-public interface BaseRepoMapper<D extends Model<?>> extends BaseMapper<D> {
+public interface BaseRepoMapper<T extends Model<?>> extends BaseMapper<T> {
 }

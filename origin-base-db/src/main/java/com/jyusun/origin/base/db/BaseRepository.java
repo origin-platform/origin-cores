@@ -19,7 +19,7 @@ import java.io.Serializable;
  * @author JyuSun at 2019/3/29 11:15
  * @version 1.0.0
  */
-public interface BaseRepository<D extends Model<?>> extends IService<D> {
+public interface BaseRepository<T extends Model<?>> extends IService<T> {
 
     /**
      * 唯一校验
@@ -28,7 +28,7 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
      * @param baseResultCode {@link BaseResultCode} 响应信息
      * @return false 不存在
      */
-    Boolean unique(Wrapper<D> wrapper, BaseResultCode baseResultCode);
+    Boolean unique(Wrapper<T> wrapper, BaseResultCode baseResultCode);
 
     /**
      * 按分页条件查询
@@ -37,7 +37,16 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
      * @param pageQuery 条件构造器
      * @return <T>
      */
-    IPage<D> page(PageQuery pageQuery, D data);
+    IPage<T> page(PageQuery pageQuery, T data);
+
+    /**
+     * 按分页条件查询
+     *
+     * @param data      数据对象
+     * @param pageQuery 条件构造器
+     * @return {@link PageObject} 目标类型
+     */
+    PageObject<T> pageQuery(PageQuery pageQuery, T data);
 
     /**
      * 按分页条件查询
@@ -46,7 +55,7 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
      * @param pageQuery    条件构造器
      * @return <T>
      */
-    IPage<D> page(PageQuery pageQuery, @Param("ew") Wrapper<D> queryWrapper);
+    IPage<T> page(PageQuery pageQuery, @Param("ew") Wrapper<T> queryWrapper);
 
     /**
      * 按分页条件查询
@@ -55,7 +64,7 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
      * @param queryWrapper 条件构造器
      * @return <T>
      */
-    PageObject<D> pageQuery(PageQuery pageQuery, Wrapper<D> queryWrapper);
+    PageObject<T> pageQuery(PageQuery pageQuery, Wrapper<T> queryWrapper);
 
     /**
      * 分页查询
@@ -65,7 +74,8 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
      * @param target       目标转换
      * @return <T>
      */
-    <T extends Serializable> PageObject<T> pageQuery(PageQuery pageQuery, @Param("ew") Wrapper<D> queryWrapper, Class<T> target);
+    <V extends Serializable> PageObject<V> pageQuery(PageQuery pageQuery, @Param("ew") Wrapper<T> queryWrapper,
+                                                     Class<V> target);
 
     /**
      * 分页查询
@@ -75,8 +85,9 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
      * @param target       目标转换
      * @return <T>
      */
-    <T extends Converter<D, T> & Serializable> PageObject<T> pageConvert(PageQuery pageQuery, @Param("ew") Wrapper<D> queryWrapper,
-                                                                       Class<T> target);
+    <V extends Converter<T, V> & Serializable> PageObject<V> pageConvert(PageQuery pageQuery,
+                                                                         @Param("ew") Wrapper<T> queryWrapper,
+                                                                         Class<V> target);
 
     /**
      * 数据查询
@@ -95,7 +106,7 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
      * @param data 数据对象
      * @return
      */
-    boolean save(Object obj, Class<D> data);
+    boolean save(Object obj, Class<T> data);
 
     /**
      * 数据更新
@@ -104,5 +115,5 @@ public interface BaseRepository<D extends Model<?>> extends IService<D> {
      * @param data 数据对象
      * @return
      */
-    boolean updateById(Object obj, Class<D> data);
+    boolean updateById(Object obj, Class<T> data);
 }
