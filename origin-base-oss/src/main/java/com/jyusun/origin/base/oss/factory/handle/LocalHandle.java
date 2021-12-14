@@ -70,7 +70,7 @@ public class LocalHandle implements OssHandleFactory {
     /**
      * 文件上传
      *
-     * @param stream
+     * @param inputStream
      * @param bucketName
      * @param basedir
      * @param originalName
@@ -78,7 +78,7 @@ public class LocalHandle implements OssHandleFactory {
      * @return {@link UploadInfo}
      */
     @Override
-    public UploadInfo put(InputStream stream, String bucketName, String basedir, String originalName, boolean cover) {
+    public UploadInfo put(InputStream inputStream, String bucketName, String basedir, String originalName, boolean cover) {
         return null;
     }
 }

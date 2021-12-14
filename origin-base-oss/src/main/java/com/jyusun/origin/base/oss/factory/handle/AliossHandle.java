@@ -104,15 +104,18 @@ public class AliossHandle implements OssHandleFactory {
 
 
     /**
+     * 文件上传
+     *
      * @param bucketName   存储空间名称
-     * @param stream       {@link InputStream} 输入流
+     * @param inputStream  {@link InputStream} 输入流
      * @param originalName {@code String} 文件名称
      * @param cover        {@code Boolean} true-覆盖，false-不覆盖
      * @return {@link UploadInfo} 上传信息
      */
     @Override
     @SneakyThrows
-    public UploadInfo put(InputStream stream, String bucketName, String basedir, String originalName, boolean cover) {
+    public UploadInfo put(InputStream inputStream, String bucketName, String basedir, String originalName,
+                          boolean cover) {
         this.makeBucket(bucketName);
         String key;
         if (StringUtils.hasText(basedir)) {
@@ -121,14 +124,14 @@ public class AliossHandle implements OssHandleFactory {
             key = this.getRule().defaultPath(originalName);
         }
         if (cover) {
-            this.getOssClient().putObject(getBucketName(bucketName), key, stream);
+            this.getOssClient().putObject(getBucketName(bucketName), key, inputStream);
         } else {
             PutObjectResult response = this.getOssClient().putObject(this.getBucketName(bucketName), key,
-                    stream);
+                    inputStream);
             int retry = 0;
             int retryCount = 5;
             while (StringUtils.hasText(response.getETag()) && retry < retryCount) {
-                response = this.getOssClient().putObject(getBucketName(bucketName), key, stream);
+                response = this.getOssClient().putObject(getBucketName(bucketName), key, inputStream);
                 retry++;
             }
         }

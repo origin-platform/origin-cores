@@ -1,7 +1,6 @@
 package com.jyusun.origin.base.oss.factory.handle;
 
 
-
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
@@ -20,16 +19,16 @@ public interface OssHandleFactory {
     /**
      * 获取配置属性
      *
-     * @return
+     * @return {@link OssProperties} OSS属性
      */
-    abstract OssProperties ossProperties();
+    OssProperties ossProperties();
 
     /**
      * 规则获取
      *
-     * @return
+     * @return {@link OssRule} 存储规则
      */
-    abstract OssRule getRule();
+    OssRule getRule();
 
     /**
      * 判断存储桶是否存在
@@ -37,26 +36,26 @@ public interface OssHandleFactory {
      * @param bucketName
      * @return
      */
-    abstract boolean bucketExists(String bucketName);
+    boolean bucketExists(String bucketName);
 
     /**
      * 创建存储桶
      *
      * @param bucketName
      */
-    abstract void makeBucket(String bucketName);
+    void makeBucket(String bucketName);
 
 
     /**
      * 文件上传
      *
-     * @param stream
+     * @param inputStream
      * @param bucketName
      * @param basedir
      * @param originalName
      * @param cover
      * @return {@link UploadInfo}
      */
-    abstract UploadInfo put(InputStream stream, String bucketName, String basedir, String originalName, boolean cover);
+    UploadInfo put(InputStream inputStream, String bucketName, String basedir, String originalName, boolean cover);
 
 }

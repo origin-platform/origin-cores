@@ -4,7 +4,6 @@ package com.jyusun.origin.base.oss;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.factory.OssAccessor;
 import com.jyusun.origin.base.oss.factory.handle.OssHandleFactory;
-import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 
 import java.io.InputStream;
@@ -32,45 +31,37 @@ public class OssTemplate extends OssAccessor {
     /**
      * Osss 属性配置
      *
-     * @return
+     * @return {@link OssProperties}
      */
     private OssProperties ossProperties() {
         return ossFactory().ossProperties();
     }
 
-    /**
-     * 获取规则
-     *
-     * @return {@link OssRule}
-     */
-    private OssRule ossRule() {
-        return ossFactory().getRule();
-    }
 
     /**
      * 文件上传
      *
-     * @param stream       输入流
+     * @param inputStream  输入流
      * @param bucketName   存储桶
      * @param basedir      基础路径
      * @param originalName 原始文件名称
      * @return {@link UploadInfo }
      */
-    public UploadInfo putFile(InputStream stream, String bucketName, String basedir, String originalName,
-                              boolean cover) {
-        return this.ossFactory().put(stream, bucketName, basedir, originalName, cover);
+    public UploadInfo upload(InputStream inputStream, String bucketName, String basedir, String originalName,
+                             boolean cover) {
+        return this.ossFactory().put(inputStream, bucketName, basedir, originalName, cover);
     }
 
     /**
      * 文件上传
      *
-     * @param stream       输入流
+     * @param inputStream  输入流
      * @param basedir      基础路径
      * @param originalName 原始文件名称
      * @return {@link UploadInfo }
      */
-    public UploadInfo putFile(InputStream stream, String basedir, String originalName) {
-        return this.ossFactory().put(stream, ossProperties().getBucketName(), basedir, originalName, true);
+    public UploadInfo upload(InputStream inputStream, String basedir, String originalName) {
+        return this.ossFactory().put(inputStream, ossProperties().getBucketName(), basedir, originalName, true);
     }
 
 
