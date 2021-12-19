@@ -23,7 +23,7 @@ public class TreeValue<T> extends BaseValue {
      * 当前节点
      */
     @ApiModelProperty("当前节点")
-    private T value;
+    private T thisNode;
 
     /**
      * 子节点列表
