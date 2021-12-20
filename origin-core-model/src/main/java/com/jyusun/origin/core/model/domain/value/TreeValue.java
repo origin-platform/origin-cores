@@ -1,6 +1,7 @@
 package com.jyusun.origin.core.model.domain.value;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +18,7 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
+@JsonIgnoreProperties(value = {"handler"})
 public class TreeValue<T> extends BaseValue {
 
     /**
