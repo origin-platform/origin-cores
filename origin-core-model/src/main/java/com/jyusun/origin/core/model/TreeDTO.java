@@ -1,4 +1,4 @@
-package com.jyusun.origin.core.model.domain.value;
+package com.jyusun.origin.core.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties(value = {"handler"})
-public class TreeValue<T extends Serializable> extends BaseValue {
+public class TreeDTO<T extends Serializable> extends BaseDTO {
 
     /**
      * 当前节点
@@ -30,6 +30,6 @@ public class TreeValue<T extends Serializable> extends BaseValue {
      * 子节点列表
      */
     @ApiModelProperty("子节点列表")
-    private List<TreeValue<T>> childrens;
+    private List<TreeDTO<T>> childrens;
 
 }
