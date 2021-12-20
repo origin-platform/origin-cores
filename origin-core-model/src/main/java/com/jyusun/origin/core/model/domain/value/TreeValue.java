@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,10 +16,9 @@ import java.util.List;
  * @author jyusun at 2021-12-19 14:47:36
  */
 @Data
-@Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @JsonIgnoreProperties(value = {"handler"})
-public class TreeValue<T> extends BaseValue {
+public class TreeValue<T extends Serializable> extends BaseValue {
 
     /**
      * 当前节点
