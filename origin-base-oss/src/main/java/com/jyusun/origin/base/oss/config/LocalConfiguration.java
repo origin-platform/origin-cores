@@ -8,7 +8,7 @@ import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
 import com.jyusun.origin.base.oss.factory.props.LocalPropsFactory;
 import com.jyusun.origin.base.oss.factory.rule.LocalOssRule;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean;
  * @author jyusun at 2021-10-8 13:58:33
  */
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @EnableConfigurationProperties({OssProperties.class})
 @ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "LOCAL")
 public class LocalConfiguration {

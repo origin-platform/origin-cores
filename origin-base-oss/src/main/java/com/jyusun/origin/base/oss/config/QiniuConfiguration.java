@@ -1,4 +1,4 @@
-package com.jyusun.origin.base.oss.config;//package com.jyusun.origin.base.oss.config;
+//package com.jyusun.origin.base.oss.config;//package com.jyusun.origin.base.oss.config;
 //
 //import com.jyusun.origin.base.oss.OssTemplate;
 //import com.jyusun.origin.base.oss.config.props.OssProperties;
@@ -10,7 +10,7 @@ package com.jyusun.origin.base.oss.config;//package com.jyusun.origin.base.oss.c
 //import com.qiniu.storage.BucketManager;
 //import com.qiniu.storage.UploadManager;
 //import com.qiniu.util.Auth;
-//import lombok.AllArgsConstructor;
+//import lombok.RequiredArgsConstructor;
 //import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 //import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 //import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -22,7 +22,7 @@ package com.jyusun.origin.base.oss.config;//package com.jyusun.origin.base.oss.c
 // *
 // * @author jyusun
 // */
-//@AllArgsConstructor
+//@RequiredArgsConstructor
 //@EnableConfigurationProperties(OssProperties.class)
 //@ConditionalOnProperty(value = "origin-system.oss.type", havingValue = "QINIU")
 //public class QiniuConfiguration {
@@ -59,7 +59,8 @@ package com.jyusun.origin.base.oss.config;//package com.jyusun.origin.base.oss.c
 //    @Bean
 //    @ConditionalOnBean(com.qiniu.storage.Configuration.class)
 //    public BucketManager bucketManager(com.qiniu.storage.Configuration cfg) {
-//        return new BucketManager(Auth.create(ossProperties.getAccessKeyId(), ossProperties.getAccessKeySecret()), cfg);
+//        return new BucketManager(Auth.create(ossProperties.getAccessKeyId(), ossProperties.getAccessKeySecret()),
+//        cfg);
 //    }
 //
 //    @Bean
