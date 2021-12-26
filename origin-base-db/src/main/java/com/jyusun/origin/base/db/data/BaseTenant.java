@@ -25,7 +25,7 @@ public abstract class BaseTenant extends BaseData {
     /**
      * 租户编号: 5位 10001
      */
-    @TableField(value = "tenant_code", fill = FieldFill.INSERT)
-    protected Integer tenantCode;
+    @TableField(value = "tenant_id", fill = FieldFill.INSERT)
+    protected Integer tenantId;
 
 }
