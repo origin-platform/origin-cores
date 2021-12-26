@@ -23,9 +23,9 @@ public abstract class BaseTenant extends BaseData {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 租户主键编号: 8位 10000001
+     * 租户编号: 5位 10001
      */
-    @TableField(value = "tenantId", fill = FieldFill.INSERT)
-    protected String tenantId;
+    @TableField(value = "tenant_code", fill = FieldFill.INSERT)
+    protected Integer tenantCode;
 
 }
