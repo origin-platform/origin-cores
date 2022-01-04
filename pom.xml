@@ -32,14 +32,6 @@
         <module>origin-core-model</module>
         <module>origin-core-secure</module>
 
-        <module>origin-base-db</module>
-        <module>origin-base-feign</module>
-        <module>origin-base-jackson</module>
-        <module>origin-base-swagger</module>
-        <module>origin-base-excel</module>
-        <module>origin-base-mail</module>
-        <module>origin-base-wecom</module>
-        <module>origin-base-oss</module>
     </modules>
 
     <dependencyManagement>

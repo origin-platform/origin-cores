@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.jyusun.origin.base.feign.config.FeignConfiguration
