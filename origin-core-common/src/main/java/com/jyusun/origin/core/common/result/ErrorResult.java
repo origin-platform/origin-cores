@@ -1,6 +1,5 @@
 package com.jyusun.origin.core.common.result;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
@@ -30,10 +29,8 @@ public class ErrorResult<E extends Serializable> extends AbstractResult<E> {
 
     @ApiModelProperty("链接对象")
     private Links links;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty("错误标题")
     private String title;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty("错误明细")
     private String detail;
 

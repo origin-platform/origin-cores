@@ -1,6 +1,5 @@
 package com.jyusun.origin.core.common.result;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;
@@ -24,7 +23,6 @@ public class RespResult<T> extends AbstractResult<T> {
 
     private static final long serialVersionUID = 1L;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     @ApiModelProperty("承载数据")
     private T body;
 
