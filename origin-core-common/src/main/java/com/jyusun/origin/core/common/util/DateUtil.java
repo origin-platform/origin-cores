@@ -29,13 +29,14 @@ public class DateUtil {
     public static final String PATTERN_YYYYMMDDHHMMSS = "yyyyMMddHHmmss";
     public static final String PATTERN_YYYYMMDDHHMM = "yyyyMMddHHmm";
     public static final String PATTERN_YYYYMMDD = "yyyyMMdd";
-    public static final String PATTERN_YYYYMM = "yyyyMM";
-    public static final String PATTERN_HHMMSS = "HHmmss";
 
-    public static final String FORMAT_YYYY = "yyyy";
-    public static final String FORMAT_MM = "MM";
-    public static final String FORMAT_DD = "dd";
-    public static final String FORMAT_HHMM = "HHmm";
+    public static final String PATTERN_YYYYMM = "yyyyMM";
+    public static final String PATTERN_YYYY = "yyyy";
+    public static final String PATTERN_MM = "MM";
+    public static final String PATTERN_DD = "dd";
+
+    public static final String PATTERN_HHMMSS = "HHmmss";
+    public static final String PATTERN_HHMM = "HHmm";
 
     /**
      * LocalDateTime To String
