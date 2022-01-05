@@ -1,6 +1,7 @@
 package com.jyusun.origin.core.common.util;
 
 import lombok.experimental.UtilityClass;
+import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
 
 /**
@@ -102,5 +103,19 @@ public final class StringUtil extends StringUtils {
         return sb.toString().toLowerCase();
     }
 
+    public boolean notHasLength(@Nullable CharSequence str) {
+        return !hasLength(str);
+    }
 
+    public boolean notHasLength(@Nullable String str) {
+        return !hasLength(str);
+    }
+
+    public boolean notHasText(@Nullable CharSequence str) {
+        return !hasText(str);
+    }
+
+    public boolean notHasText(@Nullable String str) {
+        return !hasText(str);
+    }
 }
