@@ -94,25 +94,25 @@ public class WebUtil extends WebUtils {
     public static String getIpAddr(HttpServletRequest request) {
         Assert.notNull(request, "HttpServletRequest is null");
         String ip = request.getRemoteAddr();
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+        if (!StringUtil.hasText(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Requested-For");
         }
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+        if (!StringUtil.hasText(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("X-Forwarded-For");
         }
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+        if (!StringUtil.hasText(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+        if (!StringUtil.hasText(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+        if (!StringUtil.hasText(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_CLIENT_IP");
         }
-        if (StringUtil.isBlank(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
+        if (!StringUtil.hasText(ip) || UN_KNOWN.equalsIgnoreCase(ip)) {
             ip = request.getHeader("HTTP_X_FORWARDED_FOR");
         }
 
-        return StringUtil.isBlank(ip) ? null : ip.split(",")[0];
+        return StringUtil.hasText(ip) ? null : ip.split(",")[0];
     }
 }
