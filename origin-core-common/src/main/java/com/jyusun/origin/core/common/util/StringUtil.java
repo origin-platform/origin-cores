@@ -1,7 +1,7 @@
 package com.jyusun.origin.core.common.util;
 
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.StringUtils;
 
 /**
  * 作用描述： - 字符串操作工具类
