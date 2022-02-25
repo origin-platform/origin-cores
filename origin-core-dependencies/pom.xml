@@ -56,35 +56,6 @@
                 <version>${origin.development.version}</version>
             </dependency>
 
-            <!-- 数据库操作 -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-db</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
-            <!-- 在线文档 -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-swagger</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-feign</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
-            <!-- 对象存储工具 -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-oss</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
-            <!-- Excel工具 -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-excel</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>
