@@ -27,10 +27,17 @@
 
     <modules>
         <module>origin-core-dependencies</module>
-        <module>origin-starter-core</module>
         <module>origin-core-common</module>
         <module>origin-core-model</module>
         <module>origin-core-secure</module>
+        <module>origin-core-fastjson</module>
+        <module>origin-core-jackson</module>
+        <module>origin-base-swagger</module>
+        <module>origin-base-oss</module>
+        <module>origin-base-excel</module>
+        <module>origin-base-mail</module>
+        <module>origin-base-wecom</module>
+        <module>origin-base-redis</module>
 
     </modules>
 

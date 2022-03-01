@@ -55,6 +55,60 @@
                 <artifactId>origin-core-secure</artifactId>
                 <version>${origin.development.version}</version>
             </dependency>
+            <!-- Fastjson -->
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>origin-core-fastjson</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
+            <!-- jackson -->
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>origin-core-jackson</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
+
+            <!-- swagger -->
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>origin-base-swagger</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
+
+            <!-- redis -->
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>origin-base-redis</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
+
+            <!-- oss -->
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>origin-base-oss</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
+
+            <!-- excel -->
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>origin-base-excel</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
+
+            <!-- wecom -->
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>origin-base-wecom</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
+
+            <!-- mail -->
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>origin-base-mail</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
