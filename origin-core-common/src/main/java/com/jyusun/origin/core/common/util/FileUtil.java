@@ -1,6 +1,12 @@
 package com.jyusun.origin.core.common.util;
 
 import lombok.experimental.UtilityClass;
+import org.apache.commons.io.FileUtils;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 /**
  * 文件操作工具类
@@ -27,4 +33,5 @@ public class FileUtil {
         }
         return extension;
     }
+
 }
