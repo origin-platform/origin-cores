@@ -1,7 +1,6 @@
 package com.jyusun.origin.core.logger.publisher;
 
 
-import com.alibaba.fastjson.JSON;
 import com.jyusun.origin.core.common.util.SpringUtil;
 import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.WebUtil;
