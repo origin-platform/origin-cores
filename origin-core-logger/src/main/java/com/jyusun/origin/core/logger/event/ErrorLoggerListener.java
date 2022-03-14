@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 
 import java.util.EventObject;
 
@@ -18,7 +17,6 @@ import java.util.EventObject;
  * @author jyusun at 2019-08-07
  */
 @Slf4j
-@Component
 public class ErrorLoggerListener implements LoggerListener {
 
     @Async

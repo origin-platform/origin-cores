@@ -11,7 +11,7 @@ import com.jyusun.origin.core.logger.event.RequestLoggerEvent;
 import com.jyusun.origin.core.logger.model.dto.LoginLoggerDTO;
 import com.jyusun.origin.core.logger.model.dto.RequestLoggerDTO;
 import com.jyusun.origin.core.logger.model.value.RequestValue;
-import com.jyusun.origin.core.logger.model.value.ServiceValue;
+import com.jyusun.origin.core.logger.model.value.ServerValue;
 import com.jyusun.origin.core.secure.common.util.SecureUtil;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -66,7 +66,7 @@ public final class RequestLoggerPublisher {
                                 ZoneId.systemDefault()))
                         .setTimeCost(timeCost)
                         .setRequestValue(requestValue)
-                        .setServiceValue(new ServiceValue())
+                        .setServerValue(new ServerValue())
                         .setServiceCode("")
                         .setOperationType(webLogger.operType().code())
                         .setClassName(methodClass)

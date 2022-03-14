@@ -16,7 +16,6 @@ import java.util.EventObject;
  * @author jyusun at 2019-08-07
  */
 @Slf4j
-@Component
 public class UsualLoggerListener implements LoggerListener {
 
 

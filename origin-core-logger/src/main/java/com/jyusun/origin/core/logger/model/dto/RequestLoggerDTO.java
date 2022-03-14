@@ -1,7 +1,7 @@
 package com.jyusun.origin.core.logger.model.dto;
 
 import com.jyusun.origin.core.logger.model.value.RequestValue;
-import com.jyusun.origin.core.logger.model.value.ServiceValue;
+import com.jyusun.origin.core.logger.model.value.ServerValue;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -61,6 +61,6 @@ public class RequestLoggerDTO extends AbstractLogger {
      * 服务信息
      */
     @ApiModelProperty("服务信息")
-    private ServiceValue serviceValue;
+    private ServerValue serverValue;
 
 }

@@ -8,7 +8,7 @@ import com.jyusun.origin.core.logger.common.util.LoggerUtil;
 import com.jyusun.origin.core.logger.event.ErrorLoggerEvent;
 import com.jyusun.origin.core.logger.model.dto.ErrorLoggerDTO;
 import com.jyusun.origin.core.logger.model.value.RequestValue;
-import com.jyusun.origin.core.logger.model.value.ServiceValue;
+import com.jyusun.origin.core.logger.model.value.ServerValue;
 import com.jyusun.origin.core.secure.common.util.SecureUtil;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +45,7 @@ public final class ErrorLoggerPublisher {
                 .setRequestTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime),
                         ZoneId.systemDefault()))
                 .setRequestValue(requestValue)
-                .setServiceValue(new ServiceValue())
+                .setServerValue(new ServerValue())
                 .setOperationType(webLogger.operType().code())
                 .setServiceCode("")
                 .setClassName(className)

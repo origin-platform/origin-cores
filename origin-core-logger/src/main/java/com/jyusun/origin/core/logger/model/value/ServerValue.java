@@ -14,7 +14,7 @@ import lombok.ToString;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class ServiceValue extends BaseValue {
+public class ServerValue extends BaseValue {
 
     /**
      * 应用名称

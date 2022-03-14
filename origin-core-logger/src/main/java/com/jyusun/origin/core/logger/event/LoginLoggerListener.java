@@ -18,7 +18,6 @@ import java.util.EventObject;
  * @author jyusun at 2019-08-08
  */
 @Slf4j
-@Component
 public class LoginLoggerListener implements LoggerListener {
 
 
