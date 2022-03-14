@@ -2,12 +2,12 @@ package com.jyusun.origin.core.logger.config;
 
 
 import com.jyusun.origin.core.logger.exception.GlobalExceptionHandler;
+import com.jyusun.origin.core.logger.aspect.LoginLoggerAspect;
 import com.jyusun.origin.core.logger.aspect.WebLoggerAspect;
 import com.jyusun.origin.core.logger.event.ErrorLoggerListener;
 import com.jyusun.origin.core.logger.event.LoginLoggerListener;
 import com.jyusun.origin.core.logger.event.RequestLoggerListener;
 import com.jyusun.origin.core.logger.event.UsualLoggerListener;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -20,17 +20,26 @@ import org.springframework.scheduling.annotation.EnableAsync;
  */
 @EnableAsync
 @Configuration
-@RequiredArgsConstructor
 public class LoggerAutoConfiguration {
 
     /**
-     * 系统日志切面
+     * 请求日志切面
      *
      * @return {@link WebLoggerAspect}
      */
     @Bean
     public WebLoggerAspect webLoggerAspect() {
         return new WebLoggerAspect();
+    }
+
+    /**
+     * 登录日志切面
+     *
+     * @return {@link WebLoggerAspect}
+     */
+    @Bean
+    public LoginLoggerAspect loginLoggerAspect() {
+        return new LoginLoggerAspect();
     }
 
     /**

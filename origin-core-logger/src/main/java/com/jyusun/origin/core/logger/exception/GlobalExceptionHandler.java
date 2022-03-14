@@ -1,7 +1,6 @@
 package com.jyusun.origin.core.logger.exception;
 
 
-import com.jyusun.origin.core.logger.common.util.LoggerUtil;
 import com.jyusun.origin.core.common.enums.SystemResultEnum;
 import com.jyusun.origin.core.common.exception.BusinessException;
 import com.jyusun.origin.core.common.exception.SecureException;
@@ -9,6 +8,7 @@ import com.jyusun.origin.core.common.exception.ServiceException;
 import com.jyusun.origin.core.common.exception.UtilException;
 import com.jyusun.origin.core.common.result.AbstractResult;
 import com.jyusun.origin.core.common.result.ResultFactory;
+import com.jyusun.origin.core.logger.common.util.LoggerUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -23,7 +23,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
@@ -43,7 +42,6 @@ import java.util.Set;
  */
 @Slf4j
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@RestControllerAdvice
 public class GlobalExceptionHandler {
 
 
