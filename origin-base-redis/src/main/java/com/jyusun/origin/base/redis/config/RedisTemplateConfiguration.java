@@ -38,7 +38,12 @@ public class RedisTemplateConfiguration {
         return template;
     }
 
-    //缓存管理器
+    /**
+     * 缓存管理器
+     *
+     * @param redisConnectionFactory
+     * @return
+     */
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
         RedisCacheManager.RedisCacheManagerBuilder builder = RedisCacheManager
