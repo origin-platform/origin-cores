@@ -39,6 +39,7 @@
         <module>origin-base-mail</module>
         <module>origin-base-wecom</module>
         <module>origin-base-redis</module>
+        <module>origin-base-idempotent</module>
 
     </modules>
 
