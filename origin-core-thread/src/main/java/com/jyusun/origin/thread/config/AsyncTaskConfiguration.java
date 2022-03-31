@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
@@ -29,7 +28,6 @@ public class AsyncTaskConfiguration implements AsyncConfigurer {
     private final ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
     @Override
-    @Bean
     public Executor getAsyncExecutor() {
         return threadPoolTaskExecutor;
     }
@@ -37,7 +35,7 @@ public class AsyncTaskConfiguration implements AsyncConfigurer {
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return (ex, method, params) -> {
-            log.error("Error Occurs in async method:{}", ex.getMessage());
+            log.error("#### Error Occurs in async method:{}", ex.getMessage());
         };
     }
 }
