@@ -34,7 +34,7 @@ public class AsyncTaskConfiguration implements AsyncConfigurer {
     // 当池子的线程数大于corePoolSize时，多余的线程会等待keepAliveTime长时间，如果无请求可处理就自行销毁
 
     @Bean
-    public ThreadPoolTaskExecutor threadPoolTaskExecutor(){
+    public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
         ThreadPoolTaskExecutor threadPool = new ThreadPoolTaskExecutor();
         //设置核心线程数
         threadPool.setCorePoolSize(threadPoolProperties.getCorePoolSize());
@@ -61,6 +61,8 @@ public class AsyncTaskConfiguration implements AsyncConfigurer {
 
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-        return null;
+        return (ex, method, params) -> {
+            log.error("Error Occurs in async method:{}", ex.getMessage());
+        };
     }
 }
