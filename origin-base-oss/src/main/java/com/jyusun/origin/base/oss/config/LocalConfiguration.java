@@ -2,9 +2,10 @@ package com.jyusun.origin.base.oss.config;
 
 import com.jyusun.origin.base.oss.OssTemplate;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
+import com.jyusun.origin.base.oss.context.OssContext;
 import com.jyusun.origin.base.oss.factory.handle.LocalHandle;
 import com.jyusun.origin.base.oss.factory.handle.OssHandleFactory;
-import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
+import com.jyusun.origin.base.oss.factory.props.OssClient;
 import com.jyusun.origin.base.oss.factory.props.LocalPropsFactory;
 import com.jyusun.origin.base.oss.factory.rule.LocalOssRule;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
@@ -46,8 +47,11 @@ public class LocalConfiguration {
      */
     @Bean
     @ConditionalOnBean(OssRule.class)
-    public AbstractPropsFactory propsFactory(OssRule ossRule) {
-        return new LocalPropsFactory().setOssProperties(ossProperties).setOssRule(ossRule);
+    public OssClient propsFactory(OssRule ossRule) {
+        OssContext ossContext = OssContext.creator()
+                .setOssProperties(ossProperties)
+                .setOssRule(ossRule);
+        return new LocalPropsFactory(ossContext);
     }
 
     /**
@@ -55,7 +59,7 @@ public class LocalConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(OssTemplate.class)
-    public OssTemplate ossTemplate(AbstractPropsFactory propsFactory) {
+    public OssTemplate ossTemplate(OssClient propsFactory) {
         log.info("================ Local OSS Template ================");
         OssHandleFactory ossHandleFactory = new LocalHandle(propsFactory);
         return new OssTemplate(ossHandleFactory);

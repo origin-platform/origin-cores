@@ -3,7 +3,7 @@
 //import com.jyusun.origin.base.oss.OssTemplate;
 //import com.jyusun.origin.base.oss.config.props.OssProperties;
 //import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
-//import com.jyusun.origin.base.oss.factory.props.QiniuPropsFactory;
+//import com.jyusun.origin.base.oss.context.QiniuPropsFactory;
 //import com.jyusun.origin.base.oss.factory.rule.DefaultOssRule;
 //import com.jyusun.origin.base.oss.factory.rule.OssRule;
 //import com.qiniu.common.Zone;

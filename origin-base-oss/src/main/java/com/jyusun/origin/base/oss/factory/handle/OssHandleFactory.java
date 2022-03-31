@@ -2,6 +2,7 @@ package com.jyusun.origin.base.oss.factory.handle;
 
 
 import com.jyusun.origin.base.oss.config.props.OssProperties;
+import com.jyusun.origin.base.oss.context.OssContext;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 
@@ -15,7 +16,7 @@ import java.io.InputStream;
  */
 public interface OssHandleFactory {
 
-
+    OssContext getOssContext();
     /**
      * 获取配置属性
      *

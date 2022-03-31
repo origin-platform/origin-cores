@@ -6,10 +6,12 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSClientBuilder;
 import com.jyusun.origin.base.oss.OssTemplate;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
+import com.jyusun.origin.base.oss.context.AliOssContext;
+import com.jyusun.origin.base.oss.context.OssContext;
 import com.jyusun.origin.base.oss.factory.handle.AliossHandle;
 import com.jyusun.origin.base.oss.factory.handle.OssHandleFactory;
-import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
-import com.jyusun.origin.base.oss.factory.props.AliPropsFactory;
+import com.jyusun.origin.base.oss.factory.props.AliClientImpl;
+import com.jyusun.origin.base.oss.factory.props.OssClient;
 import com.jyusun.origin.base.oss.factory.rule.DefaultOssRule;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import lombok.RequiredArgsConstructor;
@@ -54,7 +56,7 @@ public class AliossConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(OSS.class)
-    public OSS ossClient() {
+    public OSS oss() {
         // 创建ClientConfiguration。ClientConfiguration是OSSClient的配置类，可配置代理、连接超时、最大连接数等参数。
         ClientBuilderConfiguration conf = new ClientBuilderConfiguration();
         // 设置OSSClient允许打开的最大HTTP连接数，默认为1024个。
@@ -84,8 +86,13 @@ public class AliossConfiguration {
      */
     @Bean
     @ConditionalOnBean({OSS.class, OssRule.class})
-    public AbstractPropsFactory propsFactory(OSS ossClient, OssRule ossRule) {
-        return new AliPropsFactory().setOssClient(ossClient).setOssProperties(ossProperties).setOssRule(ossRule);
+    public OssClient propsFactory(OSS oss, OssRule ossRule) {
+        AliOssContext ossContext = AliOssContext.builder()
+                .ossProperties(ossProperties)
+                .ossRule(ossRule)
+                .oss(oss)
+                .build();
+        return new AliClientImpl(ossContext).setOssClient(oss);
     }
 
 
@@ -95,7 +102,7 @@ public class AliossConfiguration {
      * @return {@link OssTemplate} Oss操作模板
      */
     @Bean
-    public OssTemplate ossTemplate(AbstractPropsFactory propsFactory) {
+    public OssTemplate ossTemplate(OssClient propsFactory) {
         log.info("================ Ali OSS Template ================");
         OssHandleFactory ossHandleFactory = new AliossHandle(propsFactory);
         return new OssTemplate(ossHandleFactory);

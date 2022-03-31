@@ -1,6 +1,7 @@
 package com.jyusun.origin.base.oss.factory.props;
 
 import com.aliyun.oss.OSS;
+import com.jyusun.origin.base.oss.context.OssContext;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -11,10 +12,17 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class AliPropsFactory extends AbstractPropsFactory {
+public class AliClientImpl implements OssClient {
+
+
 
     /**
      * 阿里云对象存储
      */
     private OSS ossClient;
+
+    @Override
+    public OssContext getOssContext() {
+        return ossContext;
+    }
 }

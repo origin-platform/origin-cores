@@ -2,8 +2,9 @@ package com.jyusun.origin.base.oss;
 
 
 import com.jyusun.origin.base.oss.config.props.OssProperties;
-import com.jyusun.origin.base.oss.factory.OssAccessor;
+import com.jyusun.origin.base.oss.context.OssAccessor;
 import com.jyusun.origin.base.oss.factory.handle.OssHandleFactory;
+import com.jyusun.origin.base.oss.factory.props.OssClient;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 
 import java.io.InputStream;
@@ -15,8 +16,8 @@ import java.io.InputStream;
  */
 public class OssTemplate extends OssAccessor {
 
-    public OssTemplate(OssHandleFactory ossHandleFactory) {
-        super(ossHandleFactory);
+    public OssTemplate(OssClient ossFactory) {
+        super(ossFactory);
     }
 
     /**
@@ -24,8 +25,8 @@ public class OssTemplate extends OssAccessor {
      *
      * @return {@link OssHandleFactory}
      */
-    private OssHandleFactory ossFactory() {
-        return this.getOssHandleFactory();
+    private OssClient ossFactory() {
+        return this.getOssFactory();
     }
 
     /**
@@ -34,7 +35,7 @@ public class OssTemplate extends OssAccessor {
      * @return {@link OssProperties}
      */
     private OssProperties ossProperties() {
-        return ossFactory().ossProperties();
+        return this.ossFactory().getOssContext().getOssProperties();
     }
 
 

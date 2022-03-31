@@ -2,7 +2,7 @@ package com.jyusun.origin.base.oss.factory.handle;
 
 
 import com.jyusun.origin.base.oss.config.props.OssProperties;
-import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
+import com.jyusun.origin.base.oss.factory.props.OssClient;
 import com.jyusun.origin.base.oss.factory.props.LocalPropsFactory;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
@@ -21,7 +21,7 @@ public class LocalHandle implements OssHandleFactory {
 
     private final LocalPropsFactory propsFactory;
 
-    public LocalHandle(AbstractPropsFactory propsFactory) {
+    public LocalHandle(OssClient propsFactory) {
         this.propsFactory = (LocalPropsFactory) propsFactory;
     }
 

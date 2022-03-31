@@ -5,8 +5,8 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.Bucket;
 import com.aliyun.oss.model.PutObjectResult;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
-import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
-import com.jyusun.origin.base.oss.factory.props.AliPropsFactory;
+import com.jyusun.origin.base.oss.factory.props.OssClient;
+import com.jyusun.origin.base.oss.factory.props.AliClientImpl;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 import lombok.SneakyThrows;
@@ -24,10 +24,10 @@ import java.io.InputStream;
  */
 public class AliossHandle implements OssHandleFactory {
 
-    private final AliPropsFactory propsFactory;
+    private final AliClientImpl propsFactory;
 
-    public AliossHandle(AbstractPropsFactory propsFactory) {
-        this.propsFactory = (AliPropsFactory) propsFactory;
+    public AliossHandle(OssClient propsFactory) {
+        this.propsFactory = (AliClientImpl) propsFactory;
     }
 
 
