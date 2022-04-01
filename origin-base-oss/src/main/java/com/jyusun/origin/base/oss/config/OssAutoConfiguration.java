@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Import;
  *
  * @author jyusun
  */
+@Import({AliossConfiguration.class, QiniuConfiguration.class, LocalConfiguration.class})
 @Configuration
-@Import({AliossConfiguration.class, LocalConfiguration.class})
 @ConditionalOnProperty(prefix = "origin-system.oss", name = "enabled", matchIfMissing = true)
 public class OssAutoConfiguration {
 }

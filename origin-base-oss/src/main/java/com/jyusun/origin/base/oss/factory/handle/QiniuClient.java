@@ -1,153 +1,157 @@
-package com.jyusun.origin.base.oss.factory.handle;//package com.jyusun.origin.base.oss.factory.handle;
-//
-//import com.jyusun.origin.base.oss.config.props.OssProperties;
-//import com.jyusun.origin.base.oss.factory.props.AbstractPropsFactory;
-//import com.jyusun.origin.base.oss.factory.rule.OssRule;
-//import com.jyusun.origin.base.oss.model.UploadInfo;
-//
-//import java.io.InputStream;
-//import java.util.List;
-//
-///**
-// * 阿里云对象存储
-// *
-// * @author sun
-// */
-//public class QiniuHandle  {
-//
-//
-//    public QiniuHandle(AbstractPropsFactory abstractPropsFactory) {
-//        super();
-//        this.setOssFactory(abstractPropsFactory);
-//    }
-//
-//
-//    /**
-//     * 获取oss配置属性
-//     *
-//     * @return {@link OssProperties}
-//     */
-//    @Override
-//    public OssProperties getOssProperties() {
-//        return null;
-//    }
-//
-//    /**
-//     * 获取存取规则
-//     *
-//     * @return {@link OssRule} 存取规则
-//     */
-//    @Override
-//    public OssRule getRule() {
-//        return null;
-//    }
-//
-//    /**
-//     * 获取存储空间名称
-//     *
-//     * @param bucketName {@code String } 存储空间名称
-//     * @return {@code String} 存储空间名称
-//     */
-//    @Override
-//    public String getBucketName(String bucketName) {
-//        return null;
-//    }
-//
-//    /**
-//     * 存储空间是否存在
-//     *
-//     * @param bucketName 存储空间名称
-//     * @return {@code Boolean} true-存在，false-不存在
-//     */
-//    @Override
-//    public boolean bucketExists(String bucketName) {
-//        return false;
-//    }
-//
-//    /**
-//     * 创建存储空间
-//     *
-//     * @param bucketName 存储空间名称
-//     */
-//    @Override
-//    public void makeBucket(String bucketName) {
-//
-//    }
-//
-//    /**
-//     * @param bucketName   存储空间名称
-//     * @param stream       {@link InputStream} 输入流
-//     * @param originalName {@code String} 文件名称
-//     * @param cover        {@code Boolean} true-覆盖，false-不覆盖
-//     * @return {@link UploadInfo} 上传信息
-//     */
-//    @Override
-//    public UploadInfo put(String bucketName, InputStream stream, String originalName, boolean cover) {
-//        return null;
-//    }
-//
-//    /**
-//     * 删除文件
-//     *
-//     * @param fileName {@code String} 文件名称
-//     */
-//    @Override
-//    public void removeFile(String fileName) {
-//
-//    }
-//
-//    /**
-//     * 删除文件
-//     *
-//     * @param bucketName {@code String} 存储空间名称
-//     * @param fileName   {@code String} 文件名称
-//     */
-//    @Override
-//    public void removeFile(String bucketName, String fileName) {
-//
-//    }
-//
-//    /**
-//     * 删除文件
-//     *
-//     * @param fileNames {@link  List<String>} 文件名称集合
-//     */
-//    @Override
-//    public void removeFiles(List<String> fileNames) {
-//
-//    }
-//
-//    /**
-//     * 删除文件
-//     *
-//     * @param bucketName {@code String} 存储空间名称
-//     * @param fileNames  {@link List<String>} 文件名称集合
-//     */
-//    @Override
-//    public void removeFiles(String bucketName, List<String> fileNames) {
-//
-//    }
-//
-//    /**
-//     * 下载响应
-//     *
-//     * @param bucketName       存储空间名称
-//     * @param responseFileName 响应文件名称
-//     * @param remoteFilePath   远程文件路径
-//     */
-//    @Override
-//    public void downloadWeb(String bucketName, String responseFileName, String remoteFilePath) {
-//
-//    }
-//
-//    /**
-//     * 下载响应
-//     *
-//     * @param responseFileName 响应文件名称
-//     * @param remoteFilePath   远程文件路径
-//     */
-//    @Override
-//    public void downloadWeb(String responseFileName, String remoteFilePath) {
-//
-//    }
-//}
+package com.jyusun.origin.base.oss.factory.handle;
+
+import com.aliyun.oss.model.Bucket;
+import com.jyusun.origin.base.oss.config.props.OssProperties;
+import com.jyusun.origin.base.oss.context.QiniuOssContext;
+import com.jyusun.origin.base.oss.factory.rule.OssRule;
+import com.jyusun.origin.base.oss.model.UploadInfo;
+import lombok.SneakyThrows;
+
+import java.io.InputStream;
+
+/**
+ * 七牛客户端
+ *
+ * @author jyusun at 2022-04-01 16:21:12
+ */
+public class QiniuClient implements OssFactory {
+
+    private final QiniuOssContext ossContext;
+
+    public QiniuClient(QiniuOssContext ossContext) {
+        this.ossContext = ossContext;
+    }
+
+    @Override
+    public QiniuOssContext getOssContext() {
+        return ossContext;
+    }
+
+    /**
+     * 获取oss存取规则
+     *
+     * @return {@link OssRule} 存取规则
+     */
+    public OssRule getRule() {
+        return this.getOssContext().getOssRule();
+    }
+
+
+    /**
+     * 获取oss配置属性
+     *
+     * @return {@link OssProperties}
+     */
+    public OssProperties ossProperties() {
+        return this.getOssContext().getOssProperties();
+    }
+
+    /**
+     * 获取存储空间
+     *
+     * @param bucketName 存储空间名称
+     * @return
+     */
+    @Override
+    public String getBucket(String bucketName) {
+        return this.getRule().bucketName(bucketName);
+    }
+
+    /**
+     * 删除存储空间
+     *
+     * @param bucketName 存储空间名称
+     * @return true-成功，false-失败
+     */
+    @Override
+    public boolean removeBucket(String bucketName) {
+        return true;
+    }
+
+    /**
+     * 创建存储空间
+     *
+     * @param bucketName 存储空间名称
+     * @return {@link Bucket}
+     */
+    @SneakyThrows
+    private Bucket createBucket(String bucketName) {
+        return null;
+    }
+
+    @SneakyThrows
+    public boolean bucketExists(String bucketName) {
+        return true;
+    }
+
+    /**
+     * 创建存储空间
+     *
+     * @param bucketName 存储空间名称
+     */
+    @Override
+    @SneakyThrows
+    public void makeBucket(String bucketName) {
+        if (!bucketExists(bucketName)) {
+            this.createBucket(bucketName);
+        }
+    }
+
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param bucketName   存储空间名称
+     * @param fullPath     文件路径
+     * @param originalName 原始文件名称
+     * @param cover
+     * @return {@link UploadInfo }
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String bucketName, String fullPath, String originalName,
+                          boolean cover) {
+        return null;
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param bucketName   存储桶
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String bucketName, String basePath, String originalName) {
+        return this.put(inputStream, bucketName, this.getRule().path(basePath, originalName),
+                originalName, true);
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param bucketName   存储空间名称
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String bucketName, String originalName) {
+        return this.put(inputStream, bucketName, this.getRule().defaultPath(originalName),
+                originalName, true);
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo}
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String originalName) {
+        return this.put(inputStream, this.getBucket(ossProperties().getBucketName()),
+                this.getRule().defaultPath(originalName), originalName, true);
+    }
+}

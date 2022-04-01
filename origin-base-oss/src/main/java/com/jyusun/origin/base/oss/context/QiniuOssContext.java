@@ -30,7 +30,6 @@ public class QiniuOssContext extends OssContext {
      */
     private final BucketManager bucketManager;
 
-
     public QiniuOssContext(OssProperties ossProperties,
                            OssRule ossRule,
                            Auth auth,
@@ -64,12 +63,12 @@ public class QiniuOssContext extends OssContext {
             return this;
         }
 
-        public QiniuOssContextBuilder auth(Auth auth) {
+        public QiniuOssContextBuilder uploadManager(Auth auth) {
             this.auth = auth;
             return this;
         }
 
-        public QiniuOssContextBuilder auth(UploadManager uploadManager) {
+        public QiniuOssContextBuilder uploadManager(UploadManager uploadManager) {
             this.uploadManager = uploadManager;
             return this;
         }

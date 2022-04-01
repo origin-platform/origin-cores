@@ -1,6 +1,7 @@
 package com.jyusun.origin.base.oss.model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 文件上传信息
@@ -8,6 +9,7 @@ import lombok.Data;
  * @author sun at 2021-8-23 22:02:13
  */
 @Data
+@Accessors(chain = true)
 public class UploadInfo {
     /**
      * 文件地址

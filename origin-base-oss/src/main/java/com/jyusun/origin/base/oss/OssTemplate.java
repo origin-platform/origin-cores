@@ -1,16 +1,14 @@
 package com.jyusun.origin.base.oss;
 
 
-import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.context.OssAccessor;
 import com.jyusun.origin.base.oss.factory.handle.OssFactory;
-import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 
 import java.io.InputStream;
 
 /**
- * OSS模板
+ * OSS操作模板
  *
  * @author jyusun at 2021-10-9 13:49:09
  */
@@ -27,24 +25,6 @@ public class OssTemplate extends OssAccessor {
      */
     private OssFactory ossFactory() {
         return this.getOssFactory();
-    }
-
-    /**
-     * 配置属性
-     *
-     * @return {@link OssProperties}
-     */
-    private OssProperties getOssProps() {
-        return ossFactory().getOssContext().getOssProperties();
-    }
-
-    /**
-     * OSS规则
-     *
-     * @return {@link OssProperties}
-     */
-    private OssRule getOssRule() {
-        return ossFactory().getOssContext().getOssRule();
     }
 
     /**
