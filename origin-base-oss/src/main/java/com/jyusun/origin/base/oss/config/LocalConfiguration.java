@@ -5,6 +5,7 @@ import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.context.LocalContext;
 import com.jyusun.origin.base.oss.factory.handle.LocalClient;
 import com.jyusun.origin.base.oss.factory.handle.OssFactory;
+import com.jyusun.origin.base.oss.factory.rule.DefaultOssRule;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +36,7 @@ public class LocalConfiguration {
     @Bean
     @ConditionalOnMissingBean(OssRule.class)
     public OssRule ossRule() {
-        return new LocalOssRule();
+        return new DefaultOssRule();
     }
 
     /**
