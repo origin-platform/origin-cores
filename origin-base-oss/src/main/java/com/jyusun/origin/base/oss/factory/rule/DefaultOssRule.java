@@ -9,7 +9,7 @@ import com.jyusun.origin.core.common.util.UuidUtil;
 /**
  * 默认Oss规则
  *
- * @author sun
+ * @author jyusun at 2022-04-01 14:17:15
  */
 public class DefaultOssRule implements OssRule {
 
@@ -19,22 +19,28 @@ public class DefaultOssRule implements OssRule {
         return bucketName;
     }
 
+    /**
+     * path
+     *
+     * @param basePath         基础路径
+     * @param originalFilename 原始文件名
+     * @return String
+     */
     @Override
-    public String defaultPath(String originalFilename) {
-        return OssConstant.UPLOAD_PATH + StringUtil.SLASH + DateUtil.thisDateToStrYmd() + StringUtil.SLASH +
-                UuidUtil.generateUuidStr32() + FileUtil.getExtension(originalFilename);
+    public String path(String basePath, String originalFilename) {
+        return FileUtil.pathEndSlash(basePath) + originalFilename;
     }
 
     /**
-     * 完整的文件路径
+     * 默认路径
      *
-     * @param baseDir  文件基础路径
-     * @param fileName 文件名
-     * @return {@code String } 例如：/test/abc.xml
+     * @param originalFilename 原始文件名
+     * @return String
      */
     @Override
-    public String fullPath(String baseDir, String fileName) {
-        return baseDir + StringUtil.SLASH + fileName;
+    public String defaultPath(String originalFilename) {
+        return FileUtil.pathEndSlash(OssConstant.DEFAULT_UPLOAD_PATH) + DateUtil.thisDateToStrYmd() + StringUtil.SLASH +
+                UuidUtil.generateUuidStr32() + FileUtil.getExtension(originalFilename);
     }
 
 

@@ -16,19 +16,20 @@ public interface OssRule {
     String bucketName(String bucketName);
 
     /**
-     * 默认文件路径
+     * path
+     *
+     * @param basePath         基础路径
+     * @param originalFilename 原始文件名
+     * @return String
+     */
+    String path(String basePath, String originalFilename);
+
+    /**
+     * 默认路径
      *
      * @param originalFilename 原始文件名
-     * @return {@code String } 例如：/test/abc.xml
+     * @return String
      */
     String defaultPath(String originalFilename);
 
-    /**
-     * 完整的文件路径
-     *
-     * @param baseDir          文件基础路径
-     * @param originalFilename 原始文件名
-     * @return {@code String } 例如：/test/abc.xml
-     */
-    String fullPath(String baseDir, String originalFilename);
 }

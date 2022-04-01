@@ -1,5 +1,6 @@
 package com.jyusun.origin.base.oss.config.props;
 
+import com.jyusun.origin.base.oss.common.constant.OssConstant;
 import com.jyusun.origin.base.oss.common.enums.TypeEnum;
 import com.jyusun.origin.core.common.constant.SystemConstant;
 import lombok.Getter;
@@ -32,6 +33,10 @@ public class OssProperties {
      * 默认存储空间名称
      */
     private String bucketName = SystemConstant.NAME;
+    /**
+     * 基础路径
+     */
+    private String basePath = OssConstant.DEFAULT_UPLOAD_PATH;
     /**
      * 访问ID
      */

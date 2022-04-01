@@ -5,8 +5,7 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.Bucket;
 import com.aliyun.oss.model.PutObjectResult;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
-import com.jyusun.origin.base.oss.factory.props.OssClient;
-import com.jyusun.origin.base.oss.factory.props.AliClientImpl;
+import com.jyusun.origin.base.oss.context.AliOssContext;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 import lombok.SneakyThrows;
@@ -22,23 +21,26 @@ import java.io.InputStream;
  * @author jyusun at 2021-7-31 10:48:21
  * @since 1.0.0
  */
-public class AliossHandle implements OssHandleFactory {
+public class AliossClient implements OssFactory {
 
-    private final AliClientImpl propsFactory;
+    private final AliOssContext ossContext;
 
-    public AliossHandle(OssClient propsFactory) {
-        this.propsFactory = (AliClientImpl) propsFactory;
+    public AliossClient(AliOssContext ossContext) {
+        this.ossContext = ossContext;
     }
 
+    @Override
+    public AliOssContext getOssContext() {
+        return ossContext;
+    }
 
     /**
      * 获取oss存取规则
      *
      * @return {@link OssRule} 存取规则
      */
-    @Override
     public OssRule getRule() {
-        return this.propsFactory.getOssRule();
+        return this.getOssContext().getOssRule();
     }
 
     /**
@@ -46,8 +48,8 @@ public class AliossHandle implements OssHandleFactory {
      *
      * @return {@link OSSClient}
      */
-    private OSS getOssClient() {
-        return this.propsFactory.getOssClient();
+    private OSS ossClient() {
+        return this.getOssContext().getOss();
     }
 
     /**
@@ -55,11 +57,9 @@ public class AliossHandle implements OssHandleFactory {
      *
      * @return {@link OssProperties}
      */
-    @Override
     public OssProperties ossProperties() {
-        return this.propsFactory.getOssProperties();
+        return this.getOssContext().getOssProperties();
     }
-
 
     /**
      * 创建桶名称
@@ -79,14 +79,12 @@ public class AliossHandle implements OssHandleFactory {
      */
     @SneakyThrows
     private Bucket createBucket(String bucketName) {
-        return this.getOssClient().createBucket(this.getBucketName(bucketName));
+        return this.ossClient().createBucket(this.getBucketName(bucketName));
     }
 
-
-    @Override
     @SneakyThrows
     public boolean bucketExists(String bucketName) {
-        return this.getOssClient().doesBucketExist(getRule().bucketName(bucketName));
+        return this.ossClient().doesBucketExist(getRule().bucketName(bucketName));
     }
 
     /**
@@ -94,7 +92,6 @@ public class AliossHandle implements OssHandleFactory {
      *
      * @param bucketName 存储空间名称
      */
-    @Override
     @SneakyThrows
     public void makeBucket(String bucketName) {
         if (!bucketExists(bucketName)) {
@@ -117,29 +114,39 @@ public class AliossHandle implements OssHandleFactory {
     public UploadInfo put(InputStream inputStream, String bucketName, String basedir, String originalName,
                           boolean cover) {
         this.makeBucket(bucketName);
-        String key;
-        if (StringUtils.hasText(basedir)) {
-            key = this.getRule().fullPath(basedir, originalName);
-        } else {
-            key = this.getRule().defaultPath(originalName);
-        }
+        String thisBucketName = this.getBucketName(bucketName);
+
+        String fullPath = StringUtils.hasText(basedir) ? this.getRule().path(basedir, originalName) :
+                this.getRule().defaultPath(originalName);
         if (cover) {
-            this.getOssClient().putObject(getBucketName(bucketName), key, inputStream);
+            this.ossClient().putObject(thisBucketName, fullPath, inputStream);
         } else {
-            PutObjectResult response = this.getOssClient().putObject(this.getBucketName(bucketName), key,
-                    inputStream);
+            PutObjectResult response = this.ossClient().putObject(thisBucketName, fullPath, inputStream);
             int retry = 0;
             int retryCount = 5;
             while (StringUtils.hasText(response.getETag()) && retry < retryCount) {
-                response = this.getOssClient().putObject(getBucketName(bucketName), key, inputStream);
+                response = this.ossClient().putObject(thisBucketName, fullPath, inputStream);
                 retry++;
             }
         }
         UploadInfo file = new UploadInfo();
         file.setOriginalName(originalName);
-        file.setName(key);
-//        file.setLink(fileLink(bucketName, key));
+        file.setName(fullPath);
+//        file.setLink(fileLink(bucketName, fullPath));
         return file;
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream
+     * @param originalName
+     * @param cover
+     * @return {@link UploadInfo}
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String originalName, boolean cover) {
+        return this.put(inputStream, this.getBucketName(ossProperties().getBucketName()), "", originalName, cover);
     }
 
 

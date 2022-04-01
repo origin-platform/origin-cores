@@ -2,8 +2,7 @@ package com.jyusun.origin.base.oss.factory.handle;
 
 
 import com.jyusun.origin.base.oss.config.props.OssProperties;
-import com.jyusun.origin.base.oss.factory.props.OssClient;
-import com.jyusun.origin.base.oss.factory.props.LocalPropsFactory;
+import com.jyusun.origin.base.oss.context.LocalFileContext;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 
@@ -17,23 +16,26 @@ import java.io.InputStream;
  * @author jyusun at 2021-7-31 10:48:21
  * @since 1.0.0
  */
-public class LocalHandle implements OssHandleFactory {
+public class LocalClient implements OssFactory {
 
-    private final LocalPropsFactory propsFactory;
+    private final LocalFileContext ossContext;
 
-    public LocalHandle(OssClient propsFactory) {
-        this.propsFactory = (LocalPropsFactory) propsFactory;
+    public LocalClient(LocalFileContext ossContext) {
+        this.ossContext = ossContext;
     }
 
+    @Override
+    public LocalFileContext getOssContext() {
+        return ossContext;
+    }
 
     /**
      * 获取配置属性
      *
      * @return
      */
-    @Override
     public OssProperties ossProperties() {
-        return this.propsFactory.getOssProperties();
+        return this.getOssContext().getOssProperties();
     }
 
     /**
@@ -41,9 +43,8 @@ public class LocalHandle implements OssHandleFactory {
      *
      * @return
      */
-    @Override
     public OssRule getRule() {
-        return this.propsFactory.getOssRule();
+        return this.getOssContext().getOssRule();
     }
 
     /**
@@ -52,7 +53,6 @@ public class LocalHandle implements OssHandleFactory {
      * @param bucketName
      * @return
      */
-    @Override
     public boolean bucketExists(String bucketName) {
         return false;
     }
@@ -62,7 +62,6 @@ public class LocalHandle implements OssHandleFactory {
      *
      * @param bucketName
      */
-    @Override
     public void makeBucket(String bucketName) {
 
     }
@@ -78,7 +77,21 @@ public class LocalHandle implements OssHandleFactory {
      * @return {@link UploadInfo}
      */
     @Override
-    public UploadInfo put(InputStream inputStream, String bucketName, String basedir, String originalName, boolean cover) {
+    public UploadInfo put(InputStream inputStream, String bucketName, String basedir, String originalName,
+                          boolean cover) {
+        return null;
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream
+     * @param originalName
+     * @param cover
+     * @return {@link UploadInfo}
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String originalName, boolean cover) {
         return null;
     }
 }

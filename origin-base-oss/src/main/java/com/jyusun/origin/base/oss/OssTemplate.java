@@ -1,10 +1,8 @@
 package com.jyusun.origin.base.oss;
 
 
-import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.context.OssAccessor;
-import com.jyusun.origin.base.oss.factory.handle.OssHandleFactory;
-import com.jyusun.origin.base.oss.factory.props.OssClient;
+import com.jyusun.origin.base.oss.factory.handle.OssFactory;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 
 import java.io.InputStream;
@@ -16,26 +14,17 @@ import java.io.InputStream;
  */
 public class OssTemplate extends OssAccessor {
 
-    public OssTemplate(OssClient ossFactory) {
+    public OssTemplate(OssFactory ossFactory) {
         super(ossFactory);
     }
 
     /**
      * 处理工厂
      *
-     * @return {@link OssHandleFactory}
+     * @return {@link OssFactory}
      */
-    private OssClient ossFactory() {
+    private OssFactory ossFactory() {
         return this.getOssFactory();
-    }
-
-    /**
-     * Osss 属性配置
-     *
-     * @return {@link OssProperties}
-     */
-    private OssProperties ossProperties() {
-        return this.ossFactory().getOssContext().getOssProperties();
     }
 
 
@@ -57,12 +46,11 @@ public class OssTemplate extends OssAccessor {
      * 文件上传
      *
      * @param inputStream  输入流
-     * @param basedir      基础路径
      * @param originalName 原始文件名称
      * @return {@link UploadInfo }
      */
-    public UploadInfo upload(InputStream inputStream, String basedir, String originalName) {
-        return this.ossFactory().put(inputStream, ossProperties().getBucketName(), basedir, originalName, true);
+    public UploadInfo upload(InputStream inputStream, String originalName) {
+        return this.ossFactory().put(inputStream, originalName, true);
     }
 
 

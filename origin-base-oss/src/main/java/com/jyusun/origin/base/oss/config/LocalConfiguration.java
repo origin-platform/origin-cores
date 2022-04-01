@@ -2,12 +2,9 @@ package com.jyusun.origin.base.oss.config;
 
 import com.jyusun.origin.base.oss.OssTemplate;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
-import com.jyusun.origin.base.oss.context.OssContext;
-import com.jyusun.origin.base.oss.factory.handle.LocalHandle;
-import com.jyusun.origin.base.oss.factory.handle.OssHandleFactory;
-import com.jyusun.origin.base.oss.factory.props.OssClient;
-import com.jyusun.origin.base.oss.factory.props.LocalPropsFactory;
-import com.jyusun.origin.base.oss.factory.rule.LocalOssRule;
+import com.jyusun.origin.base.oss.context.LocalFileContext;
+import com.jyusun.origin.base.oss.factory.handle.LocalClient;
+import com.jyusun.origin.base.oss.factory.handle.OssFactory;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,11 +44,11 @@ public class LocalConfiguration {
      */
     @Bean
     @ConditionalOnBean(OssRule.class)
-    public OssClient propsFactory(OssRule ossRule) {
-        OssContext ossContext = OssContext.creator()
-                .setOssProperties(ossProperties)
-                .setOssRule(ossRule);
-        return new LocalPropsFactory(ossContext);
+    public OssFactory propsFactory(OssRule ossRule) {
+        LocalFileContext ossContext = LocalFileContext.builder().ossProperties(ossProperties)
+                .ossRule(ossRule)
+                .build();
+        return new LocalClient(ossContext);
     }
 
     /**
@@ -59,9 +56,8 @@ public class LocalConfiguration {
      */
     @Bean
     @ConditionalOnMissingBean(OssTemplate.class)
-    public OssTemplate ossTemplate(OssClient propsFactory) {
+    public OssTemplate ossTemplate(OssFactory ossFactory) {
         log.info("================ Local OSS Template ================");
-        OssHandleFactory ossHandleFactory = new LocalHandle(propsFactory);
-        return new OssTemplate(ossHandleFactory);
+        return new OssTemplate(ossFactory);
     }
 }

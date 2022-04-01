@@ -7,11 +7,8 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.jyusun.origin.base.oss.OssTemplate;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.context.AliOssContext;
-import com.jyusun.origin.base.oss.context.OssContext;
-import com.jyusun.origin.base.oss.factory.handle.AliossHandle;
-import com.jyusun.origin.base.oss.factory.handle.OssHandleFactory;
-import com.jyusun.origin.base.oss.factory.props.AliClientImpl;
-import com.jyusun.origin.base.oss.factory.props.OssClient;
+import com.jyusun.origin.base.oss.factory.handle.AliossClient;
+import com.jyusun.origin.base.oss.factory.handle.OssFactory;
 import com.jyusun.origin.base.oss.factory.rule.DefaultOssRule;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import lombok.RequiredArgsConstructor;
@@ -80,21 +77,20 @@ public class AliossConfiguration {
     }
 
     /**
-     * @param ossClient {@link OSSClient} 阿里云对象存储客户端
+     * @param oss {@link OSSClient} 阿里云对象存储客户端
      * @param ossRule   {@link OssRule }
      * @return
      */
     @Bean
     @ConditionalOnBean({OSS.class, OssRule.class})
-    public OssClient propsFactory(OSS oss, OssRule ossRule) {
+    public OssFactory propsFactory(OSS oss, OssRule ossRule) {
         AliOssContext ossContext = AliOssContext.builder()
                 .ossProperties(ossProperties)
                 .ossRule(ossRule)
                 .oss(oss)
                 .build();
-        return new AliClientImpl(ossContext).setOssClient(oss);
+        return new AliossClient(ossContext);
     }
-
 
     /**
      * 阿里云处理
@@ -102,10 +98,9 @@ public class AliossConfiguration {
      * @return {@link OssTemplate} Oss操作模板
      */
     @Bean
-    public OssTemplate ossTemplate(OssClient propsFactory) {
+    public OssTemplate ossTemplate(OssFactory ossFactory) {
         log.info("================ Ali OSS Template ================");
-        OssHandleFactory ossHandleFactory = new AliossHandle(propsFactory);
-        return new OssTemplate(ossHandleFactory);
+        return new OssTemplate(ossFactory);
     }
 
 }

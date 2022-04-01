@@ -1,7 +1,7 @@
 package com.jyusun.origin.base.oss.context;
 
 
-import com.jyusun.origin.base.oss.factory.props.OssClient;
+import com.jyusun.origin.base.oss.factory.handle.OssFactory;
 import com.jyusun.origin.core.common.enums.SystemResultEnum;
 import com.jyusun.origin.core.common.exception.ServiceException;
 import lombok.AccessLevel;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class OssAccessor implements InitializingBean {
 
     @Getter(AccessLevel.PROTECTED)
-    private final OssClient ossFactory;
+    private final OssFactory ossFactory;
 
     @Override
     public void afterPropertiesSet() {
