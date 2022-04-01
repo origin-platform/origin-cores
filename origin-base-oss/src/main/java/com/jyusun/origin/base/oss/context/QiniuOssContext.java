@@ -15,11 +15,8 @@ import lombok.experimental.Accessors;
  */
 @Getter
 @Accessors(chain = true)
-public class QiniuOssContext implements OssContext {
+public class QiniuOssContext extends OssContext {
 
-    private final OssProperties ossProperties;
-
-    private final OssRule ossRule;
     /**
      * 七牛云鉴权
      */
@@ -34,10 +31,12 @@ public class QiniuOssContext implements OssContext {
     private final BucketManager bucketManager;
 
 
-    public QiniuOssContext(OssProperties ossProperties, OssRule ossRule, Auth auth, UploadManager uploadManager,
+    public QiniuOssContext(OssProperties ossProperties,
+                           OssRule ossRule,
+                           Auth auth,
+                           UploadManager uploadManager,
                            BucketManager bucketManager) {
-        this.ossProperties = ossProperties;
-        this.ossRule = ossRule;
+        super(ossProperties,ossRule);
         this.auth = auth;
         this.uploadManager = uploadManager;
         this.bucketManager = bucketManager;

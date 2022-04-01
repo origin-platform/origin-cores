@@ -4,6 +4,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.Bucket;
 import com.aliyun.oss.model.PutObjectResult;
+import com.aliyun.oss.model.VoidResult;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.context.AliOssContext;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
@@ -62,13 +63,26 @@ public class AliossClient implements OssFactory {
     }
 
     /**
-     * 创建桶名称
+     * 获取存储空间
      *
-     * @param bucketName
+     * @param bucketName 存储空间名称
      * @return
      */
-    public String getBucketName(String bucketName) {
+    @Override
+    public String getBucket(String bucketName) {
         return this.getRule().bucketName(bucketName);
+    }
+
+    /**
+     * 删除存储空间
+     *
+     * @param bucketName 存储空间名称
+     * @return true-成功，false-失败
+     */
+    @Override
+    public boolean removeBucket(String bucketName) {
+        VoidResult voidResult = this.ossClient().deleteBucket(this.getBucket(bucketName));
+        return true;
     }
 
     /**
@@ -79,12 +93,12 @@ public class AliossClient implements OssFactory {
      */
     @SneakyThrows
     private Bucket createBucket(String bucketName) {
-        return this.ossClient().createBucket(this.getBucketName(bucketName));
+        return this.ossClient().createBucket(this.getBucket(bucketName));
     }
 
     @SneakyThrows
     public boolean bucketExists(String bucketName) {
-        return this.ossClient().doesBucketExist(getRule().bucketName(bucketName));
+        return this.ossClient().doesBucketExist(this.getBucket(bucketName));
     }
 
     /**
@@ -92,6 +106,7 @@ public class AliossClient implements OssFactory {
      *
      * @param bucketName 存储空间名称
      */
+    @Override
     @SneakyThrows
     public void makeBucket(String bucketName) {
         if (!bucketExists(bucketName)) {
@@ -105,19 +120,18 @@ public class AliossClient implements OssFactory {
      *
      * @param bucketName   存储空间名称
      * @param inputStream  {@link InputStream} 输入流
+     * @param fullPath     {@code String} 文件路径
      * @param originalName {@code String} 文件名称
      * @param cover        {@code Boolean} true-覆盖，false-不覆盖
      * @return {@link UploadInfo} 上传信息
      */
     @Override
     @SneakyThrows
-    public UploadInfo put(InputStream inputStream, String bucketName, String basedir, String originalName,
+    public UploadInfo put(InputStream inputStream, String bucketName, String fullPath, String originalName,
                           boolean cover) {
         this.makeBucket(bucketName);
-        String thisBucketName = this.getBucketName(bucketName);
+        String thisBucketName = this.getBucket(bucketName);
 
-        String fullPath = StringUtils.hasText(basedir) ? this.getRule().path(basedir, originalName) :
-                this.getRule().defaultPath(originalName);
         if (cover) {
             this.ossClient().putObject(thisBucketName, fullPath, inputStream);
         } else {
@@ -139,14 +153,42 @@ public class AliossClient implements OssFactory {
     /**
      * 文件上传
      *
-     * @param inputStream
-     * @param originalName
-     * @param cover
+     * @param inputStream  输入流
+     * @param bucketName   存储桶
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String bucketName, String basePath, String originalName) {
+        return this.put(inputStream, bucketName, this.getRule().path(basePath, originalName),
+                originalName, true);
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param bucketName   存储空间名称
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String bucketName, String originalName) {
+        return this.put(inputStream, bucketName, this.getRule().defaultPath(originalName),
+                originalName, true);
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param originalName 原始文件名称
      * @return {@link UploadInfo}
      */
     @Override
-    public UploadInfo put(InputStream inputStream, String originalName, boolean cover) {
-        return this.put(inputStream, this.getBucketName(ossProperties().getBucketName()), "", originalName, cover);
+    public UploadInfo put(InputStream inputStream, String originalName) {
+        return this.put(inputStream, this.getBucket(ossProperties().getBucketName()),
+                this.getRule().defaultPath(originalName), originalName, true);
     }
 
 

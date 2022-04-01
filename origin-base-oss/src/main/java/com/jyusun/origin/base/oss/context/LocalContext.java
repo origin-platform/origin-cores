@@ -1,19 +1,19 @@
 package com.jyusun.origin.base.oss.context;
 
-import com.aliyun.oss.OSS;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import lombok.Getter;
 
+/**
+ * 开发环境
+ *
+ * @author jyusun at 2022-04-01 15:23:43
+ */
 @Getter
-public class LocalFileContext implements OssContext {
+public class LocalContext extends OssContext {
 
-    private final OssProperties ossProperties;
-    private final OssRule ossRule;
-
-    public LocalFileContext(OssProperties ossProperties, OssRule ossRule) {
-        this.ossProperties = ossProperties;
-        this.ossRule = ossRule;
+    public LocalContext(OssProperties ossProperties, OssRule ossRule) {
+        super(ossProperties, ossRule);
     }
 
     public static LocalContextBuilder builder() {
@@ -22,7 +22,6 @@ public class LocalFileContext implements OssContext {
 
     public static class LocalContextBuilder {
 
-        private OSS oss;
         private OssProperties ossProperties;
         private OssRule ossRule;
 
@@ -36,13 +35,8 @@ public class LocalFileContext implements OssContext {
             return this;
         }
 
-        public LocalContextBuilder oss(OSS oss) {
-            this.oss = oss;
-            return this;
-        }
-
-        public LocalFileContext build() {
-            return new LocalFileContext(ossProperties, ossRule);
+        public LocalContext build() {
+            return new LocalContext(ossProperties, ossRule);
         }
     }
 }

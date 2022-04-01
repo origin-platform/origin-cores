@@ -2,7 +2,7 @@ package com.jyusun.origin.base.oss.config;
 
 import com.jyusun.origin.base.oss.OssTemplate;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
-import com.jyusun.origin.base.oss.context.LocalFileContext;
+import com.jyusun.origin.base.oss.context.LocalContext;
 import com.jyusun.origin.base.oss.factory.handle.LocalClient;
 import com.jyusun.origin.base.oss.factory.handle.OssFactory;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
@@ -45,7 +45,7 @@ public class LocalConfiguration {
     @Bean
     @ConditionalOnBean(OssRule.class)
     public OssFactory propsFactory(OssRule ossRule) {
-        LocalFileContext ossContext = LocalFileContext.builder().ossProperties(ossProperties)
+        LocalContext ossContext = LocalContext.builder().ossProperties(ossProperties)
                 .ossRule(ossRule)
                 .build();
         return new LocalClient(ossContext);

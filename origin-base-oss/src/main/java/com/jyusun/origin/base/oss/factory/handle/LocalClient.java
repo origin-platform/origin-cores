@@ -2,7 +2,7 @@ package com.jyusun.origin.base.oss.factory.handle;
 
 
 import com.jyusun.origin.base.oss.config.props.OssProperties;
-import com.jyusun.origin.base.oss.context.LocalFileContext;
+import com.jyusun.origin.base.oss.context.LocalContext;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 
@@ -18,66 +18,61 @@ import java.io.InputStream;
  */
 public class LocalClient implements OssFactory {
 
-    private final LocalFileContext ossContext;
+    private final LocalContext ossContext;
 
-    public LocalClient(LocalFileContext ossContext) {
+    public LocalClient(LocalContext ossContext) {
         this.ossContext = ossContext;
     }
 
     @Override
-    public LocalFileContext getOssContext() {
+    public LocalContext getOssContext() {
         return ossContext;
     }
 
     /**
-     * 获取配置属性
+     * 创建存储空间
      *
-     * @return
+     * @param bucketName 存储空间名称
      */
-    public OssProperties ossProperties() {
-        return this.getOssContext().getOssProperties();
-    }
-
-    /**
-     * 规则获取
-     *
-     * @return
-     */
-    public OssRule getRule() {
-        return this.getOssContext().getOssRule();
-    }
-
-    /**
-     * 判断存储桶是否存在
-     *
-     * @param bucketName
-     * @return
-     */
-    public boolean bucketExists(String bucketName) {
-        return false;
-    }
-
-    /**
-     * 创建存储桶
-     *
-     * @param bucketName
-     */
+    @Override
     public void makeBucket(String bucketName) {
 
     }
 
     /**
-     * 文件上传
+     * 获取存储空间
      *
-     * @param inputStream
-     * @param bucketName
-     * @param basedir
-     * @param originalName
-     * @param cover
-     * @return {@link UploadInfo}
+     * @param bucketName 存储空间名称
+     * @return 存储空间名称
      */
     @Override
-    public UploadInfo put(InputStream inputStream, String bucketName, String basedir, String originalName,
+    public String getBucket(String bucketName) {
+        return null;
+    }
+
+    /**
+     * 删除存储空间
+     *
+     * @param bucketName 存储空间名称
+     * @return true-成功，false-失败
+     */
+    @Override
+    public boolean removeBucket(String bucketName) {
+        return false;
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param bucketName   存储空间名称
+     * @param fullPath     文件路径
+     * @param originalName 原始文件名称
+     * @param cover
+     * @return {@link UploadInfo }
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String bucketName, String fullPath, String originalName,
                           boolean cover) {
         return null;
     }
@@ -85,13 +80,41 @@ public class LocalClient implements OssFactory {
     /**
      * 文件上传
      *
-     * @param inputStream
-     * @param originalName
-     * @param cover
-     * @return {@link UploadInfo}
+     * @param inputStream  输入流
+     * @param bucketName   存储空间名称
+     * @param basePath     基础路径
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
      */
     @Override
-    public UploadInfo put(InputStream inputStream, String originalName, boolean cover) {
+    public UploadInfo put(InputStream inputStream, String bucketName, String basePath, String originalName) {
         return null;
     }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param bucketName   存储空间名称
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String bucketName, String originalName) {
+        return null;
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    @Override
+    public UploadInfo put(InputStream inputStream, String originalName) {
+        return null;
+    }
+
+
 }

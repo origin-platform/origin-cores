@@ -1,8 +1,10 @@
 package com.jyusun.origin.base.oss;
 
 
+import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.context.OssAccessor;
 import com.jyusun.origin.base.oss.factory.handle.OssFactory;
+import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 
 import java.io.InputStream;
@@ -27,19 +29,62 @@ public class OssTemplate extends OssAccessor {
         return this.getOssFactory();
     }
 
+    /**
+     * 配置属性
+     *
+     * @return {@link OssProperties}
+     */
+    private OssProperties getOssProps() {
+        return ossFactory().getOssContext().getOssProperties();
+    }
+
+    /**
+     * OSS规则
+     *
+     * @return {@link OssProperties}
+     */
+    private OssRule getOssRule() {
+        return ossFactory().getOssContext().getOssRule();
+    }
 
     /**
      * 文件上传
      *
      * @param inputStream  输入流
      * @param bucketName   存储桶
-     * @param basedir      基础路径
+     * @param fullPath     文件路径
      * @param originalName 原始文件名称
      * @return {@link UploadInfo }
      */
-    public UploadInfo upload(InputStream inputStream, String bucketName, String basedir, String originalName,
+    public UploadInfo upload(InputStream inputStream, String bucketName, String fullPath, String originalName,
                              boolean cover) {
-        return this.ossFactory().put(inputStream, bucketName, basedir, originalName, cover);
+        return this.ossFactory().put(inputStream, bucketName, fullPath, originalName, cover);
+    }
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param bucketName   存储桶
+     * @param basePath     基础路径
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    public UploadInfo upload(InputStream inputStream, String bucketName, String basePath, String originalName) {
+        return this.ossFactory().put(inputStream, bucketName, basePath, originalName);
+    }
+
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param bucketName   存储桶
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    public UploadInfo upload(InputStream inputStream, String bucketName, String originalName) {
+        return this.ossFactory().put(inputStream, bucketName, originalName);
     }
 
     /**
@@ -50,7 +95,7 @@ public class OssTemplate extends OssAccessor {
      * @return {@link UploadInfo }
      */
     public UploadInfo upload(InputStream inputStream, String originalName) {
-        return this.ossFactory().put(inputStream, originalName, true);
+        return this.ossFactory().put(inputStream, originalName);
     }
 
 

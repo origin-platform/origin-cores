@@ -17,25 +17,66 @@ public interface OssFactory {
     OssContext getOssContext();
 
     /**
-     * 文件上传
+     * 创建存储空间
      *
-     * @param inputStream
-     * @param bucketName
-     * @param basedir
-     * @param originalName
-     * @param cover
-     * @return {@link UploadInfo}
+     * @param bucketName 存储空间名称
      */
-    UploadInfo put(InputStream inputStream, String bucketName, String basedir, String originalName, boolean cover);
+    void makeBucket(String bucketName);
+
+    /**
+     * 获取存储空间
+     *
+     * @param bucketName 存储空间名称
+     * @return 存储空间名称
+     */
+    String getBucket(String bucketName);
+
+    /**
+     * 删除存储空间
+     *
+     * @param bucketName 存储空间名称
+     * @return true-成功，false-失败
+     */
+    boolean removeBucket(String bucketName);
 
     /**
      * 文件上传
      *
-     * @param inputStream
-     * @param originalName
-     * @param cover
-     * @return {@link UploadInfo}
+     * @param inputStream  输入流
+     * @param bucketName   存储空间名称
+     * @param fullPath     文件路径
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
      */
-    UploadInfo put(InputStream inputStream, String originalName, boolean cover);
+    UploadInfo put(InputStream inputStream, String bucketName, String fullPath, String originalName, boolean cover);
 
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param bucketName   存储空间名称
+     * @param basePath     基础路径
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    UploadInfo put(InputStream inputStream, String bucketName, String basePath, String originalName);
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param bucketName   存储空间名称
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    UploadInfo put(InputStream inputStream, String bucketName, String originalName);
+
+    /**
+     * 文件上传
+     *
+     * @param inputStream  输入流
+     * @param originalName 原始文件名称
+     * @return {@link UploadInfo }
+     */
+    UploadInfo put(InputStream inputStream, String originalName);
 }

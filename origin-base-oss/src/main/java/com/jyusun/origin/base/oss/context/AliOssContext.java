@@ -5,17 +5,19 @@ import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.factory.rule.OssRule;
 import lombok.Getter;
 
+/**
+ * 阿里OSS
+ *
+ * @author jyusun at 2022-04-01 15:25:22
+ */
 @Getter
-public class AliOssContext implements OssContext {
+public class AliOssContext extends OssContext {
 
     private final OSS oss;
-    private final OssProperties ossProperties;
-    private final OssRule ossRule;
 
-    public AliOssContext(OSS oss, OssProperties ossProperties, OssRule ossRule) {
+    public AliOssContext(OssProperties ossProperties, OssRule ossRule, OSS oss) {
+        super(ossProperties, ossRule);
         this.oss = oss;
-        this.ossProperties = ossProperties;
-        this.ossRule = ossRule;
     }
 
     public static AliOssContextBuilder builder() {
@@ -44,7 +46,7 @@ public class AliOssContext implements OssContext {
         }
 
         public AliOssContext build() {
-            return new AliOssContext(oss, ossProperties, ossRule);
+            return new AliOssContext(ossProperties, ossRule, oss);
         }
     }
 }
