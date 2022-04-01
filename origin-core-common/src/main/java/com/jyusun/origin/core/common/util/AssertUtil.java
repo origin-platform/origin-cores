@@ -1,5 +1,6 @@
 package com.jyusun.origin.core.common.util;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.util.Assert;
 
 /**
@@ -11,6 +12,6 @@ import org.springframework.util.Assert;
  * @date 2020/12/8 13:30
  * @since 1.0.0
  */
-
+@UtilityClass
 public class AssertUtil extends Assert {
 }
