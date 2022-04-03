@@ -3,10 +3,10 @@ package com.jyusun.origin.base.oss.config;//package com.jyusun.origin.base.oss.c
 import com.jyusun.origin.base.oss.OssTemplate;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.context.QiniuOssContext;
-import com.jyusun.origin.base.oss.factory.handle.OssFactory;
+import com.jyusun.origin.base.oss.factory.OssFactory;
 import com.jyusun.origin.base.oss.factory.handle.QiniuClient;
 import com.jyusun.origin.base.oss.factory.rule.DefaultOssRule;
-import com.jyusun.origin.base.oss.factory.rule.OssRule;
+import com.jyusun.origin.base.oss.factory.OssRule;
 import com.qiniu.common.Zone;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;

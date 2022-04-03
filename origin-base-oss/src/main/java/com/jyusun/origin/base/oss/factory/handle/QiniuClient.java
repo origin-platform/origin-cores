@@ -3,7 +3,8 @@ package com.jyusun.origin.base.oss.factory.handle;
 import com.aliyun.oss.model.Bucket;
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.context.QiniuOssContext;
-import com.jyusun.origin.base.oss.factory.rule.OssRule;
+import com.jyusun.origin.base.oss.factory.OssFactory;
+import com.jyusun.origin.base.oss.factory.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 import lombok.SneakyThrows;
 

@@ -3,7 +3,8 @@ package com.jyusun.origin.base.oss.factory.handle;
 
 import com.jyusun.origin.base.oss.config.props.OssProperties;
 import com.jyusun.origin.base.oss.context.LocalContext;
-import com.jyusun.origin.base.oss.factory.rule.OssRule;
+import com.jyusun.origin.base.oss.factory.OssFactory;
+import com.jyusun.origin.base.oss.factory.OssRule;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 import com.jyusun.origin.core.common.util.FileUtil;
 import com.jyusun.origin.core.common.util.StringUtil;

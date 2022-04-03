@@ -1,7 +1,7 @@
 package com.jyusun.origin.base.oss.context;
 
 
-import com.jyusun.origin.base.oss.factory.handle.OssFactory;
+import com.jyusun.origin.base.oss.factory.OssFactory;
 import com.jyusun.origin.core.common.enums.SystemResultEnum;
 import com.jyusun.origin.core.common.exception.ServiceException;
 import lombok.AccessLevel;

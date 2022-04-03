@@ -1,6 +1,7 @@
 package com.jyusun.origin.base.oss.factory.rule;
 
 import com.jyusun.origin.base.oss.common.constant.OssConstant;
+import com.jyusun.origin.base.oss.factory.OssRule;
 import com.jyusun.origin.core.common.util.DateUtil;
 import com.jyusun.origin.core.common.util.FileUtil;
 import com.jyusun.origin.core.common.util.StringUtil;

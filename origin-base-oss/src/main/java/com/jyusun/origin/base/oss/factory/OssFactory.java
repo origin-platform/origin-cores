@@ -1,4 +1,4 @@
-package com.jyusun.origin.base.oss.factory.handle;
+package com.jyusun.origin.base.oss.factory;
 
 
 import com.jyusun.origin.base.oss.context.OssContext;

@@ -2,7 +2,7 @@ package com.jyusun.origin.base.oss;
 
 
 import com.jyusun.origin.base.oss.context.OssAccessor;
-import com.jyusun.origin.base.oss.factory.handle.OssFactory;
+import com.jyusun.origin.base.oss.factory.OssFactory;
 import com.jyusun.origin.base.oss.model.UploadInfo;
 
 import java.io.InputStream;

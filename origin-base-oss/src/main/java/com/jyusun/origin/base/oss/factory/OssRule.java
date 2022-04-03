@@ -1,4 +1,4 @@
-package com.jyusun.origin.base.oss.factory.rule;
+package com.jyusun.origin.base.oss.factory;
 
 /**
  * 规则处理
