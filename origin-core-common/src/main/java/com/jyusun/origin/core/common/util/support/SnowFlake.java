@@ -1,4 +1,6 @@
-package com.jyusun.origin.core.common.util;
+package com.jyusun.origin.core.common.util.support;
+
+import com.jyusun.origin.core.common.util.DateUtil;
 
 /**
  * 作用描述：

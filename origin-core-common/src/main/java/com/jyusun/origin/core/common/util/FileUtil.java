@@ -2,11 +2,8 @@ package com.jyusun.origin.core.common.util;
 
 import lombok.experimental.UtilityClass;
 import org.apache.commons.io.FileUtils;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import java.io.File;
-import java.io.FileInputStream;
 
 /**
  * 文件操作工具类
@@ -15,7 +12,7 @@ import java.io.FileInputStream;
  * @since 1.0.0
  */
 @UtilityClass
-public class FileUtil {
+public class FileUtil extends FileUtils {
 
     /**
      * 获取文件扩展名
@@ -32,6 +29,19 @@ public class FileUtil {
             extension = StringUtil.EMPTY;
         }
         return extension;
+    }
+
+    /**
+     * 路径末尾斜线处理
+     *
+     * @param path
+     * @return
+     */
+    public static String pathEndSlash(String path) {
+        if (path.charAt(path.length() - 1) != File.separatorChar) {
+            path = path + StringUtil.SLASH;
+        }
+        return path;
     }
 
 }
