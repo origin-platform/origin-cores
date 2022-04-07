@@ -13,8 +13,8 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @Data
+@EqualsAndHashCode
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
 public abstract class BaseValue implements Serializable {
 
     private static final long serialVersionUID = 1L;

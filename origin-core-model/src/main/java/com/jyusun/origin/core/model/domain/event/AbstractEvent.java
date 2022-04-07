@@ -14,8 +14,8 @@ import java.io.Serializable;
  * @since 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@EqualsAndHashCode
 @NoArgsConstructor
 public class AbstractEvent<T extends Serializable> implements Serializable {
 
