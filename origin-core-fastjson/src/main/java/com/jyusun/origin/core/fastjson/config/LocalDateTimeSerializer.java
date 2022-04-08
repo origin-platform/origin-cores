@@ -3,13 +3,13 @@ package com.jyusun.origin.core.fastjson.config;
 import com.alibaba.fastjson.serializer.JSONSerializer;
 import com.alibaba.fastjson.serializer.ObjectSerializer;
 import com.alibaba.fastjson.serializer.SerializeWriter;
+import com.jyusun.origin.core.common.util.DateUtil;
 import com.jyusun.origin.core.common.util.ObjectUtil;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
+import java.time.LocalDateTime;
 
 /**
- * 布尔类型序列化  false=0,true=1
  * <p>
  * 作用描述：
  *
@@ -17,18 +17,17 @@ import java.lang.reflect.Type;
  * @date 2021/12/1 15:50
  * @since 1.0.0
  */
-public class BooleanToIntegerSerializer implements ObjectSerializer {
+public class LocalDateTimeSerializer implements ObjectSerializer {
 
 
     @Override
-    public void write(JSONSerializer jsonSerializer, Object o, Object o1, Type type, int i) throws IOException {
+    public void write(JSONSerializer jsonSerializer, Object obj, Object o1, Type type, int i) {
         SerializeWriter out = jsonSerializer.getWriter();
-        int value;
-        if (ObjectUtil.isEmpty(o)) {
-            value = 0;
+        if (ObjectUtil.isEmpty(obj)) {
+            out.writeNull();
         } else {
-            value = Boolean.parseBoolean(String.valueOf(o)) ? 1 : 0;
+            out.writeString(DateUtil.toStr((LocalDateTime) obj, DateUtil.PATTERN_YYYY_MM_DD_HH_MM_SS));
         }
-        out.writeInt(value);
+
     }
 }
