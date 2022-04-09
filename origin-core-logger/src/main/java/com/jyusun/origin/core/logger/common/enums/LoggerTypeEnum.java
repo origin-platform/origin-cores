@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.logger.common.enums;
 
-import com.jyusun.origin.core.common.base.BaseEnum;
+import com.jyusun.origin.core.common.base.BaseKvEnum;
 import lombok.AllArgsConstructor;
 
 /**
@@ -13,27 +13,27 @@ import lombok.AllArgsConstructor;
  * @since 1.0.0
  */
 @AllArgsConstructor
-public enum LoggerTypeEnum implements BaseEnum {
+public enum LoggerTypeEnum implements BaseKvEnum {
     /**
      * 请求日志
      */
-    LOGIN("0", "登录日志"),
+    LOGIN("1", "登录日志"),
     /**
      * 请求日志
      */
-    REQ("1", "请求日志"),
+    REQ("2", "请求日志"),
     /**
      * 常规日志 业务日志
      */
-    USUAL("2", "常规日志"),
+    USUAL("3", "常规日志"),
     /**
      * 错误日志
      */
-    ERROR("3", "错误日志"),
+    ERROR("4", "错误日志"),
     /**
      * SQL执行日志
      */
-    EXESQL("4", "SQL日志");
+    EXESQL("5", "SQL日志");
 
     private final String code;
     private final String desc;

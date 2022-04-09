@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author jyusun at 2019/12/22 16:28
  * @since 1.0.0
  */
-public interface BaseResultCode extends Serializable {
+public interface BaseResultEnum extends Serializable {
 
     /**
      * 返回代码

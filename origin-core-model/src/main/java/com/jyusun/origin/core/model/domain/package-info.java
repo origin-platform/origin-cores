@@ -5,4 +5,4 @@
  *
  * @author JyuSun at 2020/1/7 13:22
  */
-package com.jyusun.origin.core.common.model.domain;
+package com.jyusun.origin.core.model.domain;

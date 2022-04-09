@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.logger.model.value;
 
-import com.jyusun.origin.core.model.domain.value.BaseValue;
+import com.jyusun.origin.core.model.domain.value.ValueObject;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,8 +15,8 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = false)
-public class ErrorValue extends BaseValue {
+@EqualsAndHashCode()
+public class ErrorValue implements ValueObject<ErrorValue> {
 
     /**
      * 堆栈信息
@@ -44,4 +44,14 @@ public class ErrorValue extends BaseValue {
     @ApiModelProperty("错误行数")
     private Integer lineNumber;
 
+    /**
+     * 值对象通过属性比较，没有唯一ID
+     *
+     * @param other 另外的值对象
+     * @return <code>true</code> 属性比较一致时返回true
+     */
+    @Override
+    public boolean sameValueAs(ErrorValue other) {
+        return false;
+    }
 }

@@ -6,7 +6,7 @@ import com.jyusun.origin.core.common.util.WebUtil;
 import com.jyusun.origin.core.logger.annotation.LoginLogger;
 import com.jyusun.origin.core.logger.event.LoginLoggerEvent;
 import com.jyusun.origin.core.logger.model.value.RequestValue;
-import com.jyusun.origin.core.logger.common.util.LoggerUtil;
+import com.jyusun.origin.core.logger.common.util.OutFormatUtil;
 import com.jyusun.origin.core.logger.model.dto.LoginLoggerDTO;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ public final class LoginLoggerPublisher {
                                     long timeCost) {
         // 请求信息
         RequestValue requestValue = Optional.ofNullable(WebUtil.getRequest())
-                .map(request -> LoggerUtil.buildRequest(request, params))
+                .map(request -> OutFormatUtil.buildRequest(request, params))
                 .orElse(new RequestValue());
 
         LoginLoggerDTO loginLoggerDTO = new LoginLoggerDTO();

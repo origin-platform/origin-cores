@@ -1,6 +1,5 @@
 package com.jyusun.origin.core.common.result;
 
-import com.jyusun.origin.core.common.base.BaseResultCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AccessLevel;

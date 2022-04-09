@@ -1,7 +1,7 @@
 package com.jyusun.origin.core.common.result;
 
 
-import com.jyusun.origin.core.common.base.BaseResultCode;
+import com.jyusun.origin.core.common.base.BaseResultEnum;
 import com.jyusun.origin.core.common.enums.SystemResultEnum;
 import com.jyusun.origin.core.common.exception.BusinessException;
 import com.jyusun.origin.core.common.util.AssemblerUtil;
@@ -41,13 +41,13 @@ public class ResultFactory {
     /**
      * 数据传输结果响应
      *
-     * @param baseResultCode {@link BaseResultCode} 基础响应结果
+     * @param baseResultEnum {@link BaseResultEnum} 基础响应结果
      * @param body           {@code Object} 承载数据
      * @param <T>            {@code T} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <T extends Serializable> AbstractResult<T> data(BaseResultCode baseResultCode, T body) {
-        return data(baseResultCode.code(), baseResultCode.message(), body);
+    public static <T extends Serializable> AbstractResult<T> data(BaseResultEnum baseResultEnum, T body) {
+        return data(baseResultEnum.code(), baseResultEnum.message(), body);
 
     }
 
@@ -81,8 +81,8 @@ public class ResultFactory {
      * @param <T>   {@code T} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <T extends Serializable> AbstractResult<List<T>> datas(BaseResultCode baseResultCode, List<T> datas) {
-        return datas(baseResultCode.code(), baseResultCode.message(), datas);
+    public static <T extends Serializable> AbstractResult<List<T>> datas(BaseResultEnum baseResultEnum, List<T> datas) {
+        return datas(baseResultEnum.code(), baseResultEnum.message(), datas);
     }
 
     /**
@@ -126,12 +126,12 @@ public class ResultFactory {
     /**
      * 数据操作状态
      *
-     * @param baseResultCode {@link BaseResultCode} 操作标记（true-成功,false-失败）
+     * @param baseResultEnum {@link BaseResultEnum} 操作标记（true-成功,false-失败）
      * @param sign           {@code Boolean} 操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>}响应结果
      */
-    private static <T extends Serializable> AbstractResult<T> status(BaseResultCode baseResultCode, boolean sign) {
-        return status(baseResultCode.code(), baseResultCode.message(), sign);
+    private static <T extends Serializable> AbstractResult<T> status(BaseResultEnum baseResultEnum, boolean sign) {
+        return status(baseResultEnum.code(), baseResultEnum.message(), sign);
     }
 
     /**
@@ -181,15 +181,15 @@ public class ResultFactory {
     /**
      * 错误信息
      *
-     * @param baseResultCode {@code BaseResultCode} 枚举消息
+     * @param baseResultEnum {@code BaseResultCode} 枚举消息
      * @param links          {@link Links} 链接信息
      * @param title          {@code String} 消息标题
      * @param detail         {@code String} 消息明细
      * @return {@link AbstractResult}响应结果
      */
-    public static AbstractResult<Serializable> error(BaseResultCode baseResultCode, Links links,
+    public static AbstractResult<Serializable> error(BaseResultEnum baseResultEnum, Links links,
                                                      String title, String detail) {
-        return error(baseResultCode.code(), baseResultCode.message(), links, title, detail);
+        return error(baseResultEnum.code(), baseResultEnum.message(), links, title, detail);
     }
 
     /**
@@ -218,11 +218,11 @@ public class ResultFactory {
     /**
      * 错误信息
      *
-     * @param baseResultCode {@link BaseResultCode}  枚举结果
+     * @param baseResultEnum {@link BaseResultEnum}  枚举结果
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Serializable> error(BaseResultCode baseResultCode) {
-        return error(baseResultCode.code(), baseResultCode.message(), links());
+    public static AbstractResult<Serializable> error(BaseResultEnum baseResultEnum) {
+        return error(baseResultEnum.code(), baseResultEnum.message(), links());
     }
 
     /**
@@ -249,22 +249,22 @@ public class ResultFactory {
     /**
      * 警告信息
      *
-     * @param baseResultCode {@link BaseResultCode} 枚举消息
+     * @param baseResultEnum {@link BaseResultEnum} 枚举消息
      * @param message        {@code String} 消息描述
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Serializable> warn(BaseResultCode baseResultCode, String message) {
-        return warn(baseResultCode.code(), message, links());
+    public static AbstractResult<Serializable> warn(BaseResultEnum baseResultEnum, String message) {
+        return warn(baseResultEnum.code(), message, links());
     }
 
     /**
      * 警告信息
      *
-     * @param baseResultCode {@link BaseResultCode} 枚举消息
+     * @param baseResultEnum {@link BaseResultEnum} 枚举消息
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Serializable> warn(BaseResultCode baseResultCode) {
-        return warn(baseResultCode.code(), baseResultCode.message(), links());
+    public static AbstractResult<Serializable> warn(BaseResultEnum baseResultEnum) {
+        return warn(baseResultEnum.code(), baseResultEnum.message(), links());
     }
 
     /**

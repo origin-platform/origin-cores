@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.common.clone;
 
-import com.jyusun.origin.core.common.base.BaseResultCode;
+import com.jyusun.origin.core.common.base.BaseResultEnum;
 import com.jyusun.origin.core.common.enums.SystemResultEnum;
 import com.jyusun.origin.core.common.exception.ServiceException;
 
@@ -25,10 +25,10 @@ public class CloneRuntimeException extends ServiceException {
     /**
      * 异常信息构造函数
      *
-     * @param baseResultCode {@link BaseResultCode} 消息枚举
+     * @param baseResultEnum {@link BaseResultEnum} 消息枚举
      */
-    public CloneRuntimeException(BaseResultCode baseResultCode) {
-        super(baseResultCode.code(), baseResultCode.message());
+    public CloneRuntimeException(BaseResultEnum baseResultEnum) {
+        super(baseResultEnum.code(), baseResultEnum.message());
     }
 
     /**
@@ -45,11 +45,11 @@ public class CloneRuntimeException extends ServiceException {
     /**
      * 异常信息构造函数
      *
-     * @param baseResultCode {@link BaseResultCode}
+     * @param baseResultEnum {@link BaseResultEnum}
      * @param throwable      {@link Throwable} 异常信息
      */
-    public CloneRuntimeException(BaseResultCode baseResultCode, Throwable throwable) {
-        this(baseResultCode.code(), baseResultCode.message(), throwable);
+    public CloneRuntimeException(BaseResultEnum baseResultEnum, Throwable throwable) {
+        this(baseResultEnum.code(), baseResultEnum.message(), throwable);
     }
 
     /**

@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.logger.model.value;
 
-import com.jyusun.origin.core.model.domain.value.BaseValue;
+import com.jyusun.origin.core.model.domain.value.ValueObject;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class UserAgentValue extends BaseValue {
+public class UserAgentValue implements ValueObject<UserAgentValue> {
 
     @ApiModelProperty("浏览器厂商")
     private String browserManufacturer;
@@ -45,4 +45,14 @@ public class UserAgentValue extends BaseValue {
     @ApiModelProperty("操作系统浏览器渲染引擎")
     private String browserRenderingEngine;
 
+    /**
+     * 值对象通过属性比较，没有唯一ID
+     *
+     * @param other 另外的值对象
+     * @return <code>true</code> 属性比较一致时返回true
+     */
+    @Override
+    public boolean sameValueAs(UserAgentValue other) {
+        return false;
+    }
 }

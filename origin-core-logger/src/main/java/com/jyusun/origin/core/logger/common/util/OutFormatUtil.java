@@ -1,7 +1,7 @@
 package com.jyusun.origin.core.logger.common.util;
 
 
-import com.jyusun.origin.core.common.base.BaseResultCode;
+import com.jyusun.origin.core.common.base.BaseResultEnum;
 import com.jyusun.origin.core.common.util.ObjectUtil;
 import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.UriUtil;
@@ -22,14 +22,14 @@ import java.util.StringJoiner;
 /**
  * 工具
  * <p>
- * 作用描述：日志处理
+ * 作用描述：日志输出格式化工具
  *
  * @author jyusun
  * @date 2021/7/3 16:21
  * @since 1.0.0
  */
 @UtilityClass
-public class LoggerUtil {
+public class OutFormatUtil {
 
     /**
      * 异常信息格式化字符串
@@ -82,21 +82,21 @@ public class LoggerUtil {
     }
 
     public static String buildErrorMessage(
-            BaseResultCode baseResultCode,
+            BaseResultEnum baseResultEnum,
             String title, String detail) {
-        return buildErrorMessage(baseResultCode.code(), baseResultCode.message(), title, detail);
+        return buildErrorMessage(baseResultEnum.code(), baseResultEnum.message(), title, detail);
     }
 
     public static String buildWarnMessage(String code, String message) {
         return String.format(STR_FORMAT_WARN, code, message);
     }
 
-    public static String buildWarnMessage(BaseResultCode baseResultCode) {
-        return buildWarnMessage(baseResultCode.code(), baseResultCode.message());
+    public static String buildWarnMessage(BaseResultEnum baseResultEnum) {
+        return buildWarnMessage(baseResultEnum.code(), baseResultEnum.message());
     }
 
-    public static String buildWarnMessage(BaseResultCode baseResultCode, String message) {
-        return buildWarnMessage(baseResultCode.code(), baseResultCode.message() + "，" + message);
+    public static String buildWarnMessage(BaseResultEnum baseResultEnum, String message) {
+        return buildWarnMessage(baseResultEnum.code(), baseResultEnum.message() + "，" + message);
 
     }
 
@@ -112,7 +112,7 @@ public class LoggerUtil {
      */
     public static String buildReqMessage(String title, String operator, LocalDateTime requestTime, long timeCost,
                                          String detail) {
-        return String.format(LoggerUtil.STR_FORMAT_REQUEST, title, operator, requestTime, timeCost, detail);
+        return String.format(OutFormatUtil.STR_FORMAT_REQUEST, title, operator, requestTime, timeCost, detail);
     }
 
     /**
@@ -126,7 +126,7 @@ public class LoggerUtil {
      */
     public static String buildErrorReqMessage(String title, String operator, LocalDateTime requestTime,
                                               String detail) {
-        return String.format(LoggerUtil.STR_FORMAT_REQUEST_ERROR, title, operator, requestTime, detail);
+        return String.format(OutFormatUtil.STR_FORMAT_REQUEST_ERROR, title, operator, requestTime, detail);
     }
 
 

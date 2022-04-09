@@ -4,7 +4,7 @@ import com.jyusun.origin.core.common.util.SpringUtil;
 import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.WebUtil;
 import com.jyusun.origin.core.logger.annotation.WebLogger;
-import com.jyusun.origin.core.logger.common.util.LoggerUtil;
+import com.jyusun.origin.core.logger.common.util.OutFormatUtil;
 import com.jyusun.origin.core.logger.event.ErrorLoggerEvent;
 import com.jyusun.origin.core.logger.model.dto.ErrorLoggerDTO;
 import com.jyusun.origin.core.logger.model.value.RequestValue;
@@ -34,7 +34,7 @@ public final class ErrorLoggerPublisher {
                                     Map<String, Object> params, WebLogger webLogger, long startTime) {
         // 请求信息
         RequestValue requestValue = Optional.ofNullable(WebUtil.getRequest())
-                .map(request -> LoggerUtil.buildRequest(request, params))
+                .map(request -> OutFormatUtil.buildRequest(request, params))
                 .orElse(new RequestValue());
 
         ErrorLoggerDTO errorLoggerDTO = new ErrorLoggerDTO();
@@ -51,7 +51,7 @@ public final class ErrorLoggerPublisher {
                 .setClassName(className)
                 .setMethodName(methodName);
 
-        errorLoggerDTO.setErrorValue(LoggerUtil.buildError(throwable));
+        errorLoggerDTO.setErrorValue(OutFormatUtil.buildError(throwable));
         SpringUtil.publishEvent(new ErrorLoggerEvent(errorLoggerDTO));
     }
 

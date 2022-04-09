@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.common.enums;
 
-import com.jyusun.origin.core.common.base.BaseResultCode;
+import com.jyusun.origin.core.common.base.BaseResultEnum;
 import com.jyusun.origin.core.common.constant.ResultConstant;
 import lombok.AllArgsConstructor;
 
@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
  * @since 1.0.0
  */
 @AllArgsConstructor
-public enum SystemResultEnum implements BaseResultCode {
+public enum SystemResultEnum implements BaseResultEnum {
     /**
      * 未知异常：-1
      */

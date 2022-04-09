@@ -8,7 +8,7 @@ import com.jyusun.origin.core.common.exception.ServiceException;
 import com.jyusun.origin.core.common.exception.UtilException;
 import com.jyusun.origin.core.common.result.AbstractResult;
 import com.jyusun.origin.core.common.result.ResultFactory;
-import com.jyusun.origin.core.logger.common.util.LoggerUtil;
+import com.jyusun.origin.core.logger.common.util.OutFormatUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public AbstractResult<Serializable> handleError(MissingServletRequestParameterException e) {
         String message = String.format("缺少必要的请求参数: %s", e.getParameterName());
-        log.warn(LoggerUtil.buildWarnMessage(SystemResultEnum.BAD_REQUEST_PARAM_MISS, e.getMessage()));
+        log.warn(OutFormatUtil.buildWarnMessage(SystemResultEnum.BAD_REQUEST_PARAM_MISS, e.getMessage()));
         return ResultFactory.warn(SystemResultEnum.BAD_REQUEST_PARAM_MISS, message);
     }
 
@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public AbstractResult<Serializable> handleError(MethodArgumentTypeMismatchException e) {
         String message = String.format("请求参数格式错误: %s", e.getName());
-        log.warn(LoggerUtil.buildWarnMessage(SystemResultEnum.BAD_REQUEST_PARAM_TYPE_ERROR, e.getMessage()));
+        log.warn(OutFormatUtil.buildWarnMessage(SystemResultEnum.BAD_REQUEST_PARAM_TYPE_ERROR, e.getMessage()));
         return ResultFactory.warn(SystemResultEnum.BAD_REQUEST_PARAM_TYPE_ERROR, message);
     }
 
@@ -82,7 +82,7 @@ public class GlobalExceptionHandler {
     private AbstractResult<Serializable> handleError(BindingResult result) {
         FieldError error = result.getFieldError();
         String message = String.format("%s:%s", Objects.requireNonNull(error).getField(), error.getDefaultMessage());
-        log.warn(LoggerUtil.buildWarnMessage(SystemResultEnum.BAD_REQUEST_PARAM_BIND_ERROR, message));
+        log.warn(OutFormatUtil.buildWarnMessage(SystemResultEnum.BAD_REQUEST_PARAM_BIND_ERROR, message));
         return ResultFactory.warn(SystemResultEnum.BAD_REQUEST_PARAM_BIND_ERROR, message);
     }
 
@@ -99,7 +99,7 @@ public class GlobalExceptionHandler {
         ConstraintViolation<?> violation = violations.iterator().next();
         String path = ((PathImpl) violation.getPropertyPath()).getLeafNode().getName();
         String message = String.format("%s:%s", path, violation.getMessage());
-        log.warn(LoggerUtil.buildWarnMessage(SystemResultEnum.BAD_REQUEST_PARAM_VALID_ERROR, message));
+        log.warn(OutFormatUtil.buildWarnMessage(SystemResultEnum.BAD_REQUEST_PARAM_VALID_ERROR, message));
         return ResultFactory.warn(SystemResultEnum.BAD_REQUEST_PARAM_VALID_ERROR);
     }
 
@@ -112,7 +112,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public AbstractResult<Serializable> handleError(NoHandlerFoundException e) {
-        log.warn(LoggerUtil.buildWarnMessage(SystemResultEnum.NOT_FOUND), e);
+        log.warn(OutFormatUtil.buildWarnMessage(SystemResultEnum.NOT_FOUND), e);
         return ResultFactory.warn(SystemResultEnum.NOT_FOUND);
     }
 
@@ -125,7 +125,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     public AbstractResult<Serializable> handleError(HttpRequestMethodNotSupportedException e) {
-        log.warn(LoggerUtil.buildWarnMessage(SystemResultEnum.METHOD_NOT_SUPPORTED, e.getMessage()), e);
+        log.warn(OutFormatUtil.buildWarnMessage(SystemResultEnum.METHOD_NOT_SUPPORTED, e.getMessage()), e);
         return ResultFactory.error(SystemResultEnum.METHOD_NOT_SUPPORTED);
     }
 
@@ -138,7 +138,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public AbstractResult<Serializable> handleError(HttpMessageNotReadableException e) {
-        log.warn(LoggerUtil.buildWarnMessage(SystemResultEnum.BAD_REQUEST_MSG_NOT_READABLE, e.getMessage()));
+        log.warn(OutFormatUtil.buildWarnMessage(SystemResultEnum.BAD_REQUEST_MSG_NOT_READABLE, e.getMessage()));
         return ResultFactory.warn(SystemResultEnum.BAD_REQUEST_MSG_NOT_READABLE);
     }
 
@@ -152,7 +152,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
     @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
     public AbstractResult<Serializable> handleError(HttpMediaTypeNotSupportedException e) {
-        log.warn(LoggerUtil.buildWarnMessage(SystemResultEnum.MEDIA_TYPE_NOT_SUPPORTED, e.getMessage()));
+        log.warn(OutFormatUtil.buildWarnMessage(SystemResultEnum.MEDIA_TYPE_NOT_SUPPORTED, e.getMessage()));
         return ResultFactory.warn(SystemResultEnum.MEDIA_TYPE_NOT_SUPPORTED);
     }
 
@@ -166,7 +166,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public AbstractResult<Serializable> handleError(BusinessException e) {
-        log.warn(LoggerUtil.buildWarnMessage(e.getCode(), e.getMessage()), e);
+        log.warn(OutFormatUtil.buildWarnMessage(e.getCode(), e.getMessage()), e);
         return ResultFactory.warn(e.getCode(), e.getMessage());
     }
 
@@ -179,7 +179,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SecureException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public AbstractResult<Serializable> handleError(SecureException e) {
-        log.warn(LoggerUtil.buildWarnMessage(e.getCode(), e.getMessage()));
+        log.warn(OutFormatUtil.buildWarnMessage(e.getCode(), e.getMessage()));
         return ResultFactory.warn(SystemResultEnum.UN_AUTHORIZED);
     }
 
@@ -193,7 +193,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UtilException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public AbstractResult<Serializable> handleError(UtilException e) {
-        log.error(LoggerUtil.buildErrorMessage(e.getCode(), e.getMessage(),
+        log.error(OutFormatUtil.buildErrorMessage(e.getCode(), e.getMessage(),
                 e.getClass().getSimpleName(), e.getMessage()), e);
         return ResultFactory.error(SystemResultEnum.INTERNAL_SERVER_ERROR);
     }
@@ -207,7 +207,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ServiceException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public AbstractResult<Serializable> handleError(ServiceException e) {
-        log.error(LoggerUtil.buildErrorMessage(e.getCode(), e.getMessage(),
+        log.error(OutFormatUtil.buildErrorMessage(e.getCode(), e.getMessage(),
                 e.getClass().getSimpleName(), e.getMessage()), e);
         return ResultFactory.error(SystemResultEnum.INTERNAL_SERVER_ERROR);
     }
@@ -221,7 +221,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public AbstractResult<Serializable> handleError(Throwable e) {
-        log.error(LoggerUtil.buildErrorMessage(SystemResultEnum.INTERNAL_SERVER_ERROR,
+        log.error(OutFormatUtil.buildErrorMessage(SystemResultEnum.INTERNAL_SERVER_ERROR,
                 e.getClass().getSimpleName(), e.getMessage()), e);
         return ResultFactory.error(SystemResultEnum.INTERNAL_SERVER_ERROR);
     }

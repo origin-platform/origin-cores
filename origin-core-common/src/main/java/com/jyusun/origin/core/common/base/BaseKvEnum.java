@@ -9,7 +9,7 @@ package com.jyusun.origin.core.common.base;
  * @date 2021/3/24 11:25
  * @since 1.0.0
  */
-public interface BaseEnum {
+public interface BaseKvEnum {
 
     /**
      * 值

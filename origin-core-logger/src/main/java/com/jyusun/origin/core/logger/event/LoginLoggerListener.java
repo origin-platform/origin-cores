@@ -1,13 +1,12 @@
 package com.jyusun.origin.core.logger.event;
 
 import com.alibaba.fastjson.JSON;
-import com.jyusun.origin.core.logger.common.util.LoggerUtil;
+import com.jyusun.origin.core.logger.common.util.OutFormatUtil;
 import com.jyusun.origin.core.logger.model.dto.RequestLoggerDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 
 import java.util.EventObject;
 
@@ -28,7 +27,7 @@ public class LoginLoggerListener implements LoggerListener {
     public void eventHandle(EventObject event) {
         RequestLoggerDTO loggerDTO = (RequestLoggerDTO) event.getSource();
         // 输出本地日志
-        String loggerFormat = LoggerUtil.buildReqMessage(loggerDTO.getTitle(),
+        String loggerFormat = OutFormatUtil.buildReqMessage(loggerDTO.getTitle(),
                 String.valueOf(loggerDTO.getOperator()),
                 loggerDTO.getRequestTime(),
                 loggerDTO.getTimeCost(),

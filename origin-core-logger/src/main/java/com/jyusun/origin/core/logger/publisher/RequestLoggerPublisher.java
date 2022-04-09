@@ -5,7 +5,7 @@ import com.jyusun.origin.core.common.util.SpringUtil;
 import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.WebUtil;
 import com.jyusun.origin.core.logger.annotation.WebLogger;
-import com.jyusun.origin.core.logger.common.util.LoggerUtil;
+import com.jyusun.origin.core.logger.common.util.OutFormatUtil;
 import com.jyusun.origin.core.logger.event.LoginLoggerEvent;
 import com.jyusun.origin.core.logger.event.RequestLoggerEvent;
 import com.jyusun.origin.core.logger.model.dto.LoginLoggerDTO;
@@ -40,7 +40,7 @@ public final class RequestLoggerPublisher {
                                     long timeCost) {
         // 请求信息
         RequestValue requestValue = Optional.ofNullable(WebUtil.getRequest())
-                .map(request -> LoggerUtil.buildRequest(request, params))
+                .map(request -> OutFormatUtil.buildRequest(request, params))
                 .orElse(new RequestValue());
 
         switch (webLogger.operType()) {

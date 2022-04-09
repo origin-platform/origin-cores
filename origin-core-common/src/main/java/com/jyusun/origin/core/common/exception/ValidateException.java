@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.common.exception;
 
-import com.jyusun.origin.core.common.base.BaseResultCode;
+import com.jyusun.origin.core.common.base.BaseResultEnum;
 import com.jyusun.origin.core.common.enums.SystemResultEnum;
 
 /**
@@ -24,10 +24,10 @@ public class ValidateException extends BusinessException {
     /**
      * 异常信息构造函数
      *
-     * @param baseResultCode {@link BaseResultCode} 消息枚举
+     * @param baseResultEnum {@link BaseResultEnum} 消息枚举
      */
-    public ValidateException(BaseResultCode baseResultCode) {
-        super(baseResultCode.code(), baseResultCode.message());
+    public ValidateException(BaseResultEnum baseResultEnum) {
+        super(baseResultEnum.code(), baseResultEnum.message());
     }
 
     /**
@@ -44,11 +44,11 @@ public class ValidateException extends BusinessException {
     /**
      * 异常信息构造函数
      *
-     * @param baseResultCode {@link BaseResultCode}
+     * @param baseResultEnum {@link BaseResultEnum}
      * @param throwable      {@link Throwable} 异常信息
      */
-    public ValidateException(BaseResultCode baseResultCode, Throwable throwable) {
-        this(baseResultCode.code(), baseResultCode.message(), throwable);
+    public ValidateException(BaseResultEnum baseResultEnum, Throwable throwable) {
+        this(baseResultEnum.code(), baseResultEnum.message(), throwable);
     }
 
     /**
