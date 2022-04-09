@@ -24,7 +24,7 @@ public enum OperTypeEnum implements BaseEnum {
     PAGE("7", "分页查询");
 
     private final String code;
-    private final String label;
+    private final String desc;
 
     @Override
     public String code() {
@@ -32,7 +32,7 @@ public enum OperTypeEnum implements BaseEnum {
     }
 
     @Override
-    public String label() {
-        return this.label;
+    public String desc() {
+        return this.desc;
     }
 }

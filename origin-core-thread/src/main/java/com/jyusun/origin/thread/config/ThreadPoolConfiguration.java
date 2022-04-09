@@ -6,6 +6,11 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+/**
+ * 线程池配置
+ *
+ * @author jyusun at 2021-04-01 12:00:55
+ */
 @RequiredArgsConstructor
 @EnableConfigurationProperties(ThreadPoolProperties.class)
 public class ThreadPoolConfiguration {

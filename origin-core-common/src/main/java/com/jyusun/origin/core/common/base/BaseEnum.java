@@ -19,9 +19,9 @@ public interface BaseEnum {
     String code();
 
     /**
-     * 标签
+     * 描述标签
      *
      * @return str
      */
-    String label();
+    String desc();
 }

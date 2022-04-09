@@ -39,7 +39,7 @@ public final class ErrorLoggerPublisher {
 
         ErrorLoggerDTO errorLoggerDTO = new ErrorLoggerDTO();
         String title = StringUtil.hasText(webLogger.value()) ? webLogger.value() :
-                webLogger.operType().label();
+                webLogger.operType().desc();
         errorLoggerDTO.setTitle(title)
                 .setOperator(SecureUtil.getUser().getUserId())
                 .setRequestTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime),

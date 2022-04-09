@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class ValueLabel extends BaseDTO {
+public class DictDTO extends BaseDTO {
 
     private static final long serialVersionUID = 1L;
 
@@ -34,10 +34,10 @@ public class ValueLabel extends BaseDTO {
     private String value;
 
     /**
-     * 标签
+     * 描述
      */
-    @ApiModelProperty("标签")
-    private String label;
+    @ApiModelProperty("描述")
+    private String desc;
 
     /**
      * 排序

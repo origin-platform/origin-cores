@@ -36,7 +36,7 @@ public enum LoggerTypeEnum implements BaseEnum {
     EXESQL("4", "SQL日志");
 
     private final String code;
-    private final String label;
+    private final String desc;
 
 
     /**
@@ -55,7 +55,7 @@ public enum LoggerTypeEnum implements BaseEnum {
      * @return str
      */
     @Override
-    public String label() {
-        return this.label;
+    public String desc() {
+        return this.desc;
     }
 }

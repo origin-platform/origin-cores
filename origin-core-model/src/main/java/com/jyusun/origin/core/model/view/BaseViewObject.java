@@ -29,11 +29,11 @@ public abstract class BaseViewObject implements Serializable {
      * 创建人ID
      */
     @ApiModelProperty("创建人ID")
-    protected Long creator;
+    protected Long createBy;
 
 
-    @ApiModelProperty("创建人：标签")
-    protected String creatorLabel;
+    @ApiModelProperty("创建人名称")
+    protected String createByDesc;
     /**
      * 创建时间
      */

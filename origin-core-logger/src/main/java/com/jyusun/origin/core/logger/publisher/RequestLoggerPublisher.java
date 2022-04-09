@@ -59,7 +59,7 @@ public final class RequestLoggerPublisher {
             default:
                 RequestLoggerDTO requestLoggerDTO = new RequestLoggerDTO();
                 String title = StringUtil.hasText(webLogger.value()) ? webLogger.value() :
-                        webLogger.operType().label();
+                        webLogger.operType().desc();
                 requestLoggerDTO.setTitle(title)
                         .setOperator(SecureUtil.getUser().getUserId())
                         .setRequestTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime),

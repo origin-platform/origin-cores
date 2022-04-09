@@ -30,10 +30,10 @@ public abstract class BaseView extends BaseViewObject {
     protected LocalDateTime updateTime;
 
     @ApiModelProperty("最后更新人")
-    protected Long updateMan;
+    protected Long updateBy;
 
     @ApiModelProperty("最后更新人：标签")
-    protected String updateManLabel;
+    protected String updateByDesc;
 
     @ApiModelProperty("乐观锁")
     protected Integer revision;
