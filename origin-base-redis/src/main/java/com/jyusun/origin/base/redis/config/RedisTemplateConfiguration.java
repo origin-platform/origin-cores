@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
@@ -22,8 +23,8 @@ public class RedisTemplateConfiguration {
     @Bean(name = "redisTemplate")
     @SuppressWarnings("unchecked")
     @ConditionalOnMissingBean(name = "redisTemplate")
-    public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
 
         //使用fastjson序列化
         FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
@@ -38,11 +39,19 @@ public class RedisTemplateConfiguration {
         return template;
     }
 
+
+    @Bean
+    public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
+        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
+        stringRedisTemplate.setConnectionFactory(redisConnectionFactory);
+        return stringRedisTemplate;
+    }
+
     /**
      * 缓存管理器
      *
-     * @param redisConnectionFactory
-     * @return
+     * @param redisConnectionFactory Redis 连接工厂
+     * @return {@link CacheManager}
      */
     @Bean
     public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
