@@ -11,7 +11,7 @@ import lombok.experimental.UtilityClass;
 public class WecomUrlConstant {
 
     /**
-     * 获取TOKEN
+     * GET 获取TOKEN
      */
     public static String GET_TOKEN = "/gettoken";
 

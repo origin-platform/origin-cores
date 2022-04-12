@@ -1,11 +1,11 @@
-package com.jyusun.origin.base.wecom.model.dto;
+package com.jyusun.origin.base.wecom.model.dto.result;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 
 @Data
-public class TokenDTO {
+public class TokenParam {
 
     @JSONField(name = "access_token")
     private String accessToken;
