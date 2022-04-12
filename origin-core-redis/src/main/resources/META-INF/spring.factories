@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.jyusun.origin.core.redis.config.RedisTemplateConfiguration\
+  com.jyusun.origin.core.redis.config.RedisHelperConfiguration
+
+
