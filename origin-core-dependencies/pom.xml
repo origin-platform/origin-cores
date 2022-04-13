@@ -83,14 +83,7 @@
             <!-- redis -->
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-redis</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
-
-            <!-- oss -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-oss</artifactId>
+                <artifactId>origin-core-redis</artifactId>
                 <version>${origin.development.version}</version>
             </dependency>
 

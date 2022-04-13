@@ -34,12 +34,11 @@
         <module>origin-core-fastjson</module>
         <module>origin-core-jackson</module>
         <module>origin-core-logger</module>
+        <module>origin-core-redis</module>
         <module>origin-base-swagger</module>
-        <module>origin-base-oss</module>
         <module>origin-base-excel</module>
         <module>origin-base-mail</module>
         <module>origin-base-wecom</module>
-        <module>origin-base-redis</module>
 <!--        <module>origin-base-idempotent</module>-->
 
     </modules>
