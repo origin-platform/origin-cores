@@ -1,7 +1,7 @@
 package com.jyusun.origin.core.logger.common.util;
 
 
-import com.jyusun.origin.core.common.base.BaseResultEnum;
+import com.jyusun.origin.core.common.model.BaseKvEnum;
 import com.jyusun.origin.core.common.util.ObjectUtil;
 import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.UriUtil;
@@ -82,21 +82,21 @@ public class OutFormatUtil {
     }
 
     public static String buildErrorMessage(
-            BaseResultEnum baseResultEnum,
+            BaseKvEnum baseKvEnum,
             String title, String detail) {
-        return buildErrorMessage(baseResultEnum.code(), baseResultEnum.message(), title, detail);
+        return buildErrorMessage(baseKvEnum.code(), baseKvEnum.desc(), title, detail);
     }
 
     public static String buildWarnMessage(String code, String message) {
         return String.format(STR_FORMAT_WARN, code, message);
     }
 
-    public static String buildWarnMessage(BaseResultEnum baseResultEnum) {
-        return buildWarnMessage(baseResultEnum.code(), baseResultEnum.message());
+    public static String buildWarnMessage(BaseKvEnum baseKvEnum) {
+        return buildWarnMessage(baseKvEnum.code(), baseKvEnum.desc());
     }
 
-    public static String buildWarnMessage(BaseResultEnum baseResultEnum, String message) {
-        return buildWarnMessage(baseResultEnum.code(), baseResultEnum.message() + "，" + message);
+    public static String buildWarnMessage(BaseKvEnum baseKvEnum, String message) {
+        return buildWarnMessage(baseKvEnum.code(), baseKvEnum.desc() + "，" + message);
 
     }
 

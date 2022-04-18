@@ -29,7 +29,6 @@
         <module>origin-core-dependencies</module>
         <module>origin-core-common</module>
         <module>origin-core-thread</module>
-        <module>origin-core-model</module>
         <module>origin-core-secure</module>
         <module>origin-core-fastjson</module>
         <module>origin-core-jackson</module>

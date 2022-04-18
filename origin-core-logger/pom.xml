@@ -21,11 +21,7 @@
             <groupId>${project.parent.groupId}</groupId>
             <artifactId>origin-core-common</artifactId>
         </dependency>
-        <!-- 公共基础-基础模型 -->
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>origin-core-model</artifactId>
-        </dependency>
+
         <!-- 公共基础-Fastjson-->
         <dependency>
             <groupId>${project.parent.groupId}</groupId>

@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.logger.model.value;
 
-import com.jyusun.origin.core.model.domain.value.ValueObject;
+import com.jyusun.origin.core.common.model.domain.valueobject.BaseValue;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,9 +12,9 @@ import lombok.ToString;
  * @author jyusun at 10:32:39
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = true)
-@EqualsAndHashCode
-public class ServerValue implements ValueObject {
+public class ServerValue extends BaseValue<ServerValue> {
 
     /**
      * 应用名称
@@ -46,14 +46,15 @@ public class ServerValue implements ValueObject {
     @ApiModelProperty("运行环境")
     private String env;
 
+
     /**
-     * 值对象通过属性比较，它们没有唯一ID
+     * 值对象通过属性比较，没有唯一ID
      *
      * @param other 另外的值对象
      * @return <code>true</code> 属性比较一致时返回true
      */
     @Override
-    public boolean sameValueAs(Object other) {
+    public boolean sameValueAs(ServerValue other) {
         return false;
     }
 }

@@ -38,5 +38,4 @@ public abstract class BaseException extends RuntimeException {
         this.code = code;
     }
 
-
 }

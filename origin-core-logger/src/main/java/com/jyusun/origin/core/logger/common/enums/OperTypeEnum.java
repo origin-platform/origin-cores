@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.logger.common.enums;
 
-import com.jyusun.origin.core.common.base.BaseKvEnum;
+import com.jyusun.origin.core.common.model.BaseKvEnum;
 import lombok.AllArgsConstructor;
 
 /**

@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.logger.model.value;
 
-import com.jyusun.origin.core.model.domain.value.ValueObject;
+import com.jyusun.origin.core.common.model.domain.valueobject.BaseValue;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class UserAgentValue implements ValueObject<UserAgentValue> {
+public class UserAgentValue extends BaseValue<UserAgentValue> {
 
     @ApiModelProperty("浏览器厂商")
     private String browserManufacturer;

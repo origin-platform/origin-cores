@@ -1,7 +1,7 @@
 package com.jyusun.origin.base.wecom.model.dto.groupchat;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.jyusun.origin.core.model.BaseCmd;
+import com.jyusun.origin.core.common.model.BaseCmd;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;

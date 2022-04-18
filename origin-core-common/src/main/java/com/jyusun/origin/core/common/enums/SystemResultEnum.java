@@ -1,7 +1,7 @@
 package com.jyusun.origin.core.common.enums;
 
-import com.jyusun.origin.core.common.base.BaseResultEnum;
 import com.jyusun.origin.core.common.constant.ResultConstant;
+import com.jyusun.origin.core.common.model.BaseKvEnum;
 import lombok.AllArgsConstructor;
 
 /**
@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
  * @since 1.0.0
  */
 @AllArgsConstructor
-public enum SystemResultEnum implements BaseResultEnum {
+public enum SystemResultEnum implements BaseKvEnum {
     /**
      * 未知异常：-1
      */
@@ -95,9 +95,9 @@ public enum SystemResultEnum implements BaseResultEnum {
     private final String code;
 
     /**
-     * 响应消息
+     * 消息描述
      */
-    private final String message;
+    private final String desc;
 
     /**
      * 返回代码
@@ -115,7 +115,7 @@ public enum SystemResultEnum implements BaseResultEnum {
      * @return str
      */
     @Override
-    public String message() {
-        return this.message;
+    public String desc() {
+        return this.desc;
     }
 }

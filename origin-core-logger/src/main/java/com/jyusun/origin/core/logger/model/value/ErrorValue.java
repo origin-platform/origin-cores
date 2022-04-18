@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.logger.model.value;
 
-import com.jyusun.origin.core.model.domain.value.ValueObject;
+import com.jyusun.origin.core.common.model.domain.valueobject.BaseValue;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,10 +13,10 @@ import lombok.experimental.Accessors;
  * @author jyusun at 2021-12-4 14:08:42
  */
 @Data
-@Accessors(chain = true)
 @ToString(callSuper = true)
-@EqualsAndHashCode()
-public class ErrorValue implements ValueObject<ErrorValue> {
+@Accessors(chain = true)
+@EqualsAndHashCode(callSuper = true)
+public class ErrorValue extends BaseValue<ErrorValue> {
 
     /**
      * 堆栈信息

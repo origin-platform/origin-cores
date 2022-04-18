@@ -43,12 +43,6 @@
                 <artifactId>origin-core-common</artifactId>
                 <version>${origin.development.version}</version>
             </dependency>
-            <!-- 通用基础-基础模型 -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-core-model</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
             <!-- 权限工具 -->
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>

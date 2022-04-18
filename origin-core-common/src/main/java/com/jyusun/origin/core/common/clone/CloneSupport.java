@@ -1,5 +1,7 @@
 package com.jyusun.origin.core.common.clone;
 
+import com.jyusun.origin.core.common.enums.SystemResultEnum;
+
 /**
  * 克隆支持类，提供默认的克隆方法
  *
@@ -8,15 +10,15 @@ package com.jyusun.origin.core.common.clone;
  */
 public class CloneSupport<T> implements Cloneable<T> {
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public T clone() {
-		try {
-			return (T) super.clone();
-		}
-		catch (CloneNotSupportedException e) {
-			throw new CloneRuntimeException(e);
-		}
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public T clone() {
+        try {
+            return (T) super.clone();
+        } catch (CloneNotSupportedException throwable) {
+            SystemResultEnum resultEnum = SystemResultEnum.INTERNAL_SERVER_ERROR;
+            throw new CloneRuntimeException(resultEnum.code(), resultEnum.desc(), throwable);
+        }
+    }
 
 }

@@ -1,8 +1,5 @@
 package com.jyusun.origin.core.common.exception;
 
-import com.jyusun.origin.core.common.base.BaseResultEnum;
-import com.jyusun.origin.core.common.enums.SystemResultEnum;
-
 /**
  * 作用描述： - 业务异常 自定义异常
  *
@@ -24,40 +21,12 @@ public class BusinessException extends BaseException {
     /**
      * 异常信息构造函数
      *
-     * @param baseResultEnum {@link BaseResultEnum} 消息枚举
-     */
-    public BusinessException(BaseResultEnum baseResultEnum) {
-        super(baseResultEnum.code(), baseResultEnum.message());
-    }
-
-    /**
-     * 异常信息构造函数
-     *
      * @param code      {@code Integer} 消息编码
      * @param message   {@code String} 消息描述
      * @param throwable {@link Throwable} 异常信息
      */
     public BusinessException(String code, String message, Throwable throwable) {
         super(code, message, throwable);
-    }
-
-    /**
-     * 异常信息构造函数
-     *
-     * @param baseResultEnum {@link BaseResultEnum}
-     * @param throwable      {@link Throwable} 异常信息
-     */
-    public BusinessException(BaseResultEnum baseResultEnum, Throwable throwable) {
-        this(baseResultEnum.code(), baseResultEnum.message(), throwable);
-    }
-
-    /**
-     * 异常信息构造函数
-     *
-     * @param throwable {@link Throwable} 异常信息
-     */
-    public BusinessException(Throwable throwable) {
-        this(SystemResultEnum.MESSAGE_BUSINESS_ERROR, throwable);
     }
 
 

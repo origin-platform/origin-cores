@@ -1,5 +1,5 @@
-import com.jyusun.origin.core.common.result.AbstractResult;
-import com.jyusun.origin.core.common.result.ResultFactory;
+import com.jyusun.origin.core.common.model.result.AbstractResult;
+import com.jyusun.origin.core.common.model.result.ResultFactory;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

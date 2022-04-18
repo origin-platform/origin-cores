@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.logger.model.value;
 
-import com.jyusun.origin.core.model.domain.value.ValueObject;
+import com.jyusun.origin.core.common.model.domain.valueobject.BaseValue;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,7 +18,7 @@ import java.util.Map;
 @Accessors(chain = true)
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class RequestValue implements ValueObject {
+public class RequestValue extends BaseValue<RequestValue> {
 
     /**
      * 操作IP地址
@@ -39,6 +39,7 @@ public class RequestValue implements ValueObject {
      */
     private Map<String,Object> params;
 
+
     /**
      * 值对象通过属性比较，没有唯一ID
      *
@@ -46,7 +47,7 @@ public class RequestValue implements ValueObject {
      * @return <code>true</code> 属性比较一致时返回true
      */
     @Override
-    public boolean sameValueAs(Object other) {
+    public boolean sameValueAs(RequestValue other) {
         return false;
     }
 }

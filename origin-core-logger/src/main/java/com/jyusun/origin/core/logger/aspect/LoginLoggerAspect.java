@@ -1,7 +1,7 @@
 package com.jyusun.origin.core.logger.aspect;
 
 
-import com.jyusun.origin.core.common.result.AbstractResult;
+import com.jyusun.origin.core.common.model.result.AbstractResult;
 import com.jyusun.origin.core.logger.annotation.LoginLogger;
 import com.jyusun.origin.core.logger.common.util.PointUtil;
 import com.jyusun.origin.core.logger.publisher.LoginLoggerPublisher;

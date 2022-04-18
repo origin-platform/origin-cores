@@ -1,6 +1,6 @@
 package com.jyusun.origin.core.secure;
 
-import com.jyusun.origin.core.model.BaseDTO;
+import com.jyusun.origin.core.common.model.BaseDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
