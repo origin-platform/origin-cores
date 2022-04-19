@@ -5,6 +5,9 @@ import com.jyusun.origin.base.wecom.model.dto.result.AccessTokenDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * @author jyusun
+ */
 @RequiredArgsConstructor
 public class WecomAccessTokenClient {
 

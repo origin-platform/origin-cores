@@ -20,7 +20,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode
-public class GroupChatCreate extends BaseCmd {
+public class GroupChatCreate implements BaseCmd {
 
     @NotBlank(message = "群组名称不允许为空")
     private String name;

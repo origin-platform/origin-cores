@@ -8,8 +8,6 @@ import java.io.Serializable;
  * @author jyusun at 2020/4/8 21:14
  * @since 1.0.0
  */
-public abstract class BaseQuery implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public interface BaseQuery extends Serializable {
 
 }

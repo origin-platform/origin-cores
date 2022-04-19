@@ -15,8 +15,7 @@ import lombok.experimental.Accessors;
 @Data
 @ToString(callSuper = true)
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = true)
-public class ErrorValue extends BaseValue<ErrorValue> {
+public class ErrorValue implements BaseValue<ErrorValue> {
 
     /**
      * 堆栈信息

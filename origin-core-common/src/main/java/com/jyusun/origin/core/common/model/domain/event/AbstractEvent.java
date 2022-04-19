@@ -14,17 +14,13 @@ import java.io.Serializable;
  */
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-public abstract class AbstractEvent extends ApplicationEvent implements DomainEvent, Serializable {
+public abstract class AbstractEvent<T> extends ApplicationEvent implements DomainEvent, Serializable {
 
-    private Serializable sid;
+    private final Serializable sid;
 
-    AbstractEvent(Object source) {
+    protected AbstractEvent(Serializable sid, T source) {
         super(source);
-        this.init();
-    }
-
-    private void init() {
-        this.sid = 1L;
+        this.sid = sid;
     }
 
 
@@ -38,16 +34,10 @@ public abstract class AbstractEvent extends ApplicationEvent implements DomainEv
         return this.sid;
     }
 
-    /**
-     * 返回事件的产生的时间
-     *
-     * @return 事件的产生的时间
-     */
     @Override
     public long timestamp() {
-        return this.getTimestamp();
+        return super.getTimestamp();
     }
-
 
     /**
      * 判断领域事件是否一致

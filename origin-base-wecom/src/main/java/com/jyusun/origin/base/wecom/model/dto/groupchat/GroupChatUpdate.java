@@ -20,7 +20,7 @@ import java.util.List;
  * @author jyusun at 2022-4-12 23:02:25
  */
 @Data
-public class GroupChatUpdate extends BaseCmd {
+public class GroupChatUpdate implements BaseCmd {
 
     @NotBlank(message = "聊天编号不允许为空")
     private String chatid;

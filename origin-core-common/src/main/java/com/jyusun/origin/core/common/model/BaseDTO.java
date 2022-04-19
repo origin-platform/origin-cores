@@ -1,9 +1,5 @@
 package com.jyusun.origin.core.common.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
 import java.io.Serializable;
 
 /**
@@ -13,10 +9,6 @@ import java.io.Serializable;
  * @date 2020/5/18 12:01
  * @since 1.0.0
  */
-@Data
-@ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = false)
-public abstract class BaseDTO implements Serializable {
+public interface BaseDTO extends Serializable {
 
-    private static final long serialVersionUID = 1L;
 }

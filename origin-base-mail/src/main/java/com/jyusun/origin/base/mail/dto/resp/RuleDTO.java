@@ -18,9 +18,8 @@ import java.util.List;
  * @since 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class RuleDTO extends BaseDTO {
+public class RuleDTO implements BaseDTO {
 
     private static final long serialVersionUID = 1L;
 

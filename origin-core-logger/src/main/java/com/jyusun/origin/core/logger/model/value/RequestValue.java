@@ -17,8 +17,7 @@ import java.util.Map;
 @Data
 @Accessors(chain = true)
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = false)
-public class RequestValue extends BaseValue<RequestValue> {
+public class RequestValue implements BaseValue<RequestValue> {
 
     /**
      * 操作IP地址

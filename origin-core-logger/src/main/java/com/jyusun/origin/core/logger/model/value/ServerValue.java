@@ -12,9 +12,8 @@ import lombok.ToString;
  * @author jyusun at 10:32:39
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
 @ToString(callSuper = true)
-public class ServerValue extends BaseValue<ServerValue> {
+public class ServerValue implements BaseValue<ServerValue> {
 
     /**
      * 应用名称

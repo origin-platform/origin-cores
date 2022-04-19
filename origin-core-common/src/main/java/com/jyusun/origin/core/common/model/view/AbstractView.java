@@ -1,8 +1,6 @@
 package com.jyusun.origin.core.common.model.view;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,9 +11,7 @@ import java.time.LocalDateTime;
  * @author jyusun at 2019/12/23 16:40
  * @since 1.0.0
  */
-@Data
-@Accessors(chain = true)
-public abstract class BaseView {
+public abstract class AbstractView {
 
     /**
      * 主键ID
@@ -43,7 +39,6 @@ public abstract class BaseView {
 
     @ApiModelProperty("最后更新人")
     protected Long updateBy;
-
     /**
      * 最后更新时间
      */

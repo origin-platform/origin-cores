@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class UserAgentValue extends BaseValue<UserAgentValue> {
+public class UserAgentValue implements BaseValue<UserAgentValue> {
 
     @ApiModelProperty("浏览器厂商")
     private String browserManufacturer;

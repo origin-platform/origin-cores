@@ -4,11 +4,8 @@ package com.jyusun.origin.core.logger.model.dto;
 import com.jyusun.origin.core.common.model.BaseDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 
 /**
  * 作用描述：日志基础数据传输对象
@@ -21,8 +18,7 @@ import java.io.Serializable;
 @Data
 @Accessors(chain = true)
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = true)
-public class AbstractLogger extends BaseDTO implements Serializable {
+public class AbstractLogger implements BaseDTO {
 
     private static final long serialVersionUID = 1L;
 

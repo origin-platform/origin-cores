@@ -16,7 +16,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = false)
-public class UserInfo extends BaseDTO {
+public class UserInfo implements BaseDTO {
 
     /**
      * 客户端id

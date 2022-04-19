@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class DictDTO extends BaseDTO {
+public class DictDTO implements BaseDTO {
 
     private static final long serialVersionUID = 1L;
 

@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author jyusun at 2020/1/7 15:11
  * @since 1.0.0
  */
-public abstract class BaseValue<T> implements Serializable {
+public interface BaseValue<T> extends Serializable {
 
 
     /**

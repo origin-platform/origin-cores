@@ -14,10 +14,9 @@ import lombok.experimental.Accessors;
  * @since 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @ApiModel("查询对象：分页查询")
-public class PageQuery extends BaseQuery {
+public class PageQuery implements BaseQuery {
 
     private static final long serialVersionUID = 1L;
 

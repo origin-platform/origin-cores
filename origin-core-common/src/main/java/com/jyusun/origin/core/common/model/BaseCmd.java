@@ -8,9 +8,6 @@ import java.io.Serializable;
  * @author jyusun at 2020/4/1 11:29
  * @since 1.0.0
  */
-public abstract class BaseCmd implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public interface BaseCmd extends Serializable {
 
 }
