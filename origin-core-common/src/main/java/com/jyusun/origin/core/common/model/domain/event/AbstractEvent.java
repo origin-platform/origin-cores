@@ -17,9 +17,11 @@ import java.io.Serializable;
 public abstract class AbstractEvent<T> extends ApplicationEvent implements DomainEvent, Serializable {
 
     private final Serializable sid;
+    protected transient T source;
 
     protected AbstractEvent(Serializable sid, T source) {
         super(source);
+        this.source = source;
         this.sid = sid;
     }
 

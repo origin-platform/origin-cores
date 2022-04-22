@@ -38,7 +38,7 @@ public class UserInfo implements BaseDTO {
      * 昵称
      */
     @ApiModelProperty(hidden = true)
-    private String nickName;
+    private String nickname;
     /**
      * 账号
      */

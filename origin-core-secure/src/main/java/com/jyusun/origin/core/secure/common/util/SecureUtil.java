@@ -29,7 +29,7 @@ public class SecureUtil {
                 .setTenantId(tenantId)
                 .setUserId(userId)
                 .setAccount(account)
-                .setNickName(nickName);
+                .setNickname(nickName);
     }
 
     /**

@@ -1,9 +1,8 @@
-package com.jyusun.origin.base.mail.dto.resp;
+package com.jyusun.origin.base.mail.model.resp;
 
 import com.jyusun.origin.core.common.model.BaseDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.util.List;

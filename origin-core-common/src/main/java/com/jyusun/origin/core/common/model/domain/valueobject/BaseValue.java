@@ -17,6 +17,6 @@ public interface BaseValue<T> extends Serializable {
      * @param other 另外的值对象
      * @return <code>true</code> 属性比较一致时返回true
      */
-    public abstract boolean sameValueAs(T other);
+    boolean sameValueAs(T other);
 
 }
