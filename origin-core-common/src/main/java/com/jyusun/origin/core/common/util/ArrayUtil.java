@@ -23,7 +23,7 @@ public class ArrayUtil extends ArrayUtils {
      * @return 空数组
      */
     @SuppressWarnings("unchecked")
-    public static <T> T[] newArray(Class<?> componentType, int newSize) {
+    public static <T> T[] newArray(Class<T> componentType, int newSize) {
         return (T[]) Array.newInstance(componentType, newSize);
     }
 

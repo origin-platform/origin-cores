@@ -6,7 +6,9 @@ import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -141,6 +143,16 @@ public class DateUtil {
      */
     public static LocalTime toLocalTime(String time, String format) {
         return LocalTime.parse(time, DateTimeFormatter.ofPattern(format));
+    }
+
+    /**
+     * LocalDateTime to Date
+     *
+     * @param dateTime {@code LocalDateTime}  转换时间
+     * @return {@link Date}
+     */
+    public static Date toDate(LocalDateTime dateTime) {
+        return Date.from(dateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
 
