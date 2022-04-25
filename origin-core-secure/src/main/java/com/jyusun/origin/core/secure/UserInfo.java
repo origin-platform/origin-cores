@@ -3,7 +3,6 @@ package com.jyusun.origin.core.secure;
 import com.jyusun.origin.core.common.model.BaseDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
@@ -15,7 +14,6 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 @ToString(callSuper = true)
-@EqualsAndHashCode(callSuper = false)
 public class UserInfo implements BaseDTO {
 
     /**
@@ -23,6 +21,7 @@ public class UserInfo implements BaseDTO {
      */
     @ApiModelProperty(hidden = true)
     private String clientId;
+
     /**
      * 租户ID
      */
@@ -44,5 +43,17 @@ public class UserInfo implements BaseDTO {
      */
     @ApiModelProperty(hidden = true)
     private String account;
+    /**
+     * 电子邮箱
+     */
+    @ApiModelProperty(hidden = true)
+    private String email;
+
+    /**
+     * 手机号码
+     */
+    @ApiModelProperty(hidden = true)
+    private String mobile;
+
 
 }
