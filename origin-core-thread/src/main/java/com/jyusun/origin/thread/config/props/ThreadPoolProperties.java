@@ -33,5 +33,12 @@ public class ThreadPoolProperties {
      */
     private Integer maxPoolSize = 50;
 
+    /**
+     * 队列容量
+     */
+    private Integer queueCapacity = 10;
+
+
+
 
 }
