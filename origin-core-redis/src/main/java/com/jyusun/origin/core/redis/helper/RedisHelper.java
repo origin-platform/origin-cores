@@ -13,10 +13,7 @@ import org.springframework.data.redis.core.ZSetOperations;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -188,7 +185,7 @@ public class RedisHelper {
      * @return 返回 key 的数据类型，数据类型有: none (key不存在)、string (字符串)、list (列表)、set (集合)、zset (有序集)、hash (哈希表)
      */
     public String type(String key) {
-        return redisTemplate.type(key).code();
+        return Objects.requireNonNull(redisTemplate.type(key)).code();
     }
 
 
