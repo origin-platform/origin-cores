@@ -75,11 +75,11 @@
             </dependency>
 
             <!-- redis -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-core-redis</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>${project.parent.groupId}</groupId>-->
+<!--                <artifactId>origin-core-redis</artifactId>-->
+<!--                <version>${origin.development.version}</version>-->
+<!--            </dependency>-->
 
             <!-- excel -->
             <dependency>

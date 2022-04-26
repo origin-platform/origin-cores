@@ -1,6 +1,7 @@
 package com.jyusun.origin.core.redis.config;
 
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
+import com.jyusun.origin.core.redis.helper.RedisHelper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,6 @@ public class RedisTemplateConfiguration {
 
 
     @Bean(name = "redisTemplate")
-    @SuppressWarnings("unchecked")
     @ConditionalOnMissingBean(name = "redisTemplate")
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
@@ -59,5 +59,11 @@ public class RedisTemplateConfiguration {
                 .RedisCacheManagerBuilder
                 .fromConnectionFactory(redisConnectionFactory);
         return builder.build();
+    }
+
+    @Bean
+    public RedisHelper redisHelper(RedisTemplate<String, Object> redisTemplate,
+                                   StringRedisTemplate stringRedisTemplate) {
+        return new RedisHelper(redisTemplate, stringRedisTemplate);
     }
 }
