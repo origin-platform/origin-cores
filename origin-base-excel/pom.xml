@@ -22,6 +22,10 @@
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
         </dependency>
+        <dependency>
+            <groupId>${project.parent.groupId}</groupId>
+            <artifactId>origin-core-common</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
