@@ -19,6 +19,6 @@ public abstract class BaseTreeDTO<T> implements BaseDTO {
      * 子节点列表
      */
     @ApiModelProperty("子节点列表")
-    private List<BaseTreeDTO<T>> childrens;
+    protected List<BaseTreeDTO<T>> childrens;
 
 }
