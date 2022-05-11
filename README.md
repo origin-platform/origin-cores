@@ -3,9 +3,20 @@
 #### 介绍
 公共基础
 
-#### 软件架构
-软件架构说明
+#### 工程结构
 
+```
+origin-platform
+├─ origin-cores-公共基础
+│  ├─- origin-core-common         公共工具
+│  ├─- origin-core-fastjson       fastjson
+│  ├─- origin-core-jackson        jackson
+│  ├─- origin-core-logger         日志工具
+│  ├─- origin-core-redis          缓存工具
+│  ├─- origin-core-thread         线程工具
+│  ├─- origin-base-swagger        接口工具
+└──└── origin-core-dependencies   公共基础二方依赖管理
+```
 
 #### 安装教程
 

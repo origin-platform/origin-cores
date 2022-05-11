@@ -1,7 +1,11 @@
 package com.jyusun.origin.core.common.util;
 
 import com.google.common.collect.Maps;
+import com.jyusun.origin.core.common.enums.SystemResultEnum;
+import com.jyusun.origin.core.common.exception.BusinessException;
+import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
+import org.springframework.http.MediaType;
 import org.springframework.lang.Nullable;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestAttributes;
@@ -10,8 +14,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * 作用描述： Web 工具
@@ -35,6 +43,18 @@ public class WebUtil extends WebUtils {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         return ObjectUtil.isEmpty(requestAttributes) ? null :
                 ((ServletRequestAttributes) requestAttributes).getRequest();
+    }
+
+    /**
+     * 获取 HttpServletRequest
+     *
+     * @return {@link HttpServletRequest} 响应信息
+     */
+    public static HttpServletResponse getResponse() {
+        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
+        return Optional.ofNullable(requestAttributes)
+                .map(request -> ((ServletRequestAttributes) request).getResponse())
+                .orElseThrow(() -> new BusinessException(SystemResultEnum.INTERNAL_SERVER_ERROR.code(), "未获得正确的响应信息"));
     }
 
     /**
@@ -74,6 +94,19 @@ public class WebUtil extends WebUtils {
 
     }
 
+    /**
+     * Web端文件响应头设置
+     *
+     * @param response {@link HttpServletResponse} httpresp
+     * @param fileName {@code String} 文件名称
+     */
+    @SneakyThrows
+    public static void setFileNameHeader(HttpServletResponse response, String fileName) {
+        response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+        response.setCharacterEncoding(StandardCharsets.UTF_8.name());
+        String encodeName = URLEncoder.encode(fileName, StandardCharsets.UTF_8.name());
+        response.setHeader("Content-Disposition", "attachment;filename=" + encodeName);
+    }
 
     /**
      * 获取ip
