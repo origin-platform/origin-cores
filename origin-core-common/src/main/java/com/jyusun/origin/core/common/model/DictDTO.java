@@ -31,13 +31,13 @@ public class DictDTO implements BaseDTO {
      * 键值
      */
     @ApiModelProperty("键值")
-    private String value;
+    private String dictValue;
 
     /**
      * 描述
      */
     @ApiModelProperty("描述")
-    private String desc;
+    private String dictDesc;
 
     /**
      * 排序
@@ -49,6 +49,6 @@ public class DictDTO implements BaseDTO {
      * 默认值
      */
     @ApiModelProperty("默认值")
-    private Boolean defaultValue;
+    private Boolean defValue;
 
 }
