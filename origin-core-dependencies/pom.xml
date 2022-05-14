@@ -49,18 +49,6 @@
                 <artifactId>origin-core-secure</artifactId>
                 <version>${origin.development.version}</version>
             </dependency>
-            <!-- Fastjson -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-core-fastjson</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
-            <!-- jackson -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-core-jackson</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
             <!-- logger -->
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>
@@ -75,11 +63,18 @@
             </dependency>
 
             <!-- redis -->
-<!--            <dependency>-->
-<!--                <groupId>${project.parent.groupId}</groupId>-->
-<!--                <artifactId>origin-core-redis</artifactId>-->
-<!--                <version>${origin.development.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>origin-core-redis</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
+
+            <!-- 数据库操作 -->
+            <dependency>
+                <groupId>${project.parent.groupId}</groupId>
+                <artifactId>origin-base-db</artifactId>
+                <version>${origin.development.version}</version>
+            </dependency>
 
             <!-- excel -->
             <dependency>
@@ -92,13 +87,6 @@
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>
                 <artifactId>origin-base-wecom</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
-
-            <!-- mail -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-mail</artifactId>
                 <version>${origin.development.version}</version>
             </dependency>
 

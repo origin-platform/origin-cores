@@ -31,11 +31,6 @@
             <artifactId>origin-core-common</artifactId>
         </dependency>
 
-        <!-- 公共基础-fastjson -->
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>origin-core-fastjson</artifactId>
-        </dependency>
         <!-- Spring Boot Autoconfigure -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

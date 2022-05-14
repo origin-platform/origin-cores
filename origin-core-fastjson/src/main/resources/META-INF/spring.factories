@@ -1,3 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.jyusun.origin.core.fastjson.config.FastJsonConfiguration
-

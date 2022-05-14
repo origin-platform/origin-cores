@@ -22,11 +22,6 @@
             <artifactId>origin-core-common</artifactId>
         </dependency>
 
-        <!-- 公共基础-Fastjson-->
-        <dependency>
-            <groupId>${project.parent.groupId}</groupId>
-            <artifactId>origin-core-fastjson</artifactId>
-        </dependency>
         <!-- 公共基础-权限工具 -->
         <dependency>
             <groupId>${project.parent.groupId}</groupId>
@@ -36,11 +31,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-        <!-- Hibernate 参数验证 -->
-        <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
         </dependency>
         <!-- Spring MVC -->
         <dependency>
