@@ -25,7 +25,7 @@ public class DictDTO implements BaseDTO {
      * 类型
      */
     @ApiModelProperty("类型")
-    private String type;
+    private String dictCode;
 
     /**
      * 键值
