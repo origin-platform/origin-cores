@@ -1,14 +1,12 @@
 package com.jyusun.origin.core.logger.publisher;
 
 
+import com.jyusun.origin.core.common.model.event.CoreEvent;
 import com.jyusun.origin.core.common.util.SpringUtil;
 import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.WebUtil;
 import com.jyusun.origin.core.logger.annotation.WebLogger;
-import com.jyusun.origin.core.logger.common.util.OutFormatUtil;
-import com.jyusun.origin.core.logger.event.LoginLoggerEvent;
-import com.jyusun.origin.core.logger.event.RequestLoggerEvent;
-import com.jyusun.origin.core.logger.model.dto.LoginLoggerDTO;
+import com.jyusun.origin.core.logger.common.util.OutForUtil;
 import com.jyusun.origin.core.logger.model.dto.RequestLoggerDTO;
 import com.jyusun.origin.core.logger.model.value.RequestValue;
 import com.jyusun.origin.core.logger.model.value.ServerValue;
@@ -40,39 +38,24 @@ public final class RequestLoggerPublisher {
                                     long timeCost) {
         // 请求信息
         RequestValue requestValue = Optional.ofNullable(WebUtil.getRequest())
-                .map(request -> OutFormatUtil.buildRequest(request, params))
+                .map(request -> OutForUtil.buildRequest(request, params))
                 .orElse(new RequestValue());
 
-        switch (webLogger.operType()) {
-            case LOGIN:
-                LoginLoggerDTO loginLoggerDTO = new LoginLoggerDTO();
-                loginLoggerDTO.setRemoteAddress(WebUtil.getIpAddr())
-                        .setLoginTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime),
-                                ZoneId.systemDefault()))
-                        .setTimeCost(timeCost)
-                        .setOperationType(webLogger.operType().code())
-                        .setServiceCode("");
+        RequestLoggerDTO requestLoggerDTO = new RequestLoggerDTO();
+        String title = StringUtil.hasText(webLogger.value()) ? webLogger.value() :
+                webLogger.operType().desc();
+        requestLoggerDTO.setTitle(title)
+                .setOperator(SecureUtil.getUser().getUserId())
+                .setRequestTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime),
+                        ZoneId.systemDefault()))
+                .setTimeCost(timeCost)
+                .setRequestValue(requestValue)
+                .setServerValue(new ServerValue())
+                .setServiceCode("")
+                .setOperationType(webLogger.operType().code())
+                .setClassName(methodClass)
+                .setMethodName(method);
 
-                SpringUtil.publishEvent(new LoginLoggerEvent(loginLoggerDTO));
-                break;
-
-            default:
-                RequestLoggerDTO requestLoggerDTO = new RequestLoggerDTO();
-                String title = StringUtil.hasText(webLogger.value()) ? webLogger.value() :
-                        webLogger.operType().desc();
-                requestLoggerDTO.setTitle(title)
-                        .setOperator(SecureUtil.getUser().getUserId())
-                        .setRequestTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime),
-                                ZoneId.systemDefault()))
-                        .setTimeCost(timeCost)
-                        .setRequestValue(requestValue)
-                        .setServerValue(new ServerValue())
-                        .setServiceCode("")
-                        .setOperationType(webLogger.operType().code())
-                        .setClassName(methodClass)
-                        .setMethodName(method);
-
-                SpringUtil.publishEvent(new RequestLoggerEvent(requestLoggerDTO));
-        }
+        SpringUtil.publishEvent(new CoreEvent<>(requestLoggerDTO));
     }
 }

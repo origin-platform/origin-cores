@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
  * @author jyusun at 2019-08-07
  * @since 1.0.0
  */
-@Target({ElementType.TYPE, ElementType.METHOD})
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface LoginLogger {
@@ -38,18 +38,10 @@ public @interface LoginLogger {
      */
     @AliasFor("value")
     String title() default StringUtil.EMPTY;
-
     /**
      * 1-数据新增，2-数据更新，3-数据删除，4-用户登录，5-数据查询，6-数据列表，7-分页查询，9-未知类型
      *
      * @return OperType
      */
-    OperTypeEnum operType() default OperTypeEnum.DEFAULT;
-
-    /**
-     * 是否打印响应结果：默认是打印的，一般分页查询中可以 将此项 set = false,避免过多的日志不方便问题排查
-     *
-     * @return Boolean
-     */
-    boolean isOutResult() default true;
+    OperTypeEnum operType() default OperTypeEnum.LOGIN;
 }

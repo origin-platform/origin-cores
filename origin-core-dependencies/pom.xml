@@ -69,13 +69,6 @@
                 <version>${origin.development.version}</version>
             </dependency>
 
-            <!-- 数据库操作 -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-db</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
-
             <!-- excel -->
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>

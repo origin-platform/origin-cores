@@ -8,6 +8,6 @@ import lombok.experimental.UtilityClass;
  * @author jyusun st  2022-04-10 00:09:45
  */
 @UtilityClass
-public class UsualLoggerUtil {
+public class LoggerUtil {
 
 }

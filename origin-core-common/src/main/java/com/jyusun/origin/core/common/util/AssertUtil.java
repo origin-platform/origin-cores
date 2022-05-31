@@ -4,8 +4,9 @@ import lombok.experimental.UtilityClass;
 import org.springframework.util.Assert;
 
 /**
+ * AssertUtil
  * <p>
- * 作用描述：
+ * 作用描述：断言
  * </p>
  *
  * @author jyusun

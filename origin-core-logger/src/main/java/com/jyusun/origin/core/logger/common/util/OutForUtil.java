@@ -17,6 +17,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 import java.util.StringJoiner;
 
 /**
@@ -29,7 +30,7 @@ import java.util.StringJoiner;
  * @since 1.0.0
  */
 @UtilityClass
-public class OutFormatUtil {
+public class OutForUtil {
 
     /**
      * 异常信息格式化字符串
@@ -37,8 +38,7 @@ public class OutFormatUtil {
     private static final String STR_FORMAT_ERROR = new StringJoiner(StringUtil.LF)
             .add(StringUtil.LF)
             .add("############################## [ 系统错误 - 开始 ] ##############################")
-            .add(" 消息代码: %s")
-            .add(" 消息描述: %s")
+            .add(" 消息代码: %s | 消息描述: %s")
             .add(" 消息标题: %s")
             .add(" 消息详情: %s")
             .add("############################## [ 系统错误 - 结束 ] ##############################")
@@ -112,7 +112,7 @@ public class OutFormatUtil {
      */
     public static String buildReqMessage(String title, String operator, LocalDateTime requestTime, long timeCost,
                                          String detail) {
-        return String.format(OutFormatUtil.STR_FORMAT_REQUEST, title, operator, requestTime, timeCost, detail);
+        return String.format(OutForUtil.STR_FORMAT_REQUEST, title, operator, requestTime, timeCost, detail);
     }
 
     /**
@@ -126,7 +126,7 @@ public class OutFormatUtil {
      */
     public static String buildErrorReqMessage(String title, String operator, LocalDateTime requestTime,
                                               String detail) {
-        return String.format(OutFormatUtil.STR_FORMAT_REQUEST_ERROR, title, operator, requestTime, detail);
+        return String.format(OutForUtil.STR_FORMAT_REQUEST_ERROR, title, operator, requestTime, detail);
     }
 
 
@@ -159,11 +159,13 @@ public class OutFormatUtil {
      * 向log中添加补齐request的信息
      */
     public static RequestValue buildRequest(HttpServletRequest request, Map<String, Object> params) {
-        return new RequestValue()
-                .setRemoteAddress(WebUtil.getIpAddr(request))
-                .setRequestUri(UriUtil.getPath(request.getRequestURI()))
-                .setHttpMethod(request.getMethod())
-                .setParams(params);
+        return Optional.ofNullable(request)
+                .map(req -> new RequestValue()
+                        .setRemoteAddress(WebUtil.getIpAddr(req))
+                        .setRequestUri(UriUtil.getPath(req.getRequestURI()))
+                        .setHttpMethod(req.getMethod())
+                        .setParams(params))
+                .orElse(new RequestValue());
     }
 
     /**

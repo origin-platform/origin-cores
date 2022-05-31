@@ -3,6 +3,8 @@ package com.jyusun.origin.core.logger.publisher;
 
 import lombok.experimental.UtilityClass;
 
+import java.io.Serializable;
+
 /**
  * evan日志信息事件发送
  *
@@ -12,7 +14,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public final class UsualLoggerPublisher {
 
-    public static void publishEvent(String level, String sid, String data) {
+    public static void publishEvent(String level, Serializable sid, String data) {
 //        SysLogUsual logUsual = new SysLogUsual();
 ////        logUsual.setLogLevel(level);
 ////        logUsual.setLogId(sid);

@@ -1,5 +1,6 @@
 package com.jyusun.origin.core.logger.model.dto;
 
+import com.jyusun.origin.core.logger.model.value.RequestValue;
 import com.jyusun.origin.core.logger.model.value.UserAgentValue;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -30,6 +31,12 @@ public class LoginLoggerDTO extends AbstractLogger implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * 日志主题
+     */
+    @ApiModelProperty("日志主题")
+    private String title;
+
+    /**
      * 操作人ID
      */
     @ApiModelProperty("登录人ID")
@@ -53,6 +60,11 @@ public class LoginLoggerDTO extends AbstractLogger implements Serializable {
     @ApiModelProperty("运行耗时")
     private Long timeCost;
 
+    /**
+     * 用户代理信息
+     */
+    @ApiModelProperty("请求信息")
+    private RequestValue requestValue;
     /**
      * 用户代理信息
      */

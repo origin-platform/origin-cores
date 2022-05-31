@@ -34,6 +34,7 @@ public class UsualLoggerDTO extends AbstractLogger {
      */
     @ApiModelProperty("详情描述")
     private String description;
+
     /**
      * 数据库表
      */

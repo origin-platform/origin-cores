@@ -38,15 +38,11 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <!-- Apache Collections 处理 -->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.commons</groupId>-->
+<!--            <artifactId>commons-collections4</artifactId>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-        </dependency>
         <!-- Apache commons-io -->
         <dependency>
             <groupId>commons-io</groupId>

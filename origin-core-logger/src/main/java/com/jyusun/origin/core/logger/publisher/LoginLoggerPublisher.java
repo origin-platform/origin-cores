@@ -1,21 +1,22 @@
 package com.jyusun.origin.core.logger.publisher;
 
 
+import com.jyusun.origin.core.common.model.event.CoreEvent;
 import com.jyusun.origin.core.common.util.SpringUtil;
+import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.WebUtil;
 import com.jyusun.origin.core.logger.annotation.LoginLogger;
-import com.jyusun.origin.core.logger.event.LoginLoggerEvent;
-import com.jyusun.origin.core.logger.model.value.RequestValue;
-import com.jyusun.origin.core.logger.common.util.OutFormatUtil;
+import com.jyusun.origin.core.logger.common.enums.OperTypeEnum;
+import com.jyusun.origin.core.logger.common.util.OutForUtil;
 import com.jyusun.origin.core.logger.model.dto.LoginLoggerDTO;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * API日志信息事件发送
@@ -33,20 +34,22 @@ public final class LoginLoggerPublisher {
                                     LoginLogger loginLogger,
                                     long startTime,
                                     long timeCost) {
-        // 请求信息
-        RequestValue requestValue = Optional.ofNullable(WebUtil.getRequest())
-                .map(request -> OutFormatUtil.buildRequest(request, params))
-                .orElse(new RequestValue());
+        String title = StringUtil.hasText(loginLogger.title()) ? loginLogger.title() : loginLogger.operType().desc();
 
+        HttpServletRequest request = WebUtil.getRequest();
         LoginLoggerDTO loginLoggerDTO = new LoginLoggerDTO();
-        loginLoggerDTO.setRemoteAddress(WebUtil.getIpAddr())
+        loginLoggerDTO
+                .setTitle(title)
+                .setRequestValue(OutForUtil.buildRequest(request, params))
+                .setUserAgentValue(OutForUtil.buildUserAgent(request))
+                .setRemoteAddress(WebUtil.getIpAddr(request))
                 .setLoginTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime),
                         ZoneId.systemDefault()))
                 .setTimeCost(timeCost)
-                .setOperationType(loginLogger.operType().code())
-                .setServiceCode("");
-
-        SpringUtil.publishEvent(new LoginLoggerEvent(loginLoggerDTO));
-
+                .setServiceCode("")
+                .setClassName(methodClass)
+                .setMethodName(method)
+                .setOperationType(OperTypeEnum.LOGIN.code());
+        SpringUtil.publishEvent(new CoreEvent<>(loginLoggerDTO));
     }
 }

@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
  * @since 1.0.0
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode
 @Accessors(chain = true)
 public class DictDTO implements BaseDTO {
 
