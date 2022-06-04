@@ -1,7 +1,6 @@
 package com.jyusun.origin.core.common.model;
 
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -18,7 +17,6 @@ public abstract class BaseTreeDTO<T> implements BaseDTO {
     /**
      * 子节点列表
      */
-    @ApiModelProperty("子节点列表")
     protected List<BaseTreeDTO<T>> childrens;
 
 }

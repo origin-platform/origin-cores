@@ -55,13 +55,6 @@
                 <artifactId>origin-core-logger</artifactId>
                 <version>${origin.development.version}</version>
             </dependency>
-            <!-- swagger -->
-            <dependency>
-                <groupId>${project.parent.groupId}</groupId>
-                <artifactId>origin-base-swagger</artifactId>
-                <version>${origin.development.version}</version>
-            </dependency>
-
             <!-- redis -->
             <dependency>
                 <groupId>${project.parent.groupId}</groupId>

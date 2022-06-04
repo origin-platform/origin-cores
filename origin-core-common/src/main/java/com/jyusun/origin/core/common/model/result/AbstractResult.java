@@ -1,7 +1,5 @@
 package com.jyusun.origin.core.common.model.result;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -18,18 +16,14 @@ import java.io.Serializable;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel("响应对象")
 public abstract class AbstractResult<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "响应编码", required = true)
     private String code;
 
-    @ApiModelProperty(value = "响应消息", required = true)
     private String message;
 
-    @ApiModelProperty(value = "操作标记", required = true, example = "0-操作失败|1-操作成功")
     private Boolean sign;
 
     protected AbstractResult(String code, String message, boolean sign) {
