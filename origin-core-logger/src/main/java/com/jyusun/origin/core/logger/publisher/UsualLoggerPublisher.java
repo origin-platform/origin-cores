@@ -14,7 +14,7 @@ import java.io.Serializable;
 @UtilityClass
 public final class UsualLoggerPublisher {
 
-    public static void publishEvent(String level, Serializable sid, String data) {
+    public static void publishEvent(String level, Serializable bizId, String data) {
 //        SysLogUsual logUsual = new SysLogUsual();
 ////        logUsual.setLogLevel(level);
 ////        logUsual.setLogId(sid);

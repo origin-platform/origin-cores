@@ -22,21 +22,15 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-public class SqlLoggerDTO extends AbstractLogger {
+public class ExeSqlLoggerDTO extends AbstractLogger {
 
     private static final long serialVersionUID = 1L;
-
-    /**
-     * 日志主题
-     */
-    @ApiModelProperty("日志主题")
-    private String title;
 
     /**
      * 操作人ID
      */
     @ApiModelProperty("操作人ID")
-    private Long operator;
+    private Long userId;
 
     /**
      * SQL值对象

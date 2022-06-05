@@ -41,9 +41,9 @@ public final class ErrorLoggerPublisher {
                 .setOperator(SecureUtil.getUser().getUserId())
                 .setRequestTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime),
                         ZoneId.systemDefault()))
-                .setErrorValue(OutForUtil.buildError(throwable))
-                .setRequestValue(OutForUtil.buildRequest(request, params))
-                .setServerValue(new ServerValue())
+                .setErrorInfo(OutForUtil.buildError(throwable))
+                .setRequestInfo(OutForUtil.buildRequest(request, params))
+                .setServerInfo(new ServerValue())
                 .setOperationType(webLogger.operType().code())
                 .setServiceCode("")
                 .setClassName(className)

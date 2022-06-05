@@ -24,10 +24,16 @@ public class UsualLoggerDTO extends AbstractLogger {
     private static final long serialVersionUID = 1L;
 
     /**
+     * 数据库表
+     */
+    @ApiModelProperty("数据库表")
+    private String tableName;
+
+    /**
      * 业务编号
      */
     @ApiModelProperty("业务编号")
-    private String businId;
+    private String bizId;
 
     /**
      * 详情描述
@@ -35,10 +41,5 @@ public class UsualLoggerDTO extends AbstractLogger {
     @ApiModelProperty("详情描述")
     private String description;
 
-    /**
-     * 数据库表
-     */
-    @ApiModelProperty("数据库表")
-    private String tableName;
 
 }

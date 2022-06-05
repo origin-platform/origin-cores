@@ -27,17 +27,12 @@ import java.time.LocalDateTime;
 public class RequestLoggerDTO extends AbstractLogger {
 
     private static final long serialVersionUID = 1L;
-    /**
-     * 日志主题
-     */
-    @ApiModelProperty("日志主题")
-    private String title;
 
     /**
      * 操作人ID
      */
     @ApiModelProperty("操作人ID")
-    private Long operator;
+    private Long userId;
 
     /**
      * 请求时间
@@ -55,12 +50,12 @@ public class RequestLoggerDTO extends AbstractLogger {
      * 请求信息
      */
     @ApiModelProperty("请求信息")
-    private RequestValue requestValue;
+    private RequestValue requestInfo;
 
     /**
      * 服务信息
      */
     @ApiModelProperty("服务信息")
-    private ServerValue serverValue;
+    private ServerValue serverInfo;
 
 }

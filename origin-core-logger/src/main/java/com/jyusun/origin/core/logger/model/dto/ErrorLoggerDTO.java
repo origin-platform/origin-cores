@@ -50,19 +50,19 @@ public class ErrorLoggerDTO extends AbstractLogger {
      * 请求信息
      */
     @ApiModelProperty("请求信息")
-    private RequestValue requestValue;
+    private RequestValue requestInfo;
 
     /**
      * 错误信息
      */
     @ApiModelProperty("错误信息")
-    private ErrorValue errorValue;
+    private ErrorValue errorInfo;
 
     /**
      * 服务信息
      */
     @ApiModelProperty("服务信息")
-    private ServerValue serverValue;
+    private ServerValue serverInfo;
 
 
 }

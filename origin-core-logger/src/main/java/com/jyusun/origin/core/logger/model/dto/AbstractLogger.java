@@ -25,10 +25,16 @@ public class AbstractLogger implements BaseDTO {
     @ApiModelProperty("服务名称")
     private String serviceCode;
     /**
-     * 操作类型：9-未知类型|0-用户登录|1-分页查询|2-数据新增|3-数据更新|4-数据删除|5-数据查询|6-数据列表
+     * 操作类型
      */
     @ApiModelProperty("操作类型")
     private String operationType;
+
+    /**
+     * 日志主题
+     */
+    @ApiModelProperty("日志主题")
+    private String title;
 
     /**
      * 方法类

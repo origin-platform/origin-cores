@@ -39,9 +39,7 @@ public final class LoginLoggerPublisher {
         HttpServletRequest request = WebUtil.getRequest();
         LoginLoggerDTO loginLoggerDTO = new LoginLoggerDTO();
         loginLoggerDTO
-                .setTitle(title)
-                .setRequestValue(OutForUtil.buildRequest(request, params))
-                .setUserAgentValue(OutForUtil.buildUserAgent(request))
+                .setUserAgent(OutForUtil.buildUserAgent(request))
                 .setRemoteAddress(WebUtil.getIpAddr(request))
                 .setLoginTime(LocalDateTime.ofInstant(Instant.ofEpochMilli(startTime),
                         ZoneId.systemDefault()))
@@ -49,7 +47,8 @@ public final class LoginLoggerPublisher {
                 .setServiceCode("")
                 .setClassName(methodClass)
                 .setMethodName(method)
-                .setOperationType(OperTypeEnum.LOGIN.code());
+                .setOperationType(OperTypeEnum.LOGIN.code())
+                .setTitle(title);
         SpringUtil.publishEvent(new CoreEvent<>(loginLoggerDTO));
     }
 }
