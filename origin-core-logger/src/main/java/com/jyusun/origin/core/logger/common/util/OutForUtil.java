@@ -104,15 +104,15 @@ public class OutForUtil {
      * 请求消息组装
      *
      * @param title
-     * @param operator
+     * @param userId
      * @param requestTime
      * @param timeCost
      * @param detail
      * @return
      */
-    public static String buildReqMessage(String title, String operator, LocalDateTime requestTime, long timeCost,
-                                         String detail) {
-        return String.format(OutForUtil.STR_FORMAT_REQUEST, title, operator, requestTime, timeCost, detail);
+    public static String buildRequestMessage(String title, String userId, LocalDateTime requestTime, long timeCost,
+                                             String detail) {
+        return String.format(OutForUtil.STR_FORMAT_REQUEST, title, userId, requestTime, timeCost, detail);
     }
 
     /**

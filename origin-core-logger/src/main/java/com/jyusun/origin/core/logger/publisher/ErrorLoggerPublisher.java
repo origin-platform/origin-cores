@@ -1,12 +1,12 @@
 package com.jyusun.origin.core.logger.publisher;
 
-import com.jyusun.origin.core.common.model.event.CoreEvent;
 import com.jyusun.origin.core.common.util.SpringUtil;
 import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.WebUtil;
 import com.jyusun.origin.core.logger.annotation.WebLogger;
 import com.jyusun.origin.core.logger.common.util.OutForUtil;
 import com.jyusun.origin.core.logger.model.dto.ErrorLoggerDTO;
+import com.jyusun.origin.core.logger.model.event.ErrorLoggerEvent;
 import com.jyusun.origin.core.logger.model.value.ServerValue;
 import com.jyusun.origin.core.secure.common.util.SecureUtil;
 import lombok.experimental.UtilityClass;
@@ -48,7 +48,7 @@ public final class ErrorLoggerPublisher {
                 .setServiceCode("")
                 .setClassName(className)
                 .setMethodName(methodName);
-        SpringUtil.publishEvent(new CoreEvent<>(errDto));
+        SpringUtil.publishEvent(new ErrorLoggerEvent(errDto));
     }
 
 }

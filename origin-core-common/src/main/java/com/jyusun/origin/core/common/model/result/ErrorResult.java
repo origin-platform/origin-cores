@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-
 /**
  * 作用描述： - 错误信息响应
  *
@@ -20,7 +18,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
 @ApiModel("异常响应对象")
-public class ErrorResult<E extends Serializable> extends AbstractResult<E> {
+public class ErrorResult<E> extends AbstractResult<E> {
 
     private static final long serialVersionUID = 1L;
 
@@ -48,9 +46,9 @@ public class ErrorResult<E extends Serializable> extends AbstractResult<E> {
     /**
      * 错误结果初始化
      *
-     * @param title   {@code String} 响应标题
-     * @param detail  {@code String} 响应明细
-     * @param links   {@link Links} 请求连接
+     * @param title  {@code String} 响应标题
+     * @param detail {@code String} 响应明细
+     * @param links  {@link Links} 请求连接
      */
     private void init(String title, String detail, Links links) {
         this.title = title;

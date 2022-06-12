@@ -1,8 +1,8 @@
 package com.jyusun.origin.core.logger.publisher;
 
-import com.jyusun.origin.core.common.model.event.CoreEvent;
 import com.jyusun.origin.core.common.util.SpringUtil;
 import com.jyusun.origin.core.logger.model.dto.ExeSqlLoggerDTO;
+import com.jyusun.origin.core.logger.model.event.ExeSqlLoggerEvent;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,10 +15,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @UtilityClass
-public final class SqlLoggerPublisher {
+public final class ExeSqlLoggerPublisher {
 
     public static void publishEvent() {
-        SpringUtil.publishEvent(new CoreEvent<>(new ExeSqlLoggerDTO()));
+        SpringUtil.publishEvent(new ExeSqlLoggerEvent(new ExeSqlLoggerDTO()));
     }
 
 }

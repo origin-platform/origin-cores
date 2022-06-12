@@ -23,6 +23,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
@@ -42,6 +43,7 @@ import java.util.Set;
  */
 @Slf4j
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
 
@@ -124,7 +126,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
-    public AbstractResult<Serializable> handleError(HttpRequestMethodNotSupportedException e) {
+    public AbstractResult<Object> handleError(HttpRequestMethodNotSupportedException e) {
         log.warn(OutForUtil.buildWarnMessage(SystemResultEnum.METHOD_NOT_SUPPORTED, e.getMessage()), e);
         return ResultFactory.error(SystemResultEnum.METHOD_NOT_SUPPORTED);
     }
@@ -192,7 +194,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(UtilException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public AbstractResult<Serializable> handleError(UtilException e) {
+    public AbstractResult<Object> handleError(UtilException e) {
         log.error(OutForUtil.buildErrorMessage(e.getCode(), e.getMessage(),
                 e.getClass().getSimpleName(), e.getMessage()), e);
         return ResultFactory.error(SystemResultEnum.INTERNAL_SERVER_ERROR);
@@ -206,7 +208,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ServiceException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public AbstractResult<Serializable> handleError(ServiceException e) {
+    public AbstractResult<Object> handleError(ServiceException e) {
         log.error(OutForUtil.buildErrorMessage(e.getCode(), e.getMessage(),
                 e.getClass().getSimpleName(), e.getMessage()), e);
         return ResultFactory.error(SystemResultEnum.INTERNAL_SERVER_ERROR);
@@ -220,7 +222,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public AbstractResult<Serializable> handleError(Throwable e) {
+    public AbstractResult<Object> handleError(Throwable e) {
         log.error(OutForUtil.buildErrorMessage(SystemResultEnum.INTERNAL_SERVER_ERROR,
                 e.getClass().getSimpleName(), e.getMessage()), e);
         return ResultFactory.error(SystemResultEnum.INTERNAL_SERVER_ERROR);

@@ -32,6 +32,7 @@
         <module>origin-core-secure</module>
         <module>origin-core-logger</module>
         <module>origin-core-redis</module>
+        <module>origin-base-translate</module>
         <module>origin-base-excel</module>
         <module>origin-base-wecom</module>
 <!--        <module>origin-base-idempotent</module>-->

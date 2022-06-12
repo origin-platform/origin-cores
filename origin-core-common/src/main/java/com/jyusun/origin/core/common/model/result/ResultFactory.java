@@ -11,7 +11,6 @@ import com.jyusun.origin.core.common.util.WebUtil;
 import lombok.experimental.UtilityClass;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -32,7 +31,7 @@ public class ResultFactory {
      * @param <T>     {@code T} 泛型标记
      * @return {@link AbstractResult} 响应结果
      */
-    public static <T extends Serializable> AbstractResult<T> data(String code, String message, T body) {
+    public static <T> AbstractResult<T> data(String code, String message, T body) {
         return Optional.ofNullable(body)
                 .map(obj -> new RespResult<>(code, message, true, obj))
                 .orElseThrow(() -> {
@@ -49,7 +48,7 @@ public class ResultFactory {
      * @param <T>        {@code T} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <T extends Serializable> AbstractResult<T> data(BaseKvEnum baseKvEnum, T body) {
+    public static <T> AbstractResult<T> data(BaseKvEnum baseKvEnum, T body) {
         return data(baseKvEnum.code(), baseKvEnum.desc(), body);
 
     }
@@ -61,45 +60,25 @@ public class ResultFactory {
      * @param <T>  {@code T} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <T extends Serializable> AbstractResult<T> data(T body) {
+    public static <T> AbstractResult<T> data(T body) {
         return data(SystemResultEnum.SUCCESS, body);
     }
 
     /**
      * 数据传输结果响应
      *
-     * @param <T> {@code T} 泛型标记
+     * @param body {@code Object} 承载数据
+     * @param <T>  {@code T} 泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <T extends Serializable> AbstractResult<List<T>> datas(String code, String message, List<T> datas) {
-        return Optional.ofNullable(datas)
-                .map(obj -> new RespResult<>(code, message, true, obj))
+    public static <T> RpcResult<T> rpcData(T body) {
+        SystemResultEnum success = SystemResultEnum.SUCCESS;
+        return Optional.ofNullable(body)
+                .map(obj -> new RpcResult<>(success.code(), success.desc(), true, obj))
                 .orElseThrow(() -> {
                     SystemResultEnum resultEnum = SystemResultEnum.SUCCESS_DATA_WARN;
                     return new BusinessException(resultEnum.code(), resultEnum.desc());
                 });
-    }
-
-    /**
-     * 数据传输结果响应
-     *
-     * @param datas {@code Object} 承载数据
-     * @param <T>   {@code T} 泛型标记
-     * @return {@link AbstractResult}响应结果
-     */
-    public static <T extends Serializable> AbstractResult<List<T>> datas(BaseKvEnum baseKvEnum, List<T> datas) {
-        return datas(baseKvEnum.code(), baseKvEnum.desc(), datas);
-    }
-
-    /**
-     * 数据传输结果响应
-     *
-     * @param datas {@code Object} 承载数据
-     * @param <T>   {@code T} 泛型标记
-     * @return {@link AbstractResult}响应结果
-     */
-    public static <T extends Serializable> AbstractResult<List<T>> datas(List<T> datas) {
-        return datas(SystemResultEnum.SUCCESS, datas);
     }
 
     /**
@@ -110,7 +89,7 @@ public class ResultFactory {
      * @param <E>   {@code E }  泛型标记
      * @return {@link AbstractResult}响应结果
      */
-    public static <E extends Serializable> AbstractResult<E> dataConvert(Object data, Class<E> clazz) {
+    public static <E> AbstractResult<E> dataConvert(Object data, Class<E> clazz) {
         return data(AssemblerUtil.convert(data, clazz));
     }
 
@@ -122,7 +101,7 @@ public class ResultFactory {
      * @param sign    操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>}响应结果
      */
-    public static <T extends Serializable> AbstractResult<T> status(String code, String message, boolean sign) {
+    public static <T> AbstractResult<T> status(String code, String message, boolean sign) {
         if (!sign) {
             SystemResultEnum resultEnum = SystemResultEnum.SUCCESS_NO_CONTENT;
             throw new BusinessException(resultEnum.code(), resultEnum.desc());
@@ -137,7 +116,7 @@ public class ResultFactory {
      * @param sign       {@code Boolean} 操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>}响应结果
      */
-    private static <T extends Serializable> AbstractResult<T> status(BaseKvEnum baseKvEnum, boolean sign) {
+    private static <T> AbstractResult<T> status(BaseKvEnum baseKvEnum, boolean sign) {
         return status(baseKvEnum.code(), baseKvEnum.desc(), sign);
     }
 
@@ -157,7 +136,7 @@ public class ResultFactory {
      * @param sign 操作标记（true-成功,false-失败）
      * @return {@link AbstractResult<Boolean>} 响应结果
      */
-    public static <T extends Serializable> AbstractResult<T> create(boolean sign) {
+    public static <T> AbstractResult<T> create(boolean sign) {
         return status(SystemResultEnum.SUCCESS_CREATE, sign);
     }
 
@@ -180,8 +159,8 @@ public class ResultFactory {
      * @param detail  {@code String} 消息明细
      * @return {@link AbstractResult}响应结果
      */
-    public static AbstractResult<Serializable> error(String code, String message, String title, String detail,
-                                                     Links links) {
+    public static AbstractResult<Object> error(String code, String message, String title, String detail,
+                                               Links links) {
         return new ErrorResult<>(code, message, title, detail, links);
     }
 
@@ -194,8 +173,8 @@ public class ResultFactory {
      * @param detail     {@code String} 消息明细
      * @return {@link AbstractResult}响应结果
      */
-    public static AbstractResult<Serializable> error(BaseKvEnum baseKvEnum,
-                                                     String title, String detail, Links links) {
+    public static AbstractResult<Object> error(BaseKvEnum baseKvEnum,
+                                               String title, String detail, Links links) {
         return error(baseKvEnum.code(), baseKvEnum.desc(), title, detail, links);
     }
 
@@ -207,7 +186,7 @@ public class ResultFactory {
      * @param links   {@link Links} 链接信息
      * @return {@link AbstractResult}响应结果
      */
-    public static AbstractResult<Serializable> error(String code, String message, Links links) {
+    public static AbstractResult<Object> error(String code, String message, Links links) {
         return new ErrorResult<>(code, message, links);
     }
 
@@ -218,7 +197,7 @@ public class ResultFactory {
      * @param message {@code String} 消息描述
      * @return {@link ErrorResult}响应结果
      */
-    public static AbstractResult<Serializable> error(String code, String message) {
+    public static AbstractResult<Object> error(String code, String message) {
         return new ErrorResult<>(code, message);
     }
 
@@ -228,7 +207,7 @@ public class ResultFactory {
      * @param baseKvEnum {@link BaseKvEnum}  枚举结果
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Serializable> error(BaseKvEnum baseKvEnum) {
+    public static AbstractResult<Object> error(BaseKvEnum baseKvEnum) {
         return error(baseKvEnum.code(), baseKvEnum.desc(), links());
     }
 
@@ -238,7 +217,7 @@ public class ResultFactory {
      * @param message {@code String} 消息描述
      * @return {@link AbstractResult} 响应结果
      */
-    public static AbstractResult<Serializable> error(String message) {
+    public static AbstractResult<Object> error(String message) {
         return error(SystemResultEnum.INTERNAL_SERVER_ERROR.code(), message);
     }
 
@@ -287,14 +266,14 @@ public class ResultFactory {
     /**
      * 接口数据处理，一般情况下如果feign接口统一包装后，获取数据使用
      *
-     * @param abstractResult {@link AbstractResult<T>}
+     * @param rpcResult {@link AbstractResult<T>}
      * @return {@link <T>} 泛型标记数据
      */
-    public static <T extends Serializable> T dataHandle(AbstractResult<T> abstractResult) {
-        if (!abstractResult.getSign()) {
-            throw new BusinessException(abstractResult.getCode(), abstractResult.getMessage());
+    public static <T> T rpcHandle(RpcResult<T> rpcResult) {
+        if (!rpcResult.getSign()) {
+            throw new BusinessException(rpcResult.getCode(), rpcResult.getMessage());
         }
-        return ((RespResult<T>) abstractResult).getBody();
+        return rpcResult.getBody();
     }
 
     /**

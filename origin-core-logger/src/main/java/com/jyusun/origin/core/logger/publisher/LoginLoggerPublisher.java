@@ -1,7 +1,6 @@
 package com.jyusun.origin.core.logger.publisher;
 
 
-import com.jyusun.origin.core.common.model.event.CoreEvent;
 import com.jyusun.origin.core.common.util.SpringUtil;
 import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.WebUtil;
@@ -9,6 +8,7 @@ import com.jyusun.origin.core.logger.annotation.LoginLogger;
 import com.jyusun.origin.core.logger.common.enums.OperTypeEnum;
 import com.jyusun.origin.core.logger.common.util.OutForUtil;
 import com.jyusun.origin.core.logger.model.dto.LoginLoggerDTO;
+import com.jyusun.origin.core.logger.model.event.LoginLoggerEvent;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
@@ -49,6 +49,6 @@ public final class LoginLoggerPublisher {
                 .setMethodName(method)
                 .setOperationType(OperTypeEnum.LOGIN.code())
                 .setTitle(title);
-        SpringUtil.publishEvent(new CoreEvent<>(loginLoggerDTO));
+        SpringUtil.publishEvent(new LoginLoggerEvent(loginLoggerDTO));
     }
 }

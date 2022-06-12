@@ -21,7 +21,7 @@ public final class UsualLoggerPublisher {
 ////        logUsual.setLogData(data);
 //
 //        LoggerUtil.addRequestToLog(logUsual);
-//        SpringUtil.publishEvent(new UsualLogEvent(logUsual));
+//        SpringUtil.publishEvent(new UsualLoggerEvent(logUsual));
     }
 
 }

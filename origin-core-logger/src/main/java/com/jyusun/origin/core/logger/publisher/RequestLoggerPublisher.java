@@ -1,13 +1,13 @@
 package com.jyusun.origin.core.logger.publisher;
 
 
-import com.jyusun.origin.core.common.model.event.CoreEvent;
 import com.jyusun.origin.core.common.util.SpringUtil;
 import com.jyusun.origin.core.common.util.StringUtil;
 import com.jyusun.origin.core.common.util.WebUtil;
 import com.jyusun.origin.core.logger.annotation.WebLogger;
 import com.jyusun.origin.core.logger.common.util.OutForUtil;
 import com.jyusun.origin.core.logger.model.dto.RequestLoggerDTO;
+import com.jyusun.origin.core.logger.model.event.RequestLoggerEvent;
 import com.jyusun.origin.core.logger.model.value.ServerValue;
 import com.jyusun.origin.core.secure.common.util.SecureUtil;
 import lombok.experimental.UtilityClass;
@@ -51,6 +51,6 @@ public final class RequestLoggerPublisher {
                 .setClassName(methodClass)
                 .setMethodName(method);
 
-        SpringUtil.publishEvent(new CoreEvent<>(requestLoggerDTO));
+        SpringUtil.publishEvent(new RequestLoggerEvent(requestLoggerDTO));
     }
 }

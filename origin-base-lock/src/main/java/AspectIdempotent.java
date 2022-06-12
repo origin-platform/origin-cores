@@ -21,7 +21,7 @@ public class AspectIdempotent {
      *
      * @param apiIdempotent {@link ApiIdempotent} 幂等注解
      */
-    @Pointcut("@annotation(apiIdempotent)")
+    @Pointcut("@com.jyusun.origin.base.translate.annotation(apiIdempotent)")
     public void doIdempotent(ApiIdempotent apiIdempotent) {
     }
 

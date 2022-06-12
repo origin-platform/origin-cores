@@ -4,7 +4,6 @@ import com.jyusun.origin.core.common.model.BaseQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -24,13 +23,13 @@ public class PageQuery implements BaseQuery {
      * 当前页数
      */
     @ApiModelProperty(value = "当前页数 默认 1", example = "1")
-    private Integer page;
+    private Long page;
 
     /**
      * 每页条数
      */
     @ApiModelProperty(value = "每页条数 10", example = "10")
-    private Integer limit;
+    private Long limit;
 
     /**
      * <p>
@@ -57,8 +56,8 @@ public class PageQuery implements BaseQuery {
      * 参数值初始化
      */
     private void init() {
-        this.page = 1;
-        this.limit = 10;
+        this.page = 1L;
+        this.limit = 10L;
     }
 
 }

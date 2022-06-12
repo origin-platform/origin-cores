@@ -24,11 +24,11 @@ public class ServiceConstant implements BaseConstants {
     /**
      * 系统服务-数据字典
      */
-    public static final String ORIGIN_SYSTEM_DICT = "origin-system-dict";
+    public static final String ORIGIN_SYSTEM_DICT = "origin-service-dict";
     /**
      * 系统服务-日志服务
      */
-    public static final String ORIGIN_SYSTEM_LOGGER = "origin-system-logger";
+    public static final String ORIGIN_SYSTEM_LOGGER = "origin-service-logger";
 
     /**
      * 系统服务-基础信息

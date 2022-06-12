@@ -1,10 +1,14 @@
 package com.jyusun.origin.core.common.util;
 
 import com.google.common.collect.Lists;
+import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.Assert;
 
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 
@@ -60,5 +64,16 @@ public class BeanUtil extends BeanUtils {
         return list;
     }
 
+    @SneakyThrows
+    public static Object readPropertyValue(Object obj, PropertyDescriptor propertyDescriptor) {
+        Method readMethod = propertyDescriptor.getReadMethod();
+        return readMethod.invoke(obj);
+    }
 
+    @SneakyThrows
+    public static void writePropertyValue(Object obj, String fieldName, String desc) {
+        PropertyDescriptor propertyDescriptor = BeanUtil.getPropertyDescriptor(obj.getClass(), fieldName);
+        Method writeMethod = propertyDescriptor.getWriteMethod();
+        writeMethod.invoke(obj, desc);
+    }
 }
