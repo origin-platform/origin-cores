@@ -12,6 +12,10 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ServiceConstant implements BaseConstants {
 
+    /**
+     * 系统服务-系统管理
+     */
+    public static final String ORIGIN_SYSTEM_ADMIN = "origin-service-admin";
 
     /**
      * 系统服务-认证服务
